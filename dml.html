@@ -1,0 +1,1101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DML Commands - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        
+        <header>
+            <h1>DML Commands</h1>
+        </header>
+<div class="questions-list">
+
+            <div class="question">
+                <div class="question-title">Question 1: Insert a record into STUDENT table</div>
+                <p class="question-text">Insert a single student record with SID = 101, SNAME = 'RAHUL', AGE = 20, COURSE = 'MCA'.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO STUDENT VALUES (101, 'RAHUL', 20, 'MCA');</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row inserted.</div>
+                    <div class="section-label" >STUDENT Table after INSERT:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>SID</th>
+                            <th>SNAME</th>
+                            <th>AGE</th>
+                            <th>COURSE</th>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>RAHUL</td>
+                            <td>20</td>
+                            <td>MCA</td>
+                        </tr>
+                    </table>
+                    <img src="photos/274.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Insert a record into EMPLOYEE table</div>
+                <p class="question-text">Insert an employee record with EID = 201, ENAME = 'ANITA', SALARY = 45000, DEPTNO = 10.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMPLOYEE VALUES (201, 'ANITA', 45000, 10);</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row inserted.</div>
+                    <div class="section-label" >EMPLOYEE Table after INSERT:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EID</th>
+                            <th>ENAME</th>
+                            <th>SALARY</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>201</td>
+                            <td>ANITA</td>
+                            <td>45000</td>
+                            <td>10</td>
+                        </tr>
+                    </table>
+                    <img src="photos/275.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Insert a new department into DEPT table</div>
+                <p class="question-text">Insert a new department with DEPTNO = 50, DNAME = 'TRAINING', LOC = 'DELHI'.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO DEPT VALUES (50, 'TRAINING', 'DELHI');</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row inserted.</div>
+                    <div class="section-label" >DEPT Table after INSERT:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DEPTNO</th>
+                            <th>DNAME</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>TRAINING</td>
+                            <td>DELHI</td>
+                        </tr>
+                    </table>
+                    <img src="photos/276.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Insert a record into BOOK table with specific columns</div>
+                <p class="question-text">Insert a book record with only BOOK_ID, TITLE, and PRICE (other columns will be NULL or default).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO BOOK (BOOK_ID, TITLE, PRICE) VALUES (1001, 'Database Design', 450);</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row inserted.</div>
+                    <div class="section-label" >BOOK Table after INSERT:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>BOOK_ID</th>
+                            <th>TITLE</th>
+                            <th>AUTHOR</th>
+                            <th>PRICE</th>
+                            <th>PUBLISHER</th>
+                        </tr>
+                        <tr>
+                            <td>1001</td>
+                            <td>Database Design</td>
+                            <td>NULL</td>
+                            <td>450</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                    <img src="photos/277.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Insert multiple rows into COURSE table</div>
+                <p class="question-text">Insert multiple course records in a single INSERT statement.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO COURSE VALUES 
+(101, 'Java Programming', 30, 5000),
+(102, 'Python Basics', 20, 4000),
+(103, 'Web Development', 40, 6000);</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">3 rows inserted.</div>
+                    <div class="section-label" >COURSE Table after INSERT:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>COURSE_ID</th>
+                            <th>COURSE_NAME</th>
+                            <th>DURATION</th>
+                            <th>FEES</th>
+                        </tr>
+                        <tr>
+                            <td>101</td>
+                            <td>Java Programming</td>
+                            <td>30</td>
+                            <td>5000</td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>Python Basics</td>
+                            <td>20</td>
+                            <td>4000</td>
+                        </tr>
+                        <tr>
+                            <td>103</td>
+                            <td>Web Development</td>
+                            <td>40</td>
+                            <td>6000</td>
+                        </tr>
+                    </table>
+                    <img src="photos/278.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Insert data into EMP_COPY table from EMP table</div>
+                <p class="question-text">Copy all records from EMP table to EMP_COPY table using INSERT INTO SELECT.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP_COPY SELECT * FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">14 rows inserted.</div>
+                    <div class="section-label" >Note:</div>
+                    <div class="success-message" >All records from EMP table have been successfully copied to EMP_COPY table.</div>
+                    <img src="photos/279.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Insert employees with salary > 3000 into EMP_HIGH_SAL</div>
+                <p class="question-text">Insert only those employees whose salary is greater than 3000 from EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP_HIGH_SAL SELECT * FROM EMP WHERE SAL > 3000;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">4 rows inserted.</div>
+                    <div class="section-label" >EMP_HIGH_SAL Table:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>5000</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>MANAGER</td>
+                            <td>2850</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>MANAGER</td>
+                            <td>2450</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>MANAGER</td>
+                            <td>2975</td>
+                        </tr>
+                    </table>
+                    <img src="photos/280.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Insert employees hired after 1981 into EMP_NEW_HIRE</div>
+                <p class="question-text">Insert only those employees who were hired after 1981 from EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP_NEW_HIRE SELECT * FROM EMP WHERE YEAR(HIREDATE) > 1981;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">6 rows inserted.</div>
+                    <div class="section-label" >EMP_NEW_HIRE Table:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>28-SEP-81</td>
+                        </tr>
+                        <tr>
+                            <td>7844</td>
+                            <td>TURNER</td>
+                            <td>08-SEP-81</td>
+                        </tr>
+                        <tr>
+                            <td>7876</td>
+                            <td>ADAMS</td>
+                            <td>12-JAN-83</td>
+                        </tr>
+                    </table>
+                    <img src="photos/281.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Insert department numbers and names into DEPT_BACKUP</div>
+                <p class="question-text">Copy only DEPTNO and DNAME columns from DEPT table to DEPT_BACKUP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO DEPT_BACKUP (DEPTNO, DNAME) 
+SELECT DEPTNO, DNAME FROM DEPT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">4 rows inserted.</div>
+                    <div class="section-label" >DEPT_BACKUP Table:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DEPTNO</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>SALES</td>
+                        </tr>
+                        <tr>
+                            <td>40</td>
+                            <td>OPERATIONS</td>
+                        </tr>
+                    </table>
+                    <img src="photos/282.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Insert employee names and salaries into EMP_SALARY_RECORD</div>
+                <p class="question-text">Insert ENAME and SAL columns from EMP table to EMP_SALARY_RECORD table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP_SALARY_RECORD (ENAME, SAL) 
+SELECT ENAME, SAL FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">14 rows inserted.</div>
+                    <div class="section-label" >EMP_SALARY_RECORD Table:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>1250</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>2975</td>
+                        </tr>
+                    </table>
+                    <img src="photos/283.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Update the salary of employee SMITH to 2000</div>
+                <p class="question-text">Modify the salary of SMITH from his current salary to 2000.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = 2000 WHERE ENAME = 'SMITH';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row updated.</div>
+                    <div class="section-label" >SMITH's Record after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>2000</td>
+                        </tr>
+                    </table>
+                    <img src="photos/284.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Increase salary of all employees by 10%</div>
+                <p class="question-text">Apply a 10% salary increase to all employees in the EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = SAL * 1.10;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">14 rows updated.</div>
+                    <div class="section-label" >Sample Records after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>Original SAL</th>
+                            <th>Updated SAL (110%)</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>880</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>1760</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>5000</td>
+                            <td>5500</td>
+                        </tr>
+                    </table>
+                    <img src="photos/285.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Update the department number of employee ALLEN to 20</div>
+                <p class="question-text">Change ALLEN's department from 30 to 20.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET DEPTNO = 20 WHERE ENAME = 'ALLEN';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row updated.</div>
+                    <div class="section-label" >ALLEN's Record after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
+                    <img src="photos/286.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Update commission of SALESMAN to 500</div>
+                <p class="question-text">Set commission to 500 for all employees with job = 'SALESMAN'.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET COMM = 500 WHERE JOB = 'SALESMAN';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">4 rows updated.</div>
+                    <div class="section-label" >SALESMAN Records after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>SALESMAN</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>MARTIN</td>
+                            <td>SALESMAN</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <td>TURNER</td>
+                            <td>SALESMAN</td>
+                            <td>500</td>
+                        </tr>
+                    </table>
+                    <img src="photos/287.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Update job of employee MILLER to MANAGER</div>
+                <p class="question-text">Change MILLER's job designation from CLERK to MANAGER.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET JOB = 'MANAGER' WHERE ENAME = 'MILLER';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row updated.</div>
+                    <div class="section-label" >MILLER's Record after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7844</td>
+                            <td>MILLER</td>
+                            <td>MANAGER</td>
+                            <td>1300</td>
+                        </tr>
+                    </table>
+                    <img src="photos/288.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Increase salary of employees in department 10 by 20%</div>
+                <p class="question-text">Apply a 20% salary increase only to employees in department 10.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = SAL * 1.20 WHERE DEPTNO = 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">3 rows updated.</div>
+                    <div class="section-label" >Department 10 Employees after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>Original SAL</th>
+                            <th>New SAL (120%)</th>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>MANAGER</td>
+                            <td>2450</td>
+                            <td>2940</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>5000</td>
+                            <td>6000</td>
+                        </tr>
+                        <tr>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                            <td>1300</td>
+                            <td>1560</td>
+                        </tr>
+                    </table>
+                    <img src="photos/289.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Update salary of employees whose job is CLERK to 1500</div>
+                <p class="question-text">Set salary to 1500 for all CLERK position employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = 1500 WHERE JOB = 'CLERK';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">4 rows updated.</div>
+                    <div class="section-label" >CLERK Employees after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>1500</td>
+                        </tr>
+                        <tr>
+                            <td>ADAMS</td>
+                            <td>CLERK</td>
+                            <td>1500</td>
+                        </tr>
+                        <tr>
+                            <td>JAMES</td>
+                            <td>CLERK</td>
+                            <td>1500</td>
+                        </tr>
+                        <tr>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                            <td>1500</td>
+                        </tr>
+                    </table>
+                    <img src="photos/290.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 18: Update location of department 30 to MUMBAI</div>
+                <p class="question-text">Change the location of department 30 from CHICAGO to MUMBAI.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE DEPT SET LOC = 'MUMBAI' WHERE DEPTNO = 30;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">1 row updated.</div>
+                    <div class="section-label" >Department 30 after UPDATE:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DEPTNO</th>
+                            <th>DNAME</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>SALES</td>
+                            <td>MUMBAI</td>
+                        </tr>
+                    </table>
+                    <img src="photos/291.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 19: Update commission of employees with NULL commission to 100</div>
+                <p class="question-text">Set commission to 100 for all employees who currently have NULL commission.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET COMM = 100 WHERE COMM IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">10 rows updated.</div>
+                    <div class="section-label" >Employees with Updated Commission:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>MANAGER</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>MANAGER</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>100</td>
+                        </tr>
+                    </table>
+                    <img src="photos/292.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 20: Update salary of employees earning less than average salary</div>
+                <p class="question-text">Increase the salary of employees whose salary is below the average salary of all employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = SAL + 500 
+WHERE SAL < (SELECT AVG(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message">7 rows updated.</div>
+                    <div class="section-label" >Average Salary: 2916.67</div>
+                    <div class="section-label" >Employees Updated:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>Original SAL</th>
+                            <th>New SAL</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>1300</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>1250</td>
+                            <td>1750</td>
+                        </tr>
+                        <tr>
+                            <td>MARTIN</td>
+                            <td>1250</td>
+                            <td>1750</td>
+                        </tr>
+                    </table>
+                    <img src="photos/293.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 21: Delete employee SMITH from EMP table</div>
+                <p class="question-text">Remove the record of employee SMITH from the EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE ENAME = 'SMITH';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >1 row deleted.</div>
+                    <div class="section-label" >Total employees after deletion: 13</div>
+                    <img src="photos/294.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 22: Delete all employees working in department 30</div>
+                <p class="question-text">Remove all employees whose DEPTNO is 30 from the EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE DEPTNO = 30;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >6 rows deleted.</div>
+                    <div class="section-label" >Employees Deleted (Department 30):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>SALESMAN</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>MARTIN</td>
+                            <td>SALESMAN</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>BLAKE</td>
+                            <td>MANAGER</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                    <img src="photos/295.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 23: Delete employees whose salary is less than 1000</div>
+                <p class="question-text">Remove all employees with salary below 1000 from the EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE SAL < 1000;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >2 rows deleted.</div>
+                    <div class="section-label" >Employees Deleted (Salary < 1000):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>JAMES</td>
+                            <td>950</td>
+                        </tr>
+                    </table>
+                    <img src="photos/296.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 24: Delete employees hired before 1981</div>
+                <p class="question-text">Remove all employees who were hired before 1981 from the EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE YEAR(HIREDATE) < 1981;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >3 rows deleted.</div>
+                    <div class="section-label" >Employees Deleted (Hired before 1981):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                        </tr>
+                        <tr>
+                            <td>FORD</td>
+                            <td>03-DEC-81</td>
+                        </tr>
+                        <tr>
+                            <td>SCOTT</td>
+                            <td>09-DEC-84</td>
+                        </tr>
+                    </table>
+                    <img src="photos/297.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 25: Delete employees who do not receive commission</div>
+                <p class="question-text">Remove employees whose COMM is NULL (do not receive commission).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE COMM IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >10 rows deleted.</div>
+                    <div class="section-label" >Employees Deleted (No Commission):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>MANAGER</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>MANAGER</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                    <img src="photos/298.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 26: Delete departments located in CHICAGO</div>
+                <p class="question-text">Remove all departments whose location is CHICAGO from the DEPT table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM DEPT WHERE LOC = 'CHICAGO';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >1 row deleted.</div>
+                    <div class="section-label" >Department Deleted:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DEPTNO</th>
+                            <th>DNAME</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>SALES</td>
+                            <td>CHICAGO</td>
+                        </tr>
+                    </table>
+                    <img src="photos/299.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 27: Delete employees whose job is CLERK</div>
+                <p class="question-text">Remove all employees with job designation CLERK from the EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE JOB = 'CLERK';</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >4 rows deleted.</div>
+                    <div class="section-label" >Employees Deleted (Job = CLERK):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>ADAMS</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>JAMES</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                        </tr>
+                    </table>
+                    <img src="photos/300.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 28: Delete employees earning the minimum salary</div>
+                <p class="question-text">Remove employees whose salary equals the minimum salary in the organization.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP 
+WHERE SAL = (SELECT MIN(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >1 row deleted.</div>
+                    <div class="section-label" >Employee Deleted (Minimum Salary = 800):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                    </table>
+                    <img src="photos/301.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 29: Delete employees working in departments located in NEW YORK</div>
+                <p class="question-text">Remove all employees whose department is located in NEW YORK.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP 
+WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'NEW YORK');</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >3 rows deleted.</div>
+                    <div class="section-label" >Employees Deleted (Department in NEW YORK):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>MANAGER</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                            <td>10</td>
+                        </tr>
+                    </table>
+                    <img src="photos/302.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 30: Delete employees whose manager number is NULL</div>
+                <p class="question-text">Remove all employees who do not have a manager (MGR is NULL).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE MGR IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="success-message" >1 row deleted.</div>
+                    <div class="section-label" >Employee Deleted (Manager = NULL):</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>MGR</th>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                    <img src="photos/303.png">
+                </div>
+            </div>
+
+        </div>
+         <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

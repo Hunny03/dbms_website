@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL Data Types & Variables - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        <header>
+            <h1>PL/SQL Data Types & Variables</h1>
+
+        </header>
+
+    
+
+        <div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Write a PL/SQL block to print your name and city in two separate lines.</div>
+                <p class="question-subtitle">(Output Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  DBMS_OUTPUT.PUT_LINE('Deepika');
+  DBMS_OUTPUT.PUT_LINE('New York');
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Deepika
+New York
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Write a PL/SQL block to display numbers from 1 to 5 using DBMS_OUTPUT.PUT_LINE.</div>
+                <p class="question-subtitle">(Output Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  DBMS_OUTPUT.PUT_LINE('1');
+  DBMS_OUTPUT.PUT_LINE('2');
+  DBMS_OUTPUT.PUT_LINE('3');
+  DBMS_OUTPUT.PUT_LINE('4');
+  DBMS_OUTPUT.PUT_LINE('5');
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+2
+3
+4
+5
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Write a PL/SQL block to print the current system date.</div>
+                <p class="question-subtitle">(Output Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  DBMS_OUTPUT.PUT_LINE(SYSDATE);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">06-APR-26
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Write a PL/SQL block to display employee name and salary (use variables).</div>
+                <p class="question-subtitle">(Output + Variables)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_name VARCHAR2(20) := 'CLARK';
+  v_salary NUMBER := 2450;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_name);
+  DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Name: CLARK
+Salary: 2450
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Write a PL/SQL block to declare a variable and assign your age, then display it.</div>
+                <p class="question-subtitle">(Variables)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_age NUMBER := 22;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('My Age: ' || v_age);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">My Age: 22
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Write a PL/SQL block to declare two variables and print their sum.</div>
+                <p class="question-subtitle">(Variables)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num1 NUMBER := 10;
+  v_num2 NUMBER := 20;
+  v_sum NUMBER;
+BEGIN
+  v_sum := v_num1 + v_num2;
+  DBMS_OUTPUT.PUT_LINE('Sum of ' || v_num1 || ' and ' || v_num2 || ' is: ' || v_sum);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Sum of 10 and 20 is: 30
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Write a PL/SQL block to store employee name and salary in variables and display them.</div>
+                <p class="question-subtitle">(Variables)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp_name VARCHAR2(25) := 'SMITH';
+  v_emp_salary NUMBER := 800;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('---Employee Details---');
+  DBMS_OUTPUT.PUT_LINE('Name: ' || v_emp_name);
+  DBMS_OUTPUT.PUT_LINE('Salary: Rs.' || v_emp_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">---Employee Details---
+Name: SMITH
+Salary: Rs.800
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Write a PL/SQL block to swap two numbers using variables.</div>
+                <p class="question-subtitle">(Variables)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_a NUMBER := 5;
+  v_b NUMBER := 10;
+  v_temp NUMBER;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Before Swap: a=' || v_a || ', b=' || v_b);
+  v_temp := v_a;
+  v_a := v_b;
+  v_b := v_temp;
+  DBMS_OUTPUT.PUT_LINE('After Swap: a=' || v_a || ', b=' || v_b);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Before Swap: a=5, b=10
+After Swap: a=10, b=5
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Write a PL/SQL block to calculate area of a rectangle using variables.</div>
+                <p class="question-subtitle">(Variables)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_length NUMBER := 15;
+  v_width NUMBER := 10;
+  v_area NUMBER;
+BEGIN
+  v_area := v_length * v_width;
+  DBMS_OUTPUT.PUT_LINE('Length: ' || v_length);
+  DBMS_OUTPUT.PUT_LINE('Width: ' || v_width);
+  DBMS_OUTPUT.PUT_LINE('Area of Rectangle: ' || v_area);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Length: 15
+Width: 10
+Area of Rectangle: 150
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Write a PL/SQL block to declare a constant value for PI and calculate area of a circle.</div>
+                <p class="question-subtitle">(Constants)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  c_pi CONSTANT NUMBER := 3.14159;
+  v_radius NUMBER := 5;
+  v_area NUMBER;
+BEGIN
+  v_area := c_pi * v_radius * v_radius;
+  DBMS_OUTPUT.PUT_LINE('Radius: ' || v_radius);
+  DBMS_OUTPUT.PUT_LINE('Area of Circle: ' || v_area);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Radius: 5
+Area of Circle: 78.53975
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Write a PL/SQL block to declare a constant tax rate and calculate total salary after tax.</div>
+                <p class="question-subtitle">(Constants)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  c_tax_rate CONSTANT NUMBER := 0.10;
+  v_salary NUMBER := 5000;
+  v_tax NUMBER;
+  v_net_salary NUMBER;
+BEGIN
+  v_tax := v_salary * c_tax_rate;
+  v_net_salary := v_salary - v_tax;
+  DBMS_OUTPUT.PUT_LINE('Gross Salary: Rs.' || v_salary);
+  DBMS_OUTPUT.PUT_LINE('Tax: Rs.' || v_tax);
+  DBMS_OUTPUT.PUT_LINE('Net Salary: Rs.' || v_net_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Gross Salary: Rs.5000
+Tax: Rs.500
+Net Salary: Rs.4500
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Write a PL/SQL block where constant value cannot be changed (try modifying and observe error).</div>
+                <p class="question-subtitle">(Constants)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  c_pi CONSTANT NUMBER := 3.14;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('PI Value: ' || c_pi);
+  c_pi := 3.142;  -- TRYING TO MODIFY CONSTANT
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Error at line 5/1:
+PLS-00363: expression 'C_PI' cannot be used as an assignment target
+(Constants cannot be modified after declaration)</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Write a PL/SQL block to calculate simple interest using constant rate of interest.</div>
+                <p class="question-subtitle">(Constants)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  c_rate CONSTANT NUMBER := 5;  -- 5% per annum
+  v_principal NUMBER := 10000;
+  v_time NUMBER := 2;
+  v_interest NUMBER;
+BEGIN
+  v_interest := (v_principal * c_rate * v_time) / 100;
+  DBMS_OUTPUT.PUT_LINE('Principal: Rs.' || v_principal);
+  DBMS_OUTPUT.PUT_LINE('Rate: ' || c_rate || '%');
+  DBMS_OUTPUT.PUT_LINE('Time: ' || v_time || ' years');
+  DBMS_OUTPUT.PUT_LINE('Simple Interest: Rs.' || v_interest);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Principal: Rs.10000
+Rate: 5%
+Time: 2 years
+Simple Interest: Rs.1000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Write a PL/SQL block using different datatypes: NUMBER, VARCHAR2, DATE.</div>
+                <p class="question-subtitle">(Datatypes)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp_number NUMBER(4) := 9001;
+  v_emp_name VARCHAR2(25) := 'HARDIK';
+  v_hire_date DATE := TO_DATE('01-JAN-2020', 'DD-MON-YYYY');
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Employee Number: ' || v_emp_number);
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_emp_name);
+  DBMS_OUTPUT.PUT_LINE('Hire Date: ' || v_hire_date);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Number: 9001
+Employee Name: HARDIK
+Hire Date: 01-JAN-20
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Write a PL/SQL block to declare a variable using %TYPE from EMP table salary column.</div>
+                <p class="question-subtitle">(Datatypes)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_salary EMP.SAL%TYPE;
+BEGIN
+  SELECT SAL INTO v_salary FROM EMP WHERE EMPNO = 7839;
+  DBMS_OUTPUT.PUT_LINE('Employee Salary: Rs.' || v_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Salary: Rs.5000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Write a PL/SQL block to declare a record using %ROWTYPE and display employee details.</div>
+                <p class="question-subtitle">(Datatypes)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp_record EMP%ROWTYPE;
+BEGIN
+  SELECT * INTO v_emp_record FROM EMP WHERE EMPNO = 7902;
+  DBMS_OUTPUT.PUT_LINE('Employee Number: ' || v_emp_record.EMPNO);
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_emp_record.ENAME);
+  DBMS_OUTPUT.PUT_LINE('Job: ' || v_emp_record.JOB);
+  DBMS_OUTPUT.PUT_LINE('Salary: Rs.' || v_emp_record.SAL);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Number: 7902
+Employee Name: FORD
+Job: ANALYST
+Salary: Rs.3000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Write a PL/SQL block to store and display current date using DATE datatype.</div>
+                <p class="question-subtitle">(Datatypes)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_current_date DATE;
+BEGIN
+  v_current_date := SYSDATE;
+  DBMS_OUTPUT.PUT_LINE('Today''s Date: ' || v_current_date);
+  DBMS_OUTPUT.PUT_LINE('Formatted Date: ' || TO_CHAR(v_current_date, 'DD-MM-YYYY'));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Today's Date: 06-APR-26
+Formatted Date: 06-04-2026
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 18: Write a PL/SQL block to convert number to string and display it.</div>
+                <p class="question-subtitle">(Datatypes + Conversion)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_number NUMBER := 12345;
+  v_string VARCHAR2(10);
+BEGIN
+  v_string := TO_CHAR(v_number);
+  DBMS_OUTPUT.PUT_LINE('Number: ' || v_number);
+  DBMS_OUTPUT.PUT_LINE('Converted to String: ' || v_string);
+  DBMS_OUTPUT.PUT_LINE('Type of v_string is: VARCHAR2');
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Number: 12345
+Converted to String: 12345
+Type of v_string is: VARCHAR2
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 19: Write a PL/SQL block using variables, constants, and output statement together.</div>
+                <p class="question-subtitle">(Combined Concepts)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  c_company CONSTANT VARCHAR2(20) := 'TCS';
+  v_emp_name VARCHAR2(20) := 'RAVI';
+  v_basic_salary NUMBER := 50000;
+  v_bonus NUMBER;
+BEGIN
+  v_bonus := v_basic_salary * 0.15;
+  DBMS_OUTPUT.PUT_LINE('=== SALARY SLIP ===');
+  DBMS_OUTPUT.PUT_LINE('Company: ' || c_company);
+  DBMS_OUTPUT.PUT_LINE('Employee: ' || v_emp_name);
+  DBMS_OUTPUT.PUT_LINE('Basic: ' || v_basic_salary);
+  DBMS_OUTPUT.PUT_LINE('Bonus (15%): ' || v_bonus);
+  DBMS_OUTPUT.PUT_LINE('Gross: ' || (v_basic_salary + v_bonus));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">=== SALARY SLIP ===
+Company: TCS
+Employee: RAVI
+Basic: 50000
+Bonus (15%): 7500
+Gross: 57500
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 20: Write a PL/SQL block to display employee details using %ROWTYPE, constants, and comments.</div>
+                <p class="question-subtitle">(Combined Concepts)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  -- Constant for department
+  c_target_deptno CONSTANT NUMBER := 20;
+  -- Record variable
+  v_emp EMP%ROWTYPE;
+  -- Variable for bonus
+  v_bonus_percent NUMBER := 10;
+BEGIN
+  -- Retrieve employee details
+  SELECT * INTO v_emp FROM EMP 
+  WHERE EMPNO = 7369 AND DEPTNO = c_target_deptno;
+  
+  -- Display employee information
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_emp.ENAME);
+  DBMS_OUTPUT.PUT_LINE('Job: ' || v_emp.JOB);
+  DBMS_OUTPUT.PUT_LINE('Salary: Rs.' || v_emp.SAL);
+  DBMS_OUTPUT.PUT_LINE('Bonus: Rs.' || (v_emp.SAL * v_bonus_percent / 100));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Name: SMITH
+Job: CLERK
+Salary: Rs.800
+Bonus: Rs.80
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 21: Write a PL/SQL block to calculate bonus (10% of salary) and display result using proper comments.</div>
+                <p class="question-subtitle">(Variables + Output + Comments)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  -- Variables for bonus calculation
+  v_emp_name VARCHAR2(25) := 'ANDERSON';
+  v_salary NUMBER := 4500;
+  -- Bonus percentage
+  v_bonus_rate NUMBER := 10;
+  -- Variable to store bonus amount
+  v_bonus_amount NUMBER;
+BEGIN
+  -- Calculate 10% bonus
+  v_bonus_amount := (v_salary * v_bonus_rate) / 100;
+  
+  -- Display result
+  DBMS_OUTPUT.PUT_LINE('---Bonus Calculation---');
+  DBMS_OUTPUT.PUT_LINE('Employee: ' || v_emp_name);
+  DBMS_OUTPUT.PUT_LINE('Salary: Rs.' || v_salary);
+  DBMS_OUTPUT.PUT_LINE('Bonus Rate: ' || v_bonus_rate || '%');
+  DBMS_OUTPUT.PUT_LINE('Bonus Amount: Rs.' || v_bonus_amount);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">---Bonus Calculation---
+Employee: ANDERSON
+Salary: Rs.4500
+Bonus Rate: 10%
+Bonus Amount: Rs.450
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 22: Write a PL/SQL block that uses all concepts: variable, constant, datatype, and output.</div>
+                <p class="question-subtitle">(Full Practice)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  -- Constants
+  c_company_name CONSTANT VARCHAR2(30) := 'ABC CORPORATION';
+  c_company_code CONSTANT NUMBER := 100;
+  -- Variables with different datatypes
+  v_emp EMP%ROWTYPE;
+  v_salary_increase NUMBER := 2000;
+  v_new_salary NUMBER;
+  v_joining_date DATE;
+  v_experience_years NUMBER;
+BEGIN
+  -- Fetch employee record using %ROWTYPE
+  SELECT * INTO v_emp FROM EMP WHERE EMPNO = 7566;
+  
+  -- Calculate new salary
+  v_new_salary := v_emp.SAL + v_salary_increase;
+  
+  -- Set joining date
+  v_joining_date := v_emp.HIREDATE;
+  
+  -- Display comprehensive details
+  DBMS_OUTPUT.PUT_LINE('**** ' || c_company_name || ' ****');
+  DBMS_OUTPUT.PUT_LINE('Company Code: ' || c_company_code);
+  DBMS_OUTPUT.PUT_LINE('');
+  DBMS_OUTPUT.PUT_LINE('Employee Details:');
+  DBMS_OUTPUT.PUT_LINE('Name: ' || v_emp.ENAME);
+  DBMS_OUTPUT.PUT_LINE('Emp ID: ' || v_emp.EMPNO);
+  DBMS_OUTPUT.PUT_LINE('Designation: ' || v_emp.JOB);
+  DBMS_OUTPUT.PUT_LINE('Current Salary: Rs.' || v_emp.SAL);
+  DBMS_OUTPUT.PUT_LINE('Salary Increase: Rs.' || v_salary_increase);
+  DBMS_OUTPUT.PUT_LINE('New Salary: Rs.' || v_new_salary);
+  DBMS_OUTPUT.PUT_LINE('Joining Date: ' || v_joining_date);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">**** ABC CORPORATION ****
+Company Code: 100
+
+Employee Details:
+Name: JONES
+Emp ID: 7566
+Designation: MANAGER
+Current Salary: Rs.2975
+Salary Increase: Rs.2000
+New Salary: Rs.4975
+Joining Date: 02-APR-81
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+    
+</body>
+</html>

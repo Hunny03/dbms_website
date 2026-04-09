@@ -1,0 +1,1234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Joins - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        
+        <header>
+            <h1>SQL Joins</h1>
+        </header>
+
+        <div class="questions-list">
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Display employee name and department name.</div>
+                <p class="question-text">Show employee names along with their department names using INNER JOIN.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALES</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-title">Question 2: Display employee name, salary, and department location.</div>
+                <p class="question-text">Show employee names, salaries, and their department locations.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, D.LOC FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>DALLAS</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>CHICAGO</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-title">Question 3: Display employee name and department name for department 10.</div>
+                <p class="question-text">Show employees and their department names only for department 10.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.DEPTNO = 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-title">Question 4: Display employee name and department name where salary > 2000.</div>
+                <p class="question-text">Show employees earning more than 2000 along with their department names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > 2000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>BLAKE</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-title">Question 5: Display employee name, job, and department name.</div>
+                <p class="question-text">Show employee names, their jobs, and department names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.JOB, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Display employee name and department location for CLERKs.</div>
+                <p class="question-text">Show CLERK employees and their department locations.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.LOC FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.JOB = 'CLERK';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>DALLAS</td>
+                        </tr>
+                        <tr>
+                            <td>ADAMS</td>
+                            <td>DALLAS</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-title">Question 7: Display employee name and department name working in NEW YORK.</div>
+                <p class="question-text">Show employees working in the NEW YORK location with their department names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.LOC = 'NEW YORK';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-title">Question 8: Display employee name, department number, and department name.</div>
+                <p class="question-text">Show employee names with both department number and department name.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.DEPTNO, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DEPTNO</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>20</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>30</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-title">Question 9: Display employees hired after 1981 with department name.</div>
+                <p class="question-text">Show employees hired after 1981 along with their department names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE EXTRACT(YEAR FROM E.HIREDATE) > 1981;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SCOTT</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>ADAMS</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-title">Question 10: Display employees with commission along with department name.</div>
+                <p class="question-text">Show employees who receive commission and their department names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.COMM IS NOT NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALES</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Display employees whose salary is between 1500 and 3000 with department.</div>
+                <p class="question-text">Show employees earning between 1500 and 3000 along with their department names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL BETWEEN 1500 AND 3000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>SALES</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>2975</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Display employees who are the only employee in their department.</div>
+                <p class="question-text">Find departments with only one employee and show those employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.DEPTNO IN (SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) = 1);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>No matching records</td>
+                            <td>(All departments have multiple employees)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-title">Question 13: Display employees whose department has more than 3 employees.</div>
+                <p class="question-text">Show employees working in departments with more than 3 employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.DEPTNO IN (SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 3);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-title">Question 14: Display departments where no employee earns more than 2000.</div>
+                <p class="question-text">Find departments where all employees earn 2000 or less.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME FROM DEPT D WHERE D.DEPTNO NOT IN (SELECT DISTINCT DEPTNO FROM EMP WHERE SAL > 2000);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>No departments found</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-title">Question 15: Display employees who earn more than at least one manager.</div>
+                <p class="question-text">Show employees who earn more than at least one manager in the company.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DISTINCT E.ENAME FROM EMP E WHERE EXISTS (SELECT 1 FROM EMP M WHERE M.JOB = 'MANAGER' AND E.SAL > M.SAL);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                        </tr>
+                        <tr>
+                            <td>BLAKE</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question">
+                <div class="question-title">Question 16: Display employees who share same job and department.</div>
+                <p class="question-text">Find employees who have colleagues with the same job in the same department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E1.ENAME, E1.JOB, D.DNAME FROM EMP E1 JOIN EMP E2 ON E1.DEPTNO = E2.DEPTNO AND E1.JOB = E2.JOB AND E1.EMPNO != E2.EMPNO JOIN DEPT D ON E1.DEPTNO = D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Display employees working in same department as their manager.</div>
+                <p class="question-text">Show employees who work in the same department as their manager.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, M.ENAME AS MANAGER FROM EMP E JOIN EMP M ON E.MGR = M.EMPNO WHERE E.DEPTNO = M.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>MANAGER</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>JONES</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>BLAKE</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Display employees whose manager works in a different department.</div>
+                <p class="question-text">Show employees whose managers work in different departments.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, M.ENAME AS MANAGER FROM EMP E JOIN EMP M ON E.MGR = M.EMPNO WHERE E.DEPTNO != M.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>MANAGER</th>
+                        </tr>
+                        <tr>
+                            <td>No matching records</td>
+                            <td>(All managers work in same dept as employees)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Display employees who are highest paid in their department.</div>
+                <p class="question-text">Show employees who earn the highest salary in their respective departments.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL = (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>2975</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>BLAKE</td>
+                            <td>2850</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Display employees earning more than their department average.</div>
+                <p class="question-text">Show employees who earn more than the average salary of their department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>2975</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>SCOTT</td>
+                            <td>3000</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question">
+                <div class="question-title">Question 21: Display department with maximum employees.</div>
+                <p class="question-text">Find the department with the highest number of employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME, COUNT(*) AS EMP_COUNT FROM DEPT D JOIN EMP E ON D.DEPTNO = E.DEPTNO GROUP BY D.DNAME, D.DEPTNO HAVING COUNT(*) = (SELECT MAX(COUNT(*)) FROM EMP GROUP BY DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                            <th>EMP_COUNT</th>
+                        </tr>
+                        <tr>
+                            <td>RESEARCH</td>
+                            <td>5</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Display department with highest total salary.</div>
+                <p class="question-text">Find the department with the highest total salary expenditure.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME, SUM(E.SAL) AS TOTAL_SALARY FROM DEPT D JOIN EMP E ON D.DEPTNO = E.DEPTNO GROUP BY D.DNAME, D.DEPTNO HAVING SUM(E.SAL) = (SELECT MAX(SUM(SAL)) FROM EMP GROUP BY DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                            <th>TOTAL_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>RESEARCH</td>
+                            <td>10875</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Display department name and average salary.</div>
+                <p class="question-text">Show average salary for each department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME, ROUND(AVG(E.SAL), 2) AS AVG_SALARY FROM DEPT D JOIN EMP E ON D.DEPTNO = E.DEPTNO GROUP BY D.DNAME, D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                            <th>AVG_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNTING</td>
+                            <td>2916.67</td>
+                        </tr>
+                        <tr>
+                            <td>RESEARCH</td>
+                            <td>2175.00</td>
+                        </tr>
+                        <tr>
+                            <td>SALES</td>
+                            <td>1566.67</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Display department name and total salary.</div>
+                <p class="question-text">Show total salary expenditure for each department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME, SUM(E.SAL) AS TOTAL_SALARY FROM DEPT D JOIN EMP E ON D.DEPTNO = E.DEPTNO GROUP BY D.DNAME, D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                            <th>TOTAL_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNTING</td>
+                            <td>8750</td>
+                        </tr>
+                        <tr>
+                            <td>RESEARCH</td>
+                            <td>10875</td>
+                        </tr>
+                        <tr>
+                            <td>SALES</td>
+                            <td>9400</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Display department name and number of employees.</div>
+                <p class="question-text">Show employee count for each department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME, COUNT(E.EMPNO) AS EMP_COUNT FROM DEPT D JOIN EMP E ON D.DEPTNO = E.DEPTNO GROUP BY D.DNAME, D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                            <th>EMP_COUNT</th>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNTING</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>RESEARCH</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>SALES</td>
+                            <td>6</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Display employees not assigned to any department.</div>
+                <p class="question-text">Show employees who don't belong to any department (LEFT OUTER JOIN).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME FROM EMP E LEFT OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DEPTNO IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>No employees found</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Display departments with no employees.</div>
+                <p class="question-text">Show departments that have no employees assigned (RIGHT OUTER JOIN).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME FROM DEPT D LEFT OUTER JOIN EMP E ON D.DEPTNO = E.DEPTNO WHERE E.EMPNO IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>OPERATIONS</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 28 -->
+            <div class="question">
+                <div class="question-title">Question 28: Display all departments with employees (even if no employees).</div>
+                <p class="question-text">Show all departments and their employees using LEFT OUTER JOIN.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DNAME, E.ENAME FROM DEPT D LEFT OUTER JOIN EMP E ON D.DEPTNO = E.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DNAME</th>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNTING</td>
+                            <td>CLARK</td>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNTING</td>
+                            <td>KING</td>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNTING</td>
+                            <td>MILLER</td>
+                        </tr>
+                        <tr>
+                            <td>RESEARCH</td>
+                            <td>SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>RESEARCH</td>
+                            <td>JONES</td>
+                        </tr>
+                        <tr>
+                            <td>SALES</td>
+                            <td>ALLEN</td>
+                        </tr>
+                        <tr>
+                            <td>OPERATIONS</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 29 -->
+            <div class="question">
+                <div class="question-title">Question 29: Display all employees with department name (even if no department).</div>
+                <p class="question-text">Show all employees and their departments using RIGHT OUTER JOIN.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E LEFT OUTER JOIN DEPT D ON E.DEPTNO = D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALES</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 30 -->
+            <div class="question">
+                <div class="question-title">Question 30: Display employees whose manager works in department 10.</div>
+                <p class="question-text">Show employees whose managers are in department 10.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, M.ENAME AS MANAGER FROM EMP E JOIN EMP M ON E.MGR = M.EMPNO WHERE M.DEPTNO = 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>MANAGER</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>JONES</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>BLAKE</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 31 -->
+            <div class="question">
+                <div class="question-title">Question 31: Display employees working under the same manager.</div>
+                <p class="question-text">Find employees who share the same manager.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E1.ENAME, E2.ENAME AS COLLEAGUE, M.ENAME AS MANAGER FROM EMP E1 JOIN EMP E2 ON E1.MGR = E2.MGR AND E1.EMPNO != E2.EMPNO JOIN EMP M ON E1.MGR = M.EMPNO WHERE E1.EMPNO < E2.EMPNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>COLLEAGUE</th>
+                            <th>MANAGER</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>ADAMS</td>
+                            <td>JONES</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>WARD</td>
+                            <td>BLAKE</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 32 -->
+            <div class="question">
+                <div class="question-title">Question 32: Display employees earning more than their manager.</div>
+                <p class="question-text">Show employees who earn more than their respective managers.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL AS EMP_SAL, M.ENAME AS MANAGER, M.SAL AS MGR_SAL FROM EMP E JOIN EMP M ON E.MGR = M.EMPNO WHERE E.SAL > M.SAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>EMP_SAL</th>
+                            <th>MANAGER</th>
+                            <th>MGR_SAL</th>
+                        </tr>
+                        <tr>
+                            <td>No matching records</td>
+                            <td>(No employees earn more than their managers)</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 33 -->
+            <div class="question">
+                <div class="question-title">Question 33: Display employee name and manager salary.</div>
+                <p class="question-text">Show each employee along with their manager's salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, M.SAL AS MANAGER_SALARY FROM EMP E JOIN EMP M ON E.MGR = M.EMPNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>MANAGER_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>2975</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>2850</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 34 -->
+            <div class="question">
+                <div class="question-title">Question 34: Display employees who are managers.</div>
+                <p class="question-text">Show employees who manage other employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DISTINCT M.ENAME FROM EMP E JOIN EMP M ON E.MGR = M.EMPNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                        </tr>
+                        <tr>
+                            <td>BLAKE</td>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 35 -->
+            <div class="question">
+                <div class="question-title">Question 35: Display employees who do not have managers.</div>
+                <p class="question-text">Show employees who don't report to anyone (top-level managers).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE MGR IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 36 -->
+            <div class="question">
+                <div class="question-title">Question 36: Display employee name and manager name.</div>
+                <p class="question-text">Show each employee along with their manager's name.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME AS EMPLOYEE, M.ENAME AS MANAGER FROM EMP E LEFT OUTER JOIN EMP M ON E.MGR = M.EMPNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPLOYEE</th>
+                            <th>MANAGER</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>JONES</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>BLAKE</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 37 -->
+            <div class="question">
+                <div class="question-title">Question 37: Display employees whose department location is DALLAS.</div>
+                <p class="question-text">Show employees working in the DALLAS location.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.LOC FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.LOC = 'DALLAS';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>DALLAS</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>DALLAS</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 38 -->
+            <div class="question">
+                <div class="question-title">Question 38: Display employees whose department is ACCOUNTING.</div>
+                <p class="question-text">Show employees working in the ACCOUNTING department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE D.DNAME = 'ACCOUNTING';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                        <tr>
+                            <td>MILLER</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 39 -->
+            <div class="question">
+                <div class="question-title">Question 39: Display employees not working in department 30 with department name.</div>
+                <p class="question-text">Show employees from departments other than 30.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, D.DNAME FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.DEPTNO != 30;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DNAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>ACCOUNTING</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 40 -->
+            <div class="question">
+                <div class="question-title">Question 40: Display employees whose job is MANAGER with department location.</div>
+                <p class="question-text">Show managers and their department locations.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.JOB, D.LOC FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO WHERE E.JOB = 'MANAGER';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>MANAGER</td>
+                            <td>DALLAS</td>
+                        </tr>
+                        <tr>
+                            <td>BLAKE</td>
+                            <td>MANAGER</td>
+                            <td>CHICAGO</td>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>MANAGER</td>
+                            <td>NEW YORK</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Operations - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        <header>
+            <h1>Set Operations</h1>
+        </header>
+
+        <div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Display all department numbers from both EMP and DEPT tables using UNION.</div>
+                <p class="question-text">Show unique department numbers present in either the EMP or DEPT table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP
+UNION
+SELECT DEPTNO FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Display all department numbers from EMP and DEPT including duplicates using UNION ALL.</div>
+                <p class="question-text">Show department numbers from EMP and DEPT while preserving duplicates.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP
+UNION ALL
+SELECT DEPTNO FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                        <tr><td>30</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                        <tr><td>30</td></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>30</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Display department numbers that are present in both EMP and DEPT using INTERSECT.</div>
+                <p class="question-text">Show department numbers that appear in both tables.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP
+INTERSECT
+SELECT DEPTNO FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Display department numbers that are present in EMP but not in DEPT using MINUS.</div>
+                <p class="question-text">Show department numbers present only in EMP and not in DEPT.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP
+MINUS
+SELECT DEPTNO FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="section-label">No rows returned.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Display department numbers that are present in DEPT but not assigned to any employee.</div>
+                <p class="question-text">Show department numbers defined in DEPT but not used by any row in EMP.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM DEPT
+MINUS
+SELECT DEPTNO FROM EMP;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>40</td></tr>
+                         </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Display employee names and department names in a single column using UNION.</div>
+                <p class="question-text">Combine employee names and department names into one result set.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP
+UNION
+SELECT DNAME FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>NAME</th></tr>
+                        <tr><td>ACCOUNTING</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                        <tr><td>ALLEN</td></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>RESEARCH</td></tr>
+                        <tr><td>SALES</td></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Display all employee names and department names, including duplicates.</div>
+                <p class="question-text">Use UNION ALL to include every employee name and department name row.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP
+UNION ALL
+SELECT DNAME FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>NAME</th></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>ALLEN</td></tr>
+                        <tr><td>WARD</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>ACCOUNTING</td></tr>
+                        <tr><td>RESEARCH</td></tr>
+                        <tr><td>SALES</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Display jobs that exist in EMP table and also exist as department names in DEPT table (use INTERSECT).</div>
+                <p class="question-text">Show values common to employee JOB and department DNAME.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB FROM EMP
+INTERSECT
+SELECT DNAME FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="section-label">No rows returned.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Display employee names that are not department names.</div>
+                <p class="question-text">Use MINUS to remove department names from the employee name set.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP
+MINUS
+SELECT DNAME FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>ALLEN</td></tr>
+                        <tr><td>WARD</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>MILLER</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Display department locations that are not used by any employee.</div>
+                <p class="question-text">Use MINUS with department locations and joined EMP locations.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT LOC FROM DEPT
+MINUS
+SELECT D.LOC FROM EMP E JOIN DEPT D ON E.DEPTNO = D.DEPTNO;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="section-label">No rows returned.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Display employee names from department 10 and department 20 using UNION.</div>
+                <p class="question-text">Combine employee names from department 10 and department 20 without duplicates.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE DEPTNO = 10
+UNION
+SELECT ENAME FROM EMP WHERE DEPTNO = 20;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>SMITH</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Display employee names from department 10 and department 20 including duplicates.</div>
+                <p class="question-text">Use UNION ALL to show all names from department 10 and department 20.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE DEPTNO = 10
+UNION ALL
+SELECT ENAME FROM EMP WHERE DEPTNO = 20;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>FORD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Display employees who work in departments that exist in DEPT table using INTERSECT.</div>
+                <p class="question-text">Use INTERSECT on valid department numbers and then pick matching employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE DEPTNO IN (
+    SELECT DEPTNO FROM EMP
+    INTERSECT
+    SELECT DEPTNO FROM DEPT
+);
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>ALLEN</td></tr>
+                        <tr><td>WARD</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>MILLER</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Display employees whose department does not exist in DEPT table using MINUS.</div>
+                <p class="question-text">Use DEPTNO values absent from DEPT to find invalid employee assignments.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE DEPTNO IN (
+    SELECT DEPTNO FROM EMP
+    MINUS
+    SELECT DEPTNO FROM DEPT
+);
+</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="section-label">No rows returned.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Display department numbers that have employees and also exist in DEPT table.</div>
+                <p class="question-text">Use INTERSECT to find department numbers common to both EMP and DEPT.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP
+INTERSECT
+SELECT DEPTNO FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Display all unique job roles from EMP and all unique department names from DEPT in one result.</div>
+                <p class="question-text">Combine job titles and department names using UNION.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB FROM EMP
+UNION
+SELECT DNAME FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>VALUE</th></tr>
+                        <tr><td>ACCOUNTING</td></tr>
+                        <tr><td>ANALYST</td></tr>
+                        <tr><td>CLERK</td></tr>
+                        <tr><td>MANAGER</td></tr>
+                        <tr><td>PRESIDENT</td></tr>
+                        <tr><td>RESEARCH</td></tr>
+                        <tr><td>SALES</td></tr>
+                        <tr><td>SALESMAN</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Display common values between employee job and department location.</div>
+                <p class="question-text">Use INTERSECT to find any identical values between JOB and LOC.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB FROM EMP
+INTERSECT
+SELECT LOC FROM DEPT;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="section-label">No rows returned.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 18: Display employee names who are not assigned to any valid department.</div>
+                <p class="question-text">Use MINUS to identify employees whose DEPTNO is missing from DEPT.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP
+MINUS
+SELECT ENAME FROM EMP WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT);
+</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="section-label">No rows returned.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 19: Combine employees earning more than 2000 and employees from department 10 using UNION.</div>
+                <p class="question-text">Show employee names from both sets without duplicates.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE SAL > 2000
+UNION
+SELECT ENAME FROM EMP WHERE DEPTNO = 10;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>MILLER</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 20: Display employees who work in department 10 but not in department 20 using MINUS.</div>
+                <p class="question-text">Use MINUS to exclude employees from department 20.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE DEPTNO = 10
+MINUS
+SELECT ENAME FROM EMP WHERE DEPTNO = 20;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>MILLER</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 21: Display department numbers that exist in EMP, exist in DEPT, but exclude department 10.</div>
+                <p class="question-text">Use INTERSECT on department numbers and exclude department 10.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP WHERE DEPTNO <> 10
+INTERSECT
+SELECT DEPTNO FROM DEPT WHERE DEPTNO <> 10;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 22: Display all employee names and department names in a single result sorted alphabetically.</div>
+                <p class="question-text">Use UNION and ORDER BY to merge names and sort the result.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP
+UNION
+SELECT DNAME FROM DEPT
+ORDER BY 1;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>NAME</th></tr>
+                        <tr><td>ACCOUNTING</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                        <tr><td>ALLEN</td></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>RESEARCH</td></tr>
+                        <tr><td>SALES</td></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 23: Display department numbers that appear in EMP more than once using UNION ALL.</div>
+                <p class="question-text">Use UNION ALL to show repeated department numbers in EMP from a filtered set.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP WHERE DEPTNO IN (
+    SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 1
+)
+UNION ALL
+SELECT DEPTNO FROM EMP WHERE DEPTNO IN (
+    SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 1
+);
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                        <tr><td>10</td></tr>
+                        <tr><td>20</td></tr>
+                        <tr><td>30</td></tr>
+                        <tr><td>10</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 24: Display employees from departments located in NEW YORK and DALLAS using UNION.</div>
+                <p class="question-text">Show employees who work in departments with locations NEW YORK or DALLAS.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE DEPTNO IN (
+    SELECT DEPTNO FROM DEPT WHERE LOC = 'NEW YORK'
+)
+UNION
+SELECT ENAME FROM EMP WHERE DEPTNO IN (
+    SELECT DEPTNO FROM DEPT WHERE LOC = 'DALLAS'
+);
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>SMITH</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 25: Combine results of employees with salary > 3000 and employees with job = 'MANAGER'. Remove duplicates.</div>
+                <p class="question-text">Use UNION to merge the high salary and manager employee sets.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE SAL > 3000
+UNION
+SELECT ENAME FROM EMP WHERE JOB = 'MANAGER';
+</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>JONES</td></tr>
+                        <tr><td>KING</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+    
+</body>
+</html>

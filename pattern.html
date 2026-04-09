@@ -1,0 +1,1343 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIKE Pattern Matching - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        
+        <header>
+            <h1>LIKE Pattern Matching</h1>
+        </header>
+
+        <div class="questions-list">
+
+            <!-- Q1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Display employees whose name starts with A</div>
+                <p class="question-text">Use LIKE with % wildcard for prefix matching.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE 'A%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: A% - Starts with 'A' followed by any characters</div>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question">
+                <div class="question-title">Question 2: Display employees whose name starts with S</div>
+                <p class="question-text">Use LIKE with S%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE 'S%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7369</td><td>SMITH</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: S% - Starts with 'S' followed by any characters</div>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question">
+                <div class="question-title">Question 3: Display employees whose name ends with N</div>
+                <p class="question-text">Use LIKE with %N for suffix matching.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%N';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %N - Ends with 'N' preceded by any characters</div>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question">
+                <div class="question-title">Question 4: Display employees whose name ends with R</div>
+                <p class="question-text">Use LIKE with %R.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%R';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7844</td><td>TURNER</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %R - Ends with 'R' preceded by any characters</div>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question">
+                <div class="question-title">Question 5: Display employees whose name contains LL</div>
+                <p class="question-text">Use LIKE with %LL% for substring matching.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%LL%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %LL% - Contains 'LL' anywhere in the string</div>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Display employees whose name contains AR</div>
+                <p class="question-text">Use LIKE with %AR%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%AR%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %AR% - Contains 'AR' anywhere in the string</div>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question">
+                <div class="question-title">Question 7: Display employees whose job starts with M</div>
+                <p class="question-text">Use LIKE on JOB column with M%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB LIKE 'M%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td><td>MANAGER</td></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>MANAGER</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: M% - JOB starts with 'M'</div>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question">
+                <div class="question-title">Question 8: Display employees whose job ends with AN</div>
+                <p class="question-text">Use LIKE with %AN.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB LIKE '%AN';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td><td>MANAGER</td></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>MANAGER</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>SALESMAN</td></tr>
+                        <tr><td>7844</td><td>TURNER</td><td>SALESMAN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %AN - JOB ends with 'AN'</div>
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="question">
+                <div class="question-title">Question 9: Display employees whose job contains CL</div>
+                <p class="question-text">Use LIKE with %CL%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB LIKE '%CL%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7369</td><td>SMITH</td><td>CLERK</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>7900</td><td>JAMES</td><td>CLERK</td></tr>
+                        <tr><td>7934</td><td>MILLER</td><td>CLERK</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %CL% - JOB contains 'CL'</div>
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="question">
+                <div class="question-title">Question 10: Display departments whose location starts with N</div>
+                <p class="question-text">Use LIKE on LOC column with N%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO, DNAME, LOC FROM DEPT WHERE LOC LIKE 'N%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>DNAME</th><th>LOC</th></tr>
+                        <tr><td>10</td><td>ACCOUNTING</td><td>NEW YORK</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: N% - LOC starts with 'N'</div>
+                </div>
+            </div>
+
+            <!-- Q11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Display employees whose name has exactly 4 characters</div>
+                <p class="question-text">Use LIKE with _ wildcard (exactly one character each).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '____';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>WARD</td></tr>
+                        <tr><td>7844</td><td>KING</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: ____ (four underscores) - Exactly 4 characters long</div>
+                </div>
+            </div>
+
+            <!-- Q12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Display employees whose name has exactly 5 characters</div>
+                <p class="question-text">Use LIKE with 5 underscores.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '_____';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                        <tr><td>7934</td><td>MILLER</td></tr>
+                        <tr><td>7566</td><td>JONES</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: _____ (five underscores) - Exactly 5 characters long</div>
+                </div>
+            </div>
+
+            <!-- Q13 -->
+            <div class="question">
+                <div class="question-title">Question 13: Display employees whose name has A as the second character</div>
+                <p class="question-text">Use LIKE with _A% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '_A%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: _A% - Any character, then 'A', then any characters</div>
+                </div>
+            </div>
+
+            <!-- Q14 -->
+            <div class="question">
+                <div class="question-title">Question 14: Display employees whose name has L as the third character</div>
+                <p class="question-text">Use LIKE with __L% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '__L%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: __L% - Two any characters, then 'L', then any characters</div>
+                </div>
+            </div>
+
+            <!-- Q15 -->
+            <div class="question">
+                <div class="question-title">Question 15: Display employees whose job has exactly 6 characters</div>
+                <p class="question-text">Use LIKE with 6 underscores on JOB.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB LIKE '______';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7369</td><td>SMITH</td><td>CLERK</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>7900</td><td>JAMES</td><td>CLERK</td></tr>
+                        <tr><td>7934</td><td>MILLER</td><td>CLERK</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: ______ (six underscores) - JOB is exactly 6 characters (CLERK, ANALYST)</div>
+                </div>
+            </div>
+
+            <!-- Q16 -->
+            <div class="question">
+                <div class="question-title">Question 16: Display employees whose name ends with N (any start)</div>
+                <p class="question-text">Use LIKE with %N pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%N';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %N - Any characters followed by 'N' at the end</div>
+                </div>
+            </div>
+
+            <!-- Q17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Display jobs starting with single character and ending with ER</div>
+                <p class="question-text">Use LIKE with _ER pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DISTINCT JOB FROM EMP WHERE JOB LIKE '_ER';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>JOB</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: _ER - One character, then 'ER'</div>
+                </div>
+            </div>
+
+            <!-- Q18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Display employees whose name starts with A and ends with N</div>
+                <p class="question-text">Use LIKE with A%N pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE 'A%N';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: A%N - Starts with 'A', ends with 'N' (ALLEN, ADAMS don't end with N)</div>
+                </div>
+            </div>
+
+            <!-- Q19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Display employees whose name has exactly 2 characters before E</div>
+                <p class="question-text">Use LIKE with __E% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '__E%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7934</td><td>MILLER</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: __E% - Two characters, then 'E', then any characters</div>
+                </div>
+            </div>
+
+            <!-- Q20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Display employees whose name has exactly 1 character after A</div>
+                <p class="question-text">Use LIKE with A_% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE 'A__%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: A_% - 'A' followed by at least one character</div>
+                </div>
+            </div>
+
+            <!-- Q21 -->
+            <div class="question">
+                <div class="question-title">Question 21: Display employees whose name starts with A and ends with N</div>
+                <p class="question-text">Use LIKE with A%N pattern (revised).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE 'A%N';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: A%N - Starts with 'A' and ends with 'N'</div>
+                </div>
+            </div>
+
+            <!-- Q22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Display employees whose name contains E anywhere</div>
+                <p class="question-text">Use LIKE with %E% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%E%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                        <tr><td>7934</td><td>MILLER</td></tr>
+                        <tr><td>7844</td><td>TURNER</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %E% - Contains 'E' anywhere in the string</div>
+                </div>
+            </div>
+
+            <!-- Q23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Display employees whose name does NOT contain A</div>
+                <p class="question-text">Use NOT LIKE with %A% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME NOT LIKE '%A%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7369</td><td>SMITH</td></tr>
+                        <tr><td>7566</td><td>JONES</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td></tr>
+                        <tr><td>7839</td><td>KING</td></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: NOT LIKE %A% - Does NOT contain 'A'</div>
+                </div>
+            </div>
+
+            <!-- Q24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Display employees whose job contains MAN</div>
+                <p class="question-text">Use LIKE with %MAN% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB LIKE '%MAN%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td><td>MANAGER</td></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>MANAGER</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>SALESMAN</td></tr>
+                        <tr><td>7844</td><td>TURNER</td><td>SALESMAN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %MAN% - Contains 'MAN' anywhere</div>
+                </div>
+            </div>
+
+            <!-- Q25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Display employees whose job does NOT start with C</div>
+                <p class="question-text">Use NOT LIKE with C% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB NOT LIKE 'C%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td><td>SALESMAN</td></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td><td>MANAGER</td></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>MANAGER</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: NOT LIKE C% - Job does NOT start with 'C'</div>
+                </div>
+            </div>
+
+            <!-- Q26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Display employees whose name contains two Ls consecutively</div>
+                <p class="question-text">Use LIKE with %LL% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%LL%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %LL% - Contains 'LL' consecutively</div>
+                </div>
+            </div>
+
+            <!-- Q27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Display employees whose name starts with J and has S anywhere</div>
+                <p class="question-text">Use LIKE with J%S% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE 'J%S%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: J%S% - Starts with 'J' and contains 'S' somewhere</div>
+                </div>
+            </div>
+
+            <!-- Q28 -->
+            <div class="question">
+                <div class="question-title">Question 28: Display employees whose job starts with S and ends with AN</div>
+                <p class="question-text">Use LIKE with S%AN pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB LIKE 'S%AN';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>SALESMAN</td></tr>
+                        <tr><td>7844</td><td>TURNER</td><td>SALESMAN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: S%AN - Starts with 'S' and ends with 'AN'</div>
+                </div>
+            </div>
+
+            <!-- Q29 -->
+            <div class="question">
+                <div class="question-title">Question 29: Display employees whose name contains A as the second last character</div>
+                <p class="question-text">Use LIKE with %A_ pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%A_';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7876</td><td>ADAMS</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %A_ - 'A' as second last character (ends with one char after A)</div>
+                </div>
+            </div>
+
+            <!-- Q30 -->
+            <div class="question">
+                <div class="question-title">Question 30: Display employees whose name has exactly one character between A and E</div>
+                <p class="question-text">Use LIKE with A_E pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE 'A_E%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: A_E% - A, one character, then E, then any</div>
+                </div>
+            </div>
+
+            <!-- Q31 -->
+            <div class="question">
+                <div class="question-title">Question 31: Display employees whose name starts with S and salary > 2000</div>
+                <p class="question-text">Combine LIKE with WHERE and numeric comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP 
+WHERE ENAME LIKE 'S%' AND SAL > 2000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">SMITH starts with S but salary is 800, not > 2000</div>
+                </div>
+            </div>
+
+            <!-- Q32 -->
+            <div class="question">
+                <div class="question-title">Question 32: Display employees whose job ends with MAN and department is 20</div>
+                <p class="question-text">Combine LIKE with department filter.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, DEPTNO FROM EMP 
+WHERE JOB LIKE '%MAN' AND DEPTNO = 20;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th><th>DEPTNO</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">No managers in department 20</div>
+                </div>
+            </div>
+
+            <!-- Q33 -->
+            <div class="question">
+                <div class="question-title">Question 33: Display employees whose name contains A and commission is NULL</div>
+                <p class="question-text">Combine LIKE with IS NULL condition.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM FROM EMP 
+WHERE ENAME LIKE '%A%' AND COMM IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>COMM</th></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>NULL</td></tr>
+                        <tr><td>7900</td><td>JAMES</td><td>NULL</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees with 'A' in name and NULL commission</div>
+                </div>
+            </div>
+
+            <!-- Q34 -->
+            <div class="question">
+                <div class="question-title">Question 34: Display employees whose job starts with C and salary < 1500</div>
+                <p class="question-text">Combine LIKE with salary condition.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, SAL FROM EMP 
+WHERE JOB LIKE 'C%' AND SAL < 1500;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th><th>SAL</th></tr>
+                        <tr><td>7369</td><td>SMITH</td><td>CLERK</td><td>800</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>CLERK</td><td>1200</td></tr>
+                        <tr><td>7900</td><td>JAMES</td><td>CLERK</td><td>950</td></tr>
+                    </table>
+                    <div class="pattern-info">CLERKs with salary < 1500</div>
+                </div>
+            </div>
+
+            <!-- Q35 -->
+            <div class="question">
+                <div class="question-title">Question 35: Display employees whose name ends with S and hired after 1981</div>
+                <p class="question-text">Combine LIKE with date comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, HIREDATE FROM EMP 
+WHERE ENAME LIKE '%S' AND YEAR(HIREDATE) > 1981;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>HIREDATE</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">ADAMS ends with S but hired in 1983 (need to check year)</div>
+                </div>
+            </div>
+
+            <!-- Q36 -->
+            <div class="question">
+                <div class="question-title">Question 36: Display employees whose name starts with M and department is not 10</div>
+                <p class="question-text">Combine LIKE with NOT EQUAL condition.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO FROM EMP 
+WHERE ENAME LIKE 'M%' AND DEPTNO <> 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>DEPTNO</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>30</td></tr>
+                    </table>
+                    <div class="pattern-info">MARTIN starts with M and is in dept 30</div>
+                </div>
+            </div>
+
+            <!-- Q37 -->
+            <div class="question">
+                <div class="question-title">Question 37: Display employees whose job contains ER and salary between 2000 and 3000</div>
+                <p class="question-text">Combine LIKE with BETWEEN condition.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, SAL FROM EMP 
+WHERE JOB LIKE '%ER%' AND SAL BETWEEN 2000 AND 3000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th><th>SAL</th></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>MANAGER</td><td>2450</td></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td><td>2975</td></tr>
+                    </table>
+                    <div class="pattern-info">MANAGERs with salary between 2000-3000</div>
+                </div>
+            </div>
+
+            <!-- Q38 -->
+            <div class="question">
+                <div class="question-title">Question 38: Display employees whose name starts with A OR job starts with S</div>
+                <p class="question-text">Use LIKE with OR operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP 
+WHERE ENAME LIKE 'A%' OR JOB LIKE 'S%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td><td>SALESMAN</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>SALESMAN</td></tr>
+                        <tr><td>7844</td><td>TURNER</td><td>SALESMAN</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees starting with A or job starting with S</div>
+                </div>
+            </div>
+
+            <!-- Q39 -->
+            <div class="question">
+                <div class="question-title">Question 39: Display employees whose name contains I and manager is NOT NULL</div>
+                <p class="question-text">Combine LIKE with IS NOT NULL.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, MGR FROM EMP 
+WHERE ENAME LIKE '%I%' AND MGR IS NOT NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>MGR</th></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>7839</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>7698</td></tr>
+                        <tr><td>7844</td><td>TURNER</td><td>7698</td></tr>
+                        <tr><td>7934</td><td>MILLER</td><td>7782</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees with 'I' in name and have a manager</div>
+                </div>
+            </div>
+
+            <!-- Q40 -->
+            <div class="question">
+                <div class="question-title">Question 40: Display employees whose name ends with N and commission is NOT NULL</div>
+                <p class="question-text">Combine LIKE with commission check.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM FROM EMP 
+WHERE ENAME LIKE '%N' AND COMM IS NOT NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>COMM</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>1400</td></tr>
+                    </table>
+                    <div class="pattern-info">MARTIN ends with N and has commission</div>
+                </div>
+            </div>
+
+            <!-- Q41 -->
+            <div class="question">
+                <div class="question-title">Question 41: Display employee name as Name whose name starts with S, ordered alphabetically</div>
+                <p class="question-text">Use alias with LIKE and ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Name FROM EMP 
+WHERE ENAME LIKE 'S%' ORDER BY ENAME;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>Name</th></tr>
+                        <tr><td>SMITH</td></tr>
+                    </table>
+                    <div class="pattern-info">SMITH with alias Name, ordered alphabetically</div>
+                </div>
+            </div>
+
+            <!-- Q42 -->
+            <div class="question">
+                <div class="question-title">Question 42: Display employee name and salary as Pay whose name contains A, ordered by salary</div>
+                <p class="question-text">Use multiple aliases with LIKE and ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Employee, SAL AS Pay FROM EMP 
+WHERE ENAME LIKE '%A%' ORDER BY SAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>Employee</th><th>Pay</th></tr>
+                        <tr><td>JAMES</td><td>950</td></tr>
+                        <tr><td>ADAMS</td><td>1200</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td></tr>
+                        <tr><td>ALLEN</td><td>1600</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees with 'A' sorted by salary</div>
+                </div>
+            </div>
+
+            <!-- Q43 -->
+            <div class="question">
+                <div class="question-title">Question 43: Display employees whose job starts with M, ordered by job and salary</div>
+                <p class="question-text">Use LIKE with multiple ORDER BY columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, SAL FROM EMP 
+WHERE JOB LIKE 'M%' ORDER BY JOB, SAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th><th>SAL</th></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>MANAGER</td><td>2450</td></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td><td>2975</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td><td>MANAGER</td><td>2850</td></tr>
+                    </table>
+                    <div class="pattern-info">MANAGERs sorted by job then salary</div>
+                </div>
+            </div>
+
+            <!-- Q44 -->
+            <div class="question">
+                <div class="question-title">Question 44: Display employees whose name ends with E, ordered by hire date</div>
+                <p class="question-text">Use LIKE with date-based ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, HIREDATE FROM EMP 
+WHERE ENAME LIKE '%E' ORDER BY HIREDATE;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>HIREDATE</th></tr>
+                        <tr><td>7500</td><td>FORD</td><td>03-DEC-81</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>12-JAN-83</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees ending with E, ordered by hire date</div>
+                </div>
+            </div>
+
+            <!-- Q45 -->
+            <div class="question">
+                <div class="question-title">Question 45: Display employee name and annual salary for employees whose name starts with J</div>
+                <p class="question-text">Use LIKE with calculated column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL * 12 AS Annual_Salary FROM EMP 
+WHERE ENAME LIKE 'J%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>Annual_Salary</th></tr>
+                        <tr><td>JAMES</td><td>11400</td></tr>
+                        <tr><td>JONES</td><td>35700</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees starting with J with annual salary</div>
+                </div>
+            </div>
+
+            <!-- Q46 -->
+            <div class="question">
+                <div class="question-title">Question 46: Display employees whose name contains R, ordered by department number</div>
+                <p class="question-text">Use LIKE with ORDER BY on department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO FROM EMP 
+WHERE ENAME LIKE '%R%' ORDER BY DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>DEPTNO</th></tr>
+                        <tr><td>7785</td><td>CLARK</td><td>10</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>30</td></tr>
+                        <tr><td>7844</td><td>TURNER</td><td>30</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees with R ordered by department</div>
+                </div>
+            </div>
+
+            <!-- Q47 -->
+            <div class="question">
+                <div class="question-title">Question 47: Display employee name as Employee whose job ends with AN</div>
+                <p class="question-text">Use LIKE with alias.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Employee, JOB FROM EMP WHERE JOB LIKE '%AN';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>Employee</th><th>JOB</th></tr>
+                        <tr><td>CLARK</td><td>MANAGER</td></tr>
+                        <tr><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>BLAKE</td><td>MANAGER</td></tr>
+                        <tr><td>MARTIN</td><td>SALESMAN</td></tr>
+                        <tr><td>TURNER</td><td>SALESMAN</td></tr>
+                    </table>
+                    <div class="pattern-info">Job ends with AN (MANAGER, SALESMAN)</div>
+                </div>
+            </div>
+
+            <!-- Q48 -->
+            <div class="question">
+                <div class="question-title">Question 48: Display employees whose name starts with K, ordered by salary descending</div>
+                <p class="question-text">Use LIKE with ORDER BY DESC.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP 
+WHERE ENAME LIKE 'K%' ORDER BY SAL DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>7839</td><td>KING</td><td>5000</td></tr>
+                    </table>
+                    <div class="pattern-info">KING starting with K</div>
+                </div>
+            </div>
+
+            <!-- Q49 -->
+            <div class="question">
+                <div class="question-title">Question 49: Display employees whose name contains L, ordered by name and salary</div>
+                <p class="question-text">Use LIKE with multiple ORDER BY columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP 
+WHERE ENAME LIKE '%L%' ORDER BY ENAME, SAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td><td>1600</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>1200</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>7934</td><td>MILLER</td><td>1300</td></tr>
+                    </table>
+                    <div class="pattern-info">Employees with L sorted by name then salary</div>
+                </div>
+            </div>
+
+            <!-- Q50 -->
+            <div class="question">
+                <div class="question-title">Question 50: Display employees whose job starts with C, ordered by job</div>
+                <p class="question-text">Use LIKE with ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP 
+WHERE JOB LIKE 'C%' ORDER BY JOB;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7369</td><td>SMITH</td><td>CLERK</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>7900</td><td>JAMES</td><td>CLERK</td></tr>
+                        <tr><td>7934</td><td>MILLER</td><td>CLERK</td></tr>
+                    </table>
+                    <div class="pattern-info">CLERKs ordered by job</div>
+                </div>
+            </div>
+
+            <!-- Q51 -->
+            <div class="question">
+                <div class="question-title">Question 51: Display employees whose name has exactly 6 characters and ends with R</div>
+                <p class="question-text">Combine _ wildcards with suffix pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '______R';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: ______R (6 chars exactly, ends with R)</div>
+                </div>
+            </div>
+
+            <!-- Q52 -->
+            <div class="question">
+                <div class="question-title">Question 52: Display employees whose name has A as the third character from start</div>
+                <p class="question-text">Use __ wildcard before A.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '__A%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: __A% - Two chars, then A at position 3</div>
+                </div>
+            </div>
+
+            <!-- Q53 -->
+            <div class="question">
+                <div class="question-title">Question 53: Display employees whose name has E as the second character from end</div>
+                <p class="question-text">Use %E_ pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '%E_';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7876</td><td>ADAMS</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: %E_ - E as second last char</div>
+                </div>
+            </div>
+
+            <!-- Q54 -->
+            <div class="question">
+                <div class="question-title">Question 54: Display employees whose name contains at least 2 chars before A</div>
+                <p class="question-text">Use _%A% pattern.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP WHERE ENAME LIKE '__%A%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                    </table>
+                    <div class="pattern-info">Pattern: __%A% - At least 2 chars before A</div>
+                </div>
+            </div>
+
+            <!-- Q55 -->
+            <div class="question">
+                <div class="question-title">Question 55: Display employees whose job contains exactly one A</div>
+                <p class="question-text">Pattern matching with single occurrence.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB LIKE '%A%' AND JOB NOT LIKE '%A%A%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td><td>MANAGER</td></tr>
+                        <tr><td>7782</td><td>CLARK</td><td>MANAGER</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td><td>SALESMAN</td></tr>
+                        <tr><td>7844</td><td>TURNER</td><td>SALESMAN</td></tr>
+                    </table>
+                    <div class="pattern-info">Job contains A but not _A...A_</div>
+                </div>
+            </div>
+
+            <!-- Q56 -->
+            <div class="question">
+                <div class="question-title">Question 56: Display employees whose name does NOT start with a vowel</div>
+                <p class="question-text">Use NOT LIKE with multiple patterns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP 
+WHERE ENAME NOT LIKE 'A%' AND ENAME NOT LIKE 'E%' AND ENAME NOT LIKE 'I%' AND ENAME NOT LIKE 'O%' AND ENAME NOT LIKE 'U%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7369</td><td>SMITH</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td></tr>
+                        <tr><td>7782</td><td>CLARK</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                        <tr><td>7839</td><td>KING</td></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                        <tr><td>7844</td><td>TURNER</td></tr>
+                        <tr><td>7934</td><td>MILLER</td></tr>
+                        <tr><td>7500</td><td>FORD</td></tr>
+                    </table>
+                    <div class="pattern-info">Names not starting with vowels (A, E, I, O, U)</div>
+                </div>
+            </div>
+
+            <!-- Q57 -->
+            <div class="question">
+                <div class="question-title">Question 57: Display employees whose job does NOT contain ER</div>
+                <p class="question-text">Use NOT LIKE with %ER%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB NOT LIKE '%ER%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>7369</td><td>SMITH</td><td>CLERK</td></tr>
+                        <tr><td>7566</td><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>7500</td><td>FORD</td><td>ANALYST</td></tr>
+                        <tr><td>7839</td><td>KING</td><td>PRESIDENT</td></tr>
+                        <tr><td>7900</td><td>JAMES</td><td>CLERK</td></tr>
+                        <tr><td>7934</td><td>MILLER</td><td>CLERK</td></tr>
+                    </table>
+                    <div class="pattern-info">Job does not contain 'ER'</div>
+                </div>
+            </div>
+
+            <!-- Q58 -->
+            <div class="question">
+                <div class="question-title">Question 58: Display employees whose name starts and ends with the same character</div>
+                <p class="question-text">Use LIKE with specific patterns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP 
+WHERE ENAME LIKE 'A%A' OR ENAME LIKE 'S%S' OR ENAME LIKE 'K%K';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                    <div class="pattern-info">Names that start and end with same character</div>
+                </div>
+            </div>
+
+            <!-- Q59 -->
+            <div class="question">
+                <div class="question-title">Question 59: Display employees whose name contains A and E in any order</div>
+                <p class="question-text">Use multiple LIKE conditions.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP 
+WHERE (ENAME LIKE '%A%E%' OR ENAME LIKE '%E%A%');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                        <tr><td>7934</td><td>MILLER</td></tr>
+                        <tr><td>7844</td><td>TURNER</td></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                    </table>
+                    <div class="pattern-info">Names containing both A and E in any order</div>
+                </div>
+            </div>
+
+            <!-- Q60 -->
+            <div class="question">
+                <div class="question-title">Question 60: Display employees whose name contains A but NOT as the first character</div>
+                <p class="question-text">Use LIKE with negative prefix check.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP 
+WHERE ENAME LIKE '%A%' AND ENAME NOT LIKE 'A%';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                    </table>
+                    <div class="pattern-info">Contains A but not at position 1</div>
+                </div>
+            </div>
+
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

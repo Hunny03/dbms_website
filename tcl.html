@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Control Language (TCL) - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        <header>
+            <h1>Transaction Control Language (TCL)</h1>
+        </header>
+
+        <div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Grant SELECT privilege on EMP table to a user named USER1.</div>
+                <p class="question-subtitle">(GRANT – BASIC SELECT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT SELECT ON EMP TO USER1;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Grant SELECT and INSERT privileges on EMP table to USER2.</div>
+                <p class="question-subtitle">(GRANT – MULTIPLE PRIVILEGES)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT SELECT, INSERT ON EMP TO USER2;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Grant all privileges on DEPT table to USER3.</div>
+                <p class="question-subtitle">(GRANT – ALL PRIVILEGES)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT ALL PRIVILEGES ON DEPT TO USER3;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Grant SELECT privilege on EMP table to USER4 with GRANT OPTION.</div>
+                <p class="question-subtitle">(GRANT – WITH GRANT OPTION)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT SELECT ON EMP TO USER4 WITH GRANT OPTION;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Grant UPDATE privilege only on SAL column of EMP table to USER5.</div>
+                <p class="question-subtitle">(GRANT – COLUMN LEVEL)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT UPDATE(SAL) ON EMP TO USER5;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Grant DELETE privilege on EMP table to USER6.</div>
+                <p class="question-subtitle">(GRANT – DELETE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT DELETE ON EMP TO USER6;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Grant SELECT privilege on both EMP and DEPT tables to USER7.</div>
+                <p class="question-subtitle">(GRANT – MULTIPLE TABLES)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT SELECT ON EMP TO USER7;
+GRANT SELECT ON DEPT TO USER7;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.
+Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Grant privileges on EMP table to PUBLIC.</div>
+                <p class="question-subtitle">(GRANT – PUBLIC ACCESS)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT SELECT ON EMP TO PUBLIC;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Grant INSERT privilege on EMP table to USER8 with the ability to grant further.</div>
+                <p class="question-subtitle">(GRANT – WITH GRANT OPTION)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT INSERT ON EMP TO USER8 WITH GRANT OPTION;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Grant UPDATE and DELETE privileges on EMP table to USER9.</div>
+                <p class="question-subtitle">(GRANT – UPDATE & DELETE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT UPDATE, DELETE ON EMP TO USER9;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Revoke SELECT privilege on EMP table from USER1.</div>
+                <p class="question-subtitle">(REVOKE – BASIC)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE SELECT ON EMP FROM USER1;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Revoke INSERT and UPDATE privileges on EMP table from USER2.</div>
+                <p class="question-subtitle">(REVOKE – MULTIPLE PRIVILEGES)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE INSERT, UPDATE ON EMP FROM USER2;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Revoke ALL privileges on DEPT table from USER3.</div>
+                <p class="question-subtitle">(REVOKE – ALL)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE ALL PRIVILEGES ON DEPT FROM USER3;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Revoke GRANT OPTION from USER4 on EMP table.</div>
+                <p class="question-subtitle">(REVOKE – GRANT OPTION)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE GRANT OPTION FOR SELECT ON EMP FROM USER4;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Revoke UPDATE privilege on SAL column from USER5.</div>
+                <p class="question-subtitle">(REVOKE – COLUMN LEVEL)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE UPDATE(SAL) ON EMP FROM USER5;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Revoke DELETE privilege on EMP table from USER6.</div>
+                <p class="question-subtitle">(REVOKE – DELETE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE DELETE ON EMP FROM USER6;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Revoke privileges granted to PUBLIC on EMP table.</div>
+                <p class="question-subtitle">(REVOKE – PUBLIC)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE SELECT ON EMP FROM PUBLIC;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 18: Revoke all privileges on EMP table from USER9.</div>
+                <p class="question-subtitle">(REVOKE – CLEANUP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE ALL PRIVILEGES ON EMP FROM USER9;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 19: Insert a new employee record into EMP table and commit the changes.</div>
+                <p class="question-subtitle">(COMMIT – INSERT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO) 
+VALUES (9001, 'JOHN', 'ANALYST', 3500, 20);
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+Commit complete.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 20: Update salary of employees in department 10 and commit the changes.</div>
+                <p class="question-subtitle">(COMMIT – UPDATE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = SAL + 500 WHERE DEPTNO = 10;
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">3 rows updated.
+Commit complete.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 21: Delete employees with salary less than 1000 and commit the transaction.</div>
+                <p class="question-subtitle">(COMMIT – DELETE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE SAL < 1000;
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row deleted.
+Commit complete.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 22: Insert multiple records into DEPT table and commit them together.</div>
+                <p class="question-subtitle">(COMMIT – MULTIPLE OPERATIONS)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO DEPT VALUES (40, 'OPERATIONS', 'BOSTON');
+INSERT INTO DEPT VALUES (50, 'SUPPORT', 'DENVER');
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+1 row inserted.
+Commit complete.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 23: Update department location and commit the changes.</div>
+                <p class="question-subtitle">(COMMIT – DEPT TABLE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE DEPT SET LOC = 'NORTH CAROLINA' WHERE DEPTNO = 40;
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row updated.
+Commit complete.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 24: Insert a new employee into EMP table but rollback the transaction.</div>
+                <p class="question-subtitle">(ROLLBACK – INSERT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO) 
+VALUES (9002, 'MIKE', 'DEVELOPER', 4000, 20);
+ROLLBACK;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+Rollback complete. Insert cancelled.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 25: Update salary of employees and then rollback the changes.</div>
+                <p class="question-subtitle">(ROLLBACK – UPDATE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = SAL * 1.1 WHERE DEPTNO = 30;
+ROLLBACK;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">3 rows updated.
+Rollback complete. Updates cancelled.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 26: Delete records from EMP table and rollback the transaction.</div>
+                <p class="question-subtitle">(ROLLBACK – DELETE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">DELETE FROM EMP WHERE JOB = 'SALESMAN';
+ROLLBACK;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">4 rows deleted.
+Rollback complete. Deletes cancelled.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 27: Perform multiple operations (INSERT, UPDATE, DELETE) and rollback all changes.</div>
+                <p class="question-subtitle">(ROLLBACK – MULTIPLE OPERATIONS)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP (EMPNO, ENAME, SAL, DEPTNO) 
+VALUES (9003, 'SARA', 3500, 10);
+UPDATE EMP SET SAL = SAL + 100 WHERE EMPNO = 9003;
+DELETE FROM EMP WHERE SAL < 1500;
+ROLLBACK;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+1 row updated.
+2 rows deleted.
+Rollback complete. All operations cancelled.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 28: Update department location and rollback before committing.</div>
+                <p class="question-subtitle">(ROLLBACK – DEPT TABLE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE DEPT SET LOC = 'FLORIDA' WHERE DEPTNO = 30;
+-- Verify before commit
+SELECT * FROM DEPT WHERE DEPTNO = 30;
+ROLLBACK;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row updated.
+DEPTNO=30, DNAME=SALES, LOC=FLORIDA
+Rollback complete. Update cancelled and LOC reverted.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 29: Insert a new employee, update salary, and commit only after verifying results.</div>
+                <p class="question-subtitle">(TRANSACTION – COMMIT CONTROL)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO) 
+VALUES (9004, 'EMMA', 'ANALYST', 3200, 20);
+UPDATE EMP SET SAL = 3500 WHERE EMPNO = 9004;
+-- Verify
+SELECT * FROM EMP WHERE EMPNO = 9004;
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+1 row updated.
+EMPNO=9004, ENAME=EMMA, JOB=ANALYST, SAL=3500, DEPTNO=20
+Commit complete.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 30: Insert multiple employees, rollback one operation using SAVEPOINT, then commit remaining.</div>
+                <p class="question-subtitle">(TRANSACTION – SAVEPOINT + COMMIT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP (EMPNO, ENAME, SAL, DEPTNO) 
+VALUES (9005, 'DAVID', 2800, 30);
+SAVEPOINT sp1;
+INSERT INTO EMP (EMPNO, ENAME, SAL, DEPTNO) 
+VALUES (9006, 'LISA', 3900, 20);
+ROLLBACK TO sp1;
+-- First insert kept, second insert rolled back
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+Savepoint sp1 created.
+1 row inserted.
+Rollback to savepoint sp1 complete. LISA insert cancelled.
+Commit complete. DAVID remains.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 31: Create a transaction where some operations are committed and others are rolled back.</div>
+                <p class="question-subtitle">(TRANSACTION – PARTIAL CONTROL)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO DEPT VALUES (60, 'TRAINING', 'ATLANTA');
+COMMIT;
+UPDATE DEPT SET LOC = 'HOUSTON' WHERE DEPTNO = 60;
+ROLLBACK;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+Commit complete. TRAINING dept added.
+1 row updated.
+Rollback complete. Location update cancelled.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 32: Demonstrate use of SAVEPOINT in EMP table operations.</div>
+                <p class="question-subtitle">(TRANSACTION – SAVEPOINT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">INSERT INTO EMP (EMPNO, ENAME, SAL, DEPTNO) 
+VALUES (9007, 'MARK', 2600, 10);
+SAVEPOINT sp_insert;
+UPDATE EMP SET SAL = SAL + 200 WHERE EMPNO = 9007;
+SAVEPOINT sp_update;
+DELETE FROM EMP WHERE EMPNO = 9007;
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row inserted.
+Savepoint sp_insert created.
+1 row updated.
+Savepoint sp_update created.
+1 row deleted.
+Commit complete. All operations saved.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 33: Perform update on EMP table and rollback to a specific SAVEPOINT.</div>
+                <p class="question-subtitle">(TRANSACTION – ROLLBACK TO SAVEPOINT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">UPDATE EMP SET SAL = 3000 WHERE JOB = 'CLERK';
+SAVEPOINT sp_clerk_update;
+UPDATE EMP SET SAL = 4500 WHERE JOB = 'MANAGER';
+ROLLBACK TO sp_clerk_update;
+-- Manager update rolled back, clerk update remains
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1 row updated.
+Savepoint sp_clerk_update created.
+3 rows updated.
+Rollback to savepoint complete. Manager update cancelled.
+Commit complete. Clerk salaries changed to 3000.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 34: Grant privileges to a user, perform DML operations, and commit changes.</div>
+                <p class="question-subtitle">(GRANT + TRANSACTION)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">GRANT SELECT, INSERT, UPDATE ON EMP TO USER10;
+-- User10 can now perform these operations
+INSERT INTO EMP (EMPNO, ENAME, SAL, DEPTNO) 
+VALUES (9008, 'CHRIS', 3300, 10);
+COMMIT;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grant succeeded.
+1 row inserted.
+Commit complete.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 35: Revoke privileges and verify access restrictions using EMP table.</div>
+                <p class="question-subtitle">(REVOKE – PRACTICAL SCENARIO)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">REVOKE INSERT, UPDATE ON EMP FROM USER10;
+-- User10 can only SELECT now
+-- Attempt to INSERT (will fail)
+INSERT INTO EMP (EMPNO, ENAME, SAL, DEPTNO) 
+VALUES (9009, 'CAROL', 3400, 20);</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Revoke succeeded.
+Error: ORA-01031: insufficient privileges
+(INSERT privilege no longer available to USER10)</div>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+    
+</body>
+</html>

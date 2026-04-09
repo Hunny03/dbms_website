@@ -1,0 +1,1642 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subqueries - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        
+        <header>
+            <h1>Subqueries</h1>
+        </header>
+
+        <div class="questions-list">
+
+            <!-- Q1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Display employees whose salary is greater than JONES</div>
+                <p class="question-text">Single-row subquery to find JONES salary first.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > (SELECT SAL FROM EMP WHERE ENAME = 'JONES');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question">
+                <div class="question-title">Question 2: Display employees earning the same salary as SCOTT</div>
+                <p class="question-text">Single-row subquery with equality operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL = (SELECT SAL FROM EMP WHERE ENAME = 'SCOTT');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question">
+                <div class="question-title">Question 3: Display employees hired after ALLEN</div>
+                <p class="question-text">Single-row subquery with date comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE FROM EMP 
+WHERE HIREDATE > (SELECT HIREDATE FROM EMP WHERE ENAME = 'ALLEN');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>HIREDATE</th></tr>
+                        <tr><td>SCOTT</td><td>19-APR-1987</td></tr>
+                        <tr><td>FORD</td><td>03-DEC-1981</td></tr>
+                        <tr><td>JAMES</td><td>03-DEC-1981</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question">
+                <div class="question-title">Question 4: Display employees working in the same department as BLAKE</div>
+                <p class="question-text">Single-row subquery to find BLAKE's department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, DEPTNO FROM EMP 
+WHERE DEPTNO = (SELECT DEPTNO FROM EMP WHERE ENAME = 'BLAKE');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>DEPTNO</th></tr>
+                        <tr><td>BLAKE</td><td>30</td></tr>
+                        <tr><td>CLARK</td><td>30</td></tr>
+                        <tr><td>MARTIN</td><td>30</td></tr>
+                        <tr><td>JAMES</td><td>30</td></tr>
+                        <tr><td>TURNER</td><td>30</td></tr>
+                        <tr><td>WARD</td><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question">
+                <div class="question-title">Question 5: Display employees having the same job as MILLER</div>
+                <p class="question-text">Single-row subquery to find MILLER's job.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, JOB FROM EMP 
+WHERE JOB = (SELECT JOB FROM EMP WHERE ENAME = 'MILLER');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>MILLER</td><td>CLERK</td></tr>
+                        <tr><td>SMITH</td><td>CLERK</td></tr>
+                        <tr><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>JAMES</td><td>CLERK</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Display employees earning less than the average salary</div>
+                <p class="question-text">Single-row subquery with aggregate function.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL < (SELECT AVG(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>SMITH</td><td>800</td></tr>
+                        <tr><td>JAMES</td><td>950</td></tr>
+                        <tr><td>WARD</td><td>1250</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td></tr>
+                        <tr><td>MILLER</td><td>1300</td></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                        <tr><td>ADAMS</td><td>1100</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question">
+                <div class="question-title">Question 7: Display employees earning more than the maximum salary of CLERKs</div>
+                <p class="question-text">Single-row subquery comparing to MAX of specific job.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > (SELECT MAX(SAL) FROM EMP WHERE JOB = 'CLERK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>CLARK</td><td>2450</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question">
+                <div class="question-title">Question 8: Display employee(s) with the minimum salary</div>
+                <p class="question-text">Single-row subquery finding overall minimum.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL = (SELECT MIN(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>SMITH</td><td>800</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="question">
+                <div class="question-title">Question 9: Display employee(s) with the maximum salary</div>
+                <p class="question-text">Single-row subquery finding overall maximum.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL = (SELECT MAX(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="question">
+                <div class="question-title">Question 10: Display employees working in departments located in NEW YORK</div>
+                <p class="question-text">Multiple-row subquery joining with DEPT table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP 
+WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'NEW YORK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MILLER</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Display employees whose salary matches any salary in department 30</div>
+                <p class="question-text">Multiple-row subquery with IN operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL IN (SELECT SAL FROM EMP WHERE DEPTNO = 30);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>CLARK</td><td>2840</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td></tr>
+                        <tr><td>JAMES</td><td>950</td></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                        <tr><td>WARD</td><td>1250</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Display employees earning more than all CLERKs</div>
+                <p class="question-text">Multiple-row subquery with ALL operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > ALL (SELECT SAL FROM EMP WHERE JOB = 'CLERK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>CLARK</td><td>2450</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q13 -->
+            <div class="question">
+                <div class="question-title">Question 13: Display employees earning less than any MANAGER</div>
+                <p class="question-text">Multiple-row subquery with ANY operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL < ANY (SELECT SAL FROM EMP WHERE JOB = 'MANAGER');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>SMITH</td><td>800</td></tr>
+                        <tr><td>JAMES</td><td>950</td></tr>
+                        <tr><td>WARD</td><td>1250</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td></tr>
+                        <tr><td>MILLER</td><td>1300</td></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                        <tr><td>ADAMS</td><td>1100</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q14 -->
+            <div class="question">
+                <div class="question-title">Question 14: Display employees whose job appears in department 20</div>
+                <p class="question-text">Multiple-row subquery with IN and job list.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, JOB FROM EMP 
+WHERE JOB IN (SELECT JOB FROM EMP WHERE DEPTNO = 20);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>SCOTT</td><td>ANALYST</td></tr>
+                        <tr><td>FORD</td><td>ANALYST</td></tr>
+                        <tr><td>SMITH</td><td>CLERK</td></tr>
+                        <tr><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>JAMES</td><td>CLERK</td></tr>
+                        <tr><td>MILLER</td><td>CLERK</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q15 -->
+            <div class="question">
+                <div class="question-title">Question 15: Display employees whose department has at least one SALESMAN</div>
+                <p class="question-text">Correlated subquery checking for SALESMAN in each department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP E 
+WHERE EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = E.DEPTNO AND JOB = 'SALESMAN');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>JAMES</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q16 -->
+            <div class="question">
+                <div class="question-title">Question 16: Display employees earning the same salary as any CLERK</div>
+                <p class="question-text">Multiple-row subquery with IN and specific job.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL IN (SELECT SAL FROM EMP WHERE JOB = 'CLERK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>SMITH</td><td>800</td></tr>
+                        <tr><td>JAMES</td><td>950</td></tr>
+                        <tr><td>MILLER</td><td>1300</td></tr>
+                        <tr><td>ADAMS</td><td>1100</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Display employees not working in departments of SALESMAN</div>
+                <p class="question-text">Multiple-row subquery with NOT IN.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP 
+WHERE DEPTNO NOT IN (SELECT DEPTNO FROM EMP WHERE JOB = 'SALESMAN');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>SCOTT</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Display employees earning more than all employees in department 10</div>
+                <p class="question-text">Multiple-row subquery with ALL operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > ALL (SELECT SAL FROM EMP WHERE DEPTNO = 10);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td></tr>
+                        <tr><td>JAMES</td><td>950</td></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                        <tr><td>WARD</td><td>1250</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Display employees whose DEPTNO is among departments with >3 employees</div>
+                <p class="question-text">Nested subquery with HAVING clause.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP 
+WHERE DEPTNO IN (SELECT DEPTNO FROM EMP GROUP BY DEPTNO HAVING COUNT(*) > 3);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>SCOTT</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                        <tr><td>JAMES</td></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Display employees whose salary is greater than salary of their manager</div>
+                <p class="question-text">Correlated subquery comparing employee to manager salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL FROM EMP E 
+WHERE E.SAL > (SELECT M.SAL FROM EMP M WHERE M.EMPNO = E.MGR);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q21 -->
+            <div class="question">
+                <div class="question-title">Question 21: Display jobs where average salary > overall average salary</div>
+                <p class="question-text">Nested subquery with GROUP BY and HAVING.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB FROM EMP GROUP BY JOB 
+HAVING AVG(SAL) > (SELECT AVG(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>JOB</th></tr>
+                        <tr><td>ANALYST</td></tr>
+                        <tr><td>MANAGER</td></tr>
+                        <tr><td>PRESIDENT</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Display employees earning more than department average salary</div>
+                <p class="question-text">Correlated subquery comparing to department average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.DEPTNO FROM EMP E 
+WHERE E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>DEPTNO</th></tr>
+                        <tr><td>KING</td><td>5000</td><td>10</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td><td>20</td></tr>
+                        <tr><td>FORD</td><td>3000</td><td>20</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td><td>30</td></tr>
+                        <tr><td>CLARK</td><td>2450</td><td>10</td></tr>
+                        <tr><td>JONES</td><td>2975</td><td>20</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Display employees earning the highest salary in each department</div>
+                <p class="question-text">Correlated subquery finding max salary per department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.DEPTNO FROM EMP E 
+WHERE E.SAL = (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>DEPTNO</th></tr>
+                        <tr><td>KING</td><td>5000</td><td>10</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td><td>20</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Display employees earning the lowest salary in each job</div>
+                <p class="question-text">Correlated subquery finding min salary per job.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.JOB FROM EMP E 
+WHERE E.SAL = (SELECT MIN(SAL) FROM EMP WHERE JOB = E.JOB);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>JOB</th></tr>
+                        <tr><td>SMITH</td><td>800</td><td>CLERK</td></tr>
+                        <tr><td>FORD</td><td>3000</td><td>ANALYST</td></tr>
+                        <tr><td>CLARK</td><td>2450</td><td>MANAGER</td></tr>
+                        <tr><td>WARD</td><td>1250</td><td>SALESMAN</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Display departments having total salary > department 20</div>
+                <p class="question-text">Nested subquery comparing department totals.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO, SUM(SAL) AS Total_Salary FROM EMP 
+GROUP BY DEPTNO 
+HAVING SUM(SAL) > (SELECT SUM(SAL) FROM EMP WHERE DEPTNO = 20);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>Total_Salary</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Display employees whose salary equals max salary of their job</div>
+                <p class="question-text">Correlated subquery finding job-wise maximum.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.JOB FROM EMP E 
+WHERE E.SAL = (SELECT MAX(SAL) FROM EMP WHERE JOB = E.JOB);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>JOB</th></tr>
+                        <tr><td>KING</td><td>5000</td><td>PRESIDENT</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td><td>ANALYST</td></tr>
+                        <tr><td>FORD</td><td>3000</td><td>ANALYST</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td><td>MANAGER</td></tr>
+                        <tr><td>CLARK</td><td>2450</td><td>MANAGER</td></tr>
+                        <tr><td>JONES</td><td>2975</td><td>MANAGER</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td><td>SALESMAN</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Display employees earning more than overall average salary</div>
+                <p class="question-text">Single-row subquery with overall average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > (SELECT AVG(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>CLARK</td><td>2450</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q28 -->
+            <div class="question">
+                <div class="question-title">Question 28: Display department(s) having maximum number of employees</div>
+                <p class="question-text">Nested subquery finding max employee count.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP GROUP BY DEPTNO 
+HAVING COUNT(*) = (SELECT MAX(Employee_Count) FROM (SELECT COUNT(*) AS Employee_Count FROM EMP GROUP BY DEPTNO) TEMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q29 -->
+            <div class="question">
+                <div class="question-title">Question 29: Display jobs having minimum average salary</div>
+                <p class="question-text">Nested subquery finding min job average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB FROM EMP GROUP BY JOB 
+HAVING AVG(SAL) = (SELECT MIN(AVG_SAL) FROM (SELECT AVG(SAL) AS AVG_SAL FROM EMP GROUP BY JOB) TEMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>JOB</th></tr>
+                        <tr><td>SALESMAN</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q30 -->
+            <div class="question">
+                <div class="question-title">Question 30: Display employees earning > average salary of CLERKs</div>
+                <p class="question-text">Single-row subquery with job-specific average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > (SELECT AVG(SAL) FROM EMP WHERE JOB = 'CLERK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>CLARK</td><td>2450</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                        <tr><td>MARTIN</td><td>1250</td></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q31 -->
+            <div class="question">
+                <div class="question-title">Question 31: Display department(s) where average salary is highest</div>
+                <p class="question-text">Nested subquery finding max department average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP GROUP BY DEPTNO 
+HAVING AVG(SAL) = (SELECT MAX(AVG_SAL) FROM (SELECT AVG(SAL) AS AVG_SAL FROM EMP GROUP BY DEPTNO) TEMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>10</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q32 -->
+            <div class="question">
+                <div class="question-title">Question 32: Display employees earning > average salary of own department</div>
+                <p class="question-text">Correlated subquery comparing to own department average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.DEPTNO FROM EMP E 
+WHERE E.SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>DEPTNO</th></tr>
+                        <tr><td>KING</td><td>5000</td><td>10</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td><td>20</td></tr>
+                        <tr><td>FORD</td><td>3000</td><td>20</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td><td>30</td></tr>
+                        <tr><td>CLARK</td><td>2450</td><td>10</td></tr>
+                        <tr><td>JONES</td><td>2975</td><td>20</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q33 -->
+            <div class="question">
+                <div class="question-title">Question 33: Display employees earning maximum salary in their department</div>
+                <p class="question-text">Correlated subquery finding department maximums.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.DEPTNO FROM EMP E 
+WHERE E.SAL = (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>DEPTNO</th></tr>
+                        <tr><td>KING</td><td>5000</td><td>10</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td><td>20</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q34 -->
+            <div class="question">
+                <div class="question-title">Question 34: Display employees earning minimum salary in their department</div>
+                <p class="question-text">Correlated subquery finding department minimums.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.DEPTNO FROM EMP E 
+WHERE E.SAL = (SELECT MIN(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>DEPTNO</th></tr>
+                        <tr><td>SMITH</td><td>800</td><td>20</td></tr>
+                        <tr><td>MILLER</td><td>1300</td><td>10</td></tr>
+                        <tr><td>JAMES</td><td>950</td><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q35 -->
+            <div class="question">
+                <div class="question-title">Question 35: Display employees whose salary > average salary of their job</div>
+                <p class="question-text">Correlated subquery comparing to job average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.JOB FROM EMP E 
+WHERE E.SAL > (SELECT AVG(SAL) FROM EMP WHERE JOB = E.JOB);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>JOB</th></tr>
+                        <tr><td>KING</td><td>5000</td><td>PRESIDENT</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td><td>ANALYST</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td><td>MANAGER</td></tr>
+                        <tr><td>CLARK</td><td>2450</td><td>MANAGER</td></tr>
+                        <tr><td>JONES</td><td>2975</td><td>MANAGER</td></tr>
+                        <tr><td>TURNER</td><td>1500</td><td>SALESMAN</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q36 -->
+            <div class="question">
+                <div class="question-title">Question 36: Display employees who are only employee in their department</div>
+                <p class="question-text">Correlated subquery checking department count.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.DEPTNO FROM EMP E 
+WHERE (SELECT COUNT(*) FROM EMP WHERE DEPTNO = E.DEPTNO) = 1;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>DEPTNO</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q37 -->
+            <div class="question">
+                <div class="question-title">Question 37: Display departments having employees earning > 5000</div>
+                <p class="question-text">EXISTS subquery checking for salary condition.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM DEPT D 
+WHERE EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = D.DEPTNO AND SAL > 5000);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q38 -->
+            <div class="question">
+                <div class="question-title">Question 38: Display employees whose department has > 3 employees</div>
+                <p class="question-text">Correlated subquery checking department count.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME FROM EMP E 
+WHERE (SELECT COUNT(*) FROM EMP WHERE DEPTNO = E.DEPTNO) > 3;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>JAMES</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q39 -->
+            <div class="question">
+                <div class="question-title">Question 39: Display employees whose job has > 2 employees</div>
+                <p class="question-text">Correlated subquery checking job count.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.JOB FROM EMP E 
+WHERE (SELECT COUNT(*) FROM EMP WHERE JOB = E.JOB) > 2;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>JOB</th></tr>
+                        <tr><td>SMITH</td><td>CLERK</td></tr>
+                        <tr><td>MILLER</td><td>CLERK</td></tr>
+                        <tr><td>ADAMS</td><td>CLERK</td></tr>
+                        <tr><td>JAMES</td><td>CLERK</td></tr>
+                        <tr><td>BLAKE</td><td>MANAGER</td></tr>
+                        <tr><td>CLARK</td><td>MANAGER</td></tr>
+                        <tr><td>JONES</td><td>MANAGER</td></tr>
+                        <tr><td>MARTIN</td><td>SALESMAN</td></tr>
+                        <tr><td>TURNER</td><td>SALESMAN</td></tr>
+                        <tr><td>WARD</td><td>SALESMAN</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q40 -->
+            <div class="question">
+                <div class="question-title">Question 40: Display employees in departments where no one gets commission</div>
+                <p class="question-text">NOT EXISTS subquery checking for commission.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME FROM EMP E 
+WHERE NOT EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = E.DEPTNO AND COMM IS NOT NULL);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>SCOTT</td></tr>
+                        <tr><td>FORD</td></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q41 -->
+            <div class="question">
+                <div class="question-title">Question 41: Display employees whose department has at least one manager</div>
+                <p class="question-text">EXISTS subquery checking for MANAGER job.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME FROM EMP E 
+WHERE EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = E.DEPTNO AND JOB = 'MANAGER');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>KING</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MILLER</td></tr>
+                        <tr><td>SCOTT</td></tr>
+                        <tr><td>FORD</td><td></td></tr>
+                        <tr><td>SMITH</td></tr>
+                        <tr><td>ADAMS</td></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>JAMES</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q42 -->
+            <div class="question">
+                <div class="question-title">Question 42: Display departments that have employees</div>
+                <p class="question-text">EXISTS subquery checking for employees in each department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DEPTNO, D.DNAME FROM DEPT D 
+WHERE EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = D.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>DNAME</th></tr>
+                        <tr><td>10</td><td>ACCOUNTING</td></tr>
+                        <tr><td>20</td><td>RESEARCH</td></tr>
+                        <tr><td>30</td><td>SALES</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q43 -->
+            <div class="question">
+                <div class="question-title">Question 43: Display departments that have no employees</div>
+                <p class="question-text">NOT EXISTS subquery checking for no employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DEPTNO, D.DNAME FROM DEPT D 
+WHERE NOT EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = D.DEPTNO);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>DNAME</th></tr>
+                        <tr><td>40</td><td>OPERATIONS</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q44 -->
+            <div class="question">
+                <div class="question-title">Question 44: Display employees who are managers (have subordinates)</div>
+                <p class="question-text">IN subquery finding managers from MGR column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP 
+WHERE EMPNO IN (SELECT MGR FROM EMP WHERE MGR IS NOT NULL);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7566</td><td>JONES</td></tr>
+                        <tr><td>7698</td><td>BLAKE</td></tr>
+                        <tr><td>7782</td><td>CLARK</td></tr>
+                        <tr><td>7788</td><td>SCOTT</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q45 -->
+            <div class="question">
+                <div class="question-title">Question 45: Display employees who are not managers</div>
+                <p class="question-text">NOT IN subquery finding non-managers.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP 
+WHERE EMPNO NOT IN (SELECT MGR FROM EMP WHERE MGR IS NOT NULL);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>EMPNO</th><th>ENAME</th></tr>
+                        <tr><td>7369</td><td>SMITH</td></tr>
+                        <tr><td>7499</td><td>ALLEN</td></tr>
+                        <tr><td>7521</td><td>WARD</td></tr>
+                        <tr><td>7654</td><td>MARTIN</td></tr>
+                        <tr><td>7844</td><td>TURNER</td></tr>
+                        <tr><td>7876</td><td>ADAMS</td></tr>
+                        <tr><td>7900</td><td>JAMES</td></tr>
+                        <tr><td>7934</td><td>MILLER</td></tr>
+                        <tr><td>7902</td><td>FORD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q46 -->
+            <div class="question">
+                <div class="question-title">Question 46: Display employees in departments where SALESMAN exists</div>
+                <p class="question-text">EXISTS subquery checking for SALESMAN job.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME FROM EMP E 
+WHERE EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = E.DEPTNO AND JOB = 'SALESMAN');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>JAMES</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q47 -->
+            <div class="question">
+                <div class="question-title">Question 47: Display departments where no SALESMAN exists</div>
+                <p class="question-text">NOT EXISTS subquery checking for SALESMAN.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT D.DEPTNO, D.DNAME FROM DEPT D 
+WHERE NOT EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = D.DEPTNO AND JOB = 'SALESMAN');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>DNAME</th></tr>
+                        <tr><td>10</td><td>ACCOUNTING</td></tr>
+                        <tr><td>20</td><td>RESEARCH</td></tr>
+                        <tr><td>40</td><td>OPERATIONS</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q48 -->
+            <div class="question">
+                <div class="question-title">Question 48: Display employees in departments with employees getting commission</div>
+                <p class="question-text">EXISTS subquery checking for commission.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME FROM EMP E 
+WHERE EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = E.DEPTNO AND COMM IS NOT NULL);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>JAMES</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q49 -->
+            <div class="question">
+                <div class="question-title">Question 49: Display departments where all employees get commission</div>
+                <p class="question-text">Nested subquery checking commission counts.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP GROUP BY DEPTNO 
+HAVING COUNT(*) = COUNT(COMM);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q50 -->
+            <div class="question">
+                <div class="question-title">Question 50: Display employees in departments with no CLERKs</div>
+                <p class="question-text">NOT EXISTS subquery checking for CLERK job.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME FROM EMP E 
+WHERE NOT EXISTS (SELECT 1 FROM EMP WHERE DEPTNO = E.DEPTNO AND JOB = 'CLERK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q51 -->
+            <div class="question">
+                <div class="question-title">Question 51: Display employees in departments located in CHICAGO</div>
+                <p class="question-text">Subquery with DEPT table location.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP 
+WHERE DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'CHICAGO');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th></tr>
+                        <tr><td>BLAKE</td></tr>
+                        <tr><td>CLARK</td></tr>
+                        <tr><td>MARTIN</td></tr>
+                        <tr><td>JAMES</td></tr>
+                        <tr><td>TURNER</td></tr>
+                        <tr><td>WARD</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q52 -->
+            <div class="question">
+                <div class="question-title">Question 52: Display deptno and avg salary where salary > 2000</div>
+                <p class="question-text">Filtered GROUP BY in subquery context.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO, AVG(SAL) FROM EMP 
+WHERE SAL > 2000 
+GROUP BY DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>AVG(SAL)</th></tr>
+                        <tr><td>10</td><td>3583.33</td></tr>
+                        <tr><td>20</td><td>3000.00</td></tr>
+                        <tr><td>30</td><td>2850.00</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q53 -->
+            <div class="question">
+                <div class="question-title">Question 53: Display job and total salary earning > dept average</div>
+                <p class="question-text">Correlated subquery filtering by department average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB, SUM(SAL) FROM EMP E 
+WHERE SAL > (SELECT AVG(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO) 
+GROUP BY JOB;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>JOB</th><th>SUM(SAL)</th></tr>
+                        <tr><td>ANALYST</td><td>6000</td></tr>
+                        <tr><td>MANAGER</td><td>8225</td></tr>
+                        <tr><td>PRESIDENT</td><td>5000</td></tr>
+                        <tr><td>SALESMAN</td><td>1250</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q54 -->
+            <div class="question">
+                <div class="question-title">Question 54: Display departments > overall average salary</div>
+                <p class="question-text">Nested subquery with HAVING and GROUP BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP GROUP BY DEPTNO 
+HAVING AVG(SAL) > (SELECT AVG(SAL) FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>10</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q55 -->
+            <div class="question">
+                <div class="question-title">Question 55: Display job-wise employee count earning > 1500</div>
+                <p class="question-text">Filtered GROUP BY for job-wise count.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB, COUNT(*) FROM EMP 
+WHERE SAL > 1500 
+GROUP BY JOB;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>JOB</th><th>COUNT(*)</th></tr>
+                        <tr><td>ANALYST</td><td>2</td></tr>
+                        <tr><td>MANAGER</td><td>3</td></tr>
+                        <tr><td>PRESIDENT</td><td>1</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q56 -->
+            <div class="question">
+                <div class="question-title">Question 56: Display departments with > 2 employees getting commission</div>
+                <p class="question-text">Nested GROUP BY with HAVING on commission count.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP 
+WHERE COMM IS NOT NULL 
+GROUP BY DEPTNO 
+HAVING COUNT(*) > 2;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q57 -->
+            <div class="question">
+                <div class="question-title">Question 57: Display job and max salary hired after 1981</div>
+                <p class="question-text">Filtered GROUP BY for employees hired after 1981.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB, MAX(SAL) FROM EMP 
+WHERE YEAR(HIREDATE) > 1981 
+GROUP BY JOB;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>JOB</th><th>MAX(SAL)</th></tr>
+                        <tr><td>ANALYST</td><td>3000</td></tr>
+                        <tr><td>CLERK</td><td>1100</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q58 -->
+            <div class="question">
+                <div class="question-title">Question 58: Display department-wise total salary excluding 30</div>
+                <p class="question-text">Filtered GROUP BY excluding department 30.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO, SUM(SAL) FROM EMP 
+WHERE DEPTNO != 30 
+GROUP BY DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>SUM(SAL)</th></tr>
+                        <tr><td>10</td><td>8750</td></tr>
+                        <tr><td>20</td><td>10875</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q59 -->
+            <div class="question">
+                <div class="question-title">Question 59: Display departments with total salary > department average</div>
+                <p class="question-text">Nested subquery comparing department totals to average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO, SUM(SAL) FROM EMP 
+GROUP BY DEPTNO 
+HAVING SUM(SAL) > (SELECT AVG(Total_Salary) FROM (SELECT SUM(SAL) AS Total_Salary FROM EMP GROUP BY DEPTNO) TEMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>SUM(SAL)</th></tr>
+                        <tr><td>20</td><td>10875</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q60 -->
+            <div class="question">
+                <div class="question-title">Question 60: Display job-wise average salary where dept > 3 employees</div>
+                <p class="question-text">Correlated subquery combined with GROUP BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB, AVG(SAL) FROM EMP E 
+WHERE (SELECT COUNT(*) FROM EMP WHERE DEPTNO = E.DEPTNO) > 3 
+GROUP BY JOB;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>JOB</th><th>AVG(SAL)</th></tr>
+                        <tr><td>CLERK</td><td>1116.67</td></tr>
+                        <tr><td>MANAGER</td><td>2850.00</td></tr>
+                        <tr><td>SALESMAN</td><td>1400.00</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q61 -->
+            <div class="question">
+                <div class="question-title">Question 61: Display department and job with maximum total salary</div>
+                <p class="question-text">Nested subquery finding max department-job salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO, JOB, SUM(SAL) FROM EMP 
+GROUP BY DEPTNO, JOB 
+HAVING SUM(SAL) = (SELECT MAX(Total_Salary) FROM (SELECT SUM(SAL) AS Total_Salary FROM EMP GROUP BY DEPTNO, JOB) TEMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th><th>JOB</th><th>SUM(SAL)</th></tr>
+                        <tr><td>20</td><td>ANALYST</td><td>6000</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q62 -->
+            <div class="question">
+                <div class="question-title">Question 62: Display employees earning the second highest salary</div>
+                <p class="question-text">Nested subquery finding second max salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL = (SELECT MAX(SAL) FROM EMP WHERE SAL < (SELECT MAX(SAL) FROM EMP));</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q63 -->
+            <div class="question">
+                <div class="question-title">Question 63: Display employees earning > avg salary in DALLAS</div>
+                <p class="question-text">Nested subquery finding DALLAS department average.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > (SELECT AVG(E.SAL) FROM EMP E WHERE E.DEPTNO IN (SELECT DEPTNO FROM DEPT WHERE LOC = 'DALLAS'));</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q64 -->
+            <div class="question">
+                <div class="question-title">Question 64: Display departments with max = min salary</div>
+                <p class="question-text">GROUP BY with HAVING comparing MAX and MIN.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DEPTNO FROM EMP 
+GROUP BY DEPTNO 
+HAVING MAX(SAL) = MIN(SAL);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>DEPTNO</th></tr>
+                        <tr><td>No matching records</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q65 -->
+            <div class="question">
+                <div class="question-title">Question 65: Display employees < all MANAGERS but > any CLERK</div>
+                <p class="question-text">Multiple-row subqueries with ALL and ANY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL < ALL (SELECT SAL FROM EMP WHERE JOB = 'MANAGER') 
+AND SAL > ANY (SELECT SAL FROM EMP WHERE JOB = 'CLERK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q66 -->
+            <div class="question">
+                <div class="question-title">Question 66: Display employees = department-wise second highest salary</div>
+                <p class="question-text">Complex correlated subquery for second max per department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT E.ENAME, E.SAL, E.DEPTNO FROM EMP E 
+WHERE E.SAL = (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO AND SAL < (SELECT MAX(SAL) FROM EMP WHERE DEPTNO = E.DEPTNO));</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th><th>DEPTNO</th></tr>
+                        <tr><td>CLARK</td><td>2450</td><td>10</td></tr>
+                        <tr><td>JONES</td><td>2975</td><td>20</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td><td>30</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q67 -->
+            <div class="question">
+                <div class="question-title">Question 67: Display employees earning > median salary</div>
+                <p class="question-text">Subquery calculating median salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL > (SELECT AVG(SAL) FROM (SELECT SAL FROM EMP ORDER BY SAL) TEMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>CLARK</td><td>2450</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q68 -->
+            <div class="question">
+                <div class="question-title">Question 68: Display employees whose salary > 50% of employees</div>
+                <p class="question-text">Subquery counting salary percentiles.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP E 
+WHERE (SELECT COUNT(*) FROM EMP WHERE SAL < E.SAL) > (SELECT COUNT(*) / 2 FROM EMP);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>KING</td><td>5000</td></tr>
+                        <tr><td>SCOTT</td><td>3000</td></tr>
+                        <tr><td>FORD</td><td>3000</td></tr>
+                        <tr><td>BLAKE</td><td>2850</td></tr>
+                        <tr><td>CLARK</td><td>2450</td></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                        <tr><td>TURNER</td><td>1500</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Q69 -->
+            <div class="question">
+                <div class="question-title">Question 69: Display employees earning the third highest salary</div>
+                <p class="question-text">Nested subquery finding third maximum salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL FROM EMP 
+WHERE SAL = (SELECT MAX(SAL) FROM EMP WHERE SAL < (SELECT MAX(SAL) FROM EMP WHERE SAL < (SELECT MAX(SAL) FROM EMP)));</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr><th>ENAME</th><th>SAL</th></tr>
+                        <tr><td>JONES</td><td>2975</td></tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+</body>
+</html>

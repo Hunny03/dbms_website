@@ -1,0 +1,1968 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHERE, ORDER BY, and ALIASES - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        
+        <header>
+            <h1>WHERE, ORDER BY & ALIASES</h1>
+        </header>
+
+        <div class="questions-list">
+
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Display employees whose salary is greater than 3000</div>
+                <p class="question-text">Use WHERE clause to filter employees with salary > 3000.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, SAL FROM EMP WHERE SAL > 3000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-title">Question 2: Display employees working in department 10</div>
+                <p class="question-text">Use WHERE clause to filter by DEPTNO = 10.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, DEPTNO FROM EMP WHERE DEPTNO = 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>MANAGER</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>7934</td>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                            <td>10</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-title">Question 3: Display employees whose job is 'CLERK'</div>
+                <p class="question-text">Use WHERE clause to filter by JOB = 'CLERK'.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB = 'CLERK';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>7876</td>
+                            <td>ADAMS</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>7900</td>
+                            <td>JAMES</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>7934</td>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-title">Question 4: Display employees hired after 01-JAN-81</div>
+                <p class="question-text">Use WHERE clause with date comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, HIREDATE FROM EMP WHERE HIREDATE > '01-JAN-81';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>28-SEP-81</td>
+                        </tr>
+                        <tr>
+                            <td>7876</td>
+                            <td>ADAMS</td>
+                            <td>12-JAN-83</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-title">Question 5: Display employees whose salary is less than 1500</div>
+                <p class="question-text">Use WHERE clause with SAL < 1500.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP WHERE SAL < 1500;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>7900</td>
+                            <td>JAMES</td>
+                            <td>950</td>
+                        </tr>
+                        <tr>
+                            <td>7934</td>
+                            <td>MILLER</td>
+                            <td>1300</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Display employees whose salary is > 2000 AND job is 'MANAGER'</div>
+                <p class="question-text">Use WHERE clause with AND operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, SAL FROM EMP WHERE SAL > 2000 AND JOB = 'MANAGER';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>MANAGER</td>
+                            <td>2975</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>MANAGER</td>
+                            <td>2850</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-title">Question 7: Display employees working in department 10 OR 20</div>
+                <p class="question-text">Use WHERE clause with OR operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO FROM EMP WHERE DEPTNO = 10 OR DEPTNO = 20;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>10</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-title">Question 8: Display employees whose job is 'SALESMAN' AND salary > 1500</div>
+                <p class="question-text">Use WHERE clause with AND for string and numeric comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, SAL FROM EMP WHERE JOB = 'SALESMAN' AND SAL > 1500;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>7844</td>
+                            <td>TURNER</td>
+                            <td>SALESMAN</td>
+                            <td>1500</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-title">Question 9: Display employees who are either CLERK or ANALYST</div>
+                <p class="question-text">Use WHERE clause with OR operator for two different jobs.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB = 'CLERK' OR JOB = 'ANALYST';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>7500</td>
+                            <td>FORD</td>
+                            <td>ANALYST</td>
+                        </tr>
+                        <tr>
+                            <td>7876</td>
+                            <td>ADAMS</td>
+                            <td>CLERK</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-title">Question 10: Display employees hired before 1982 AND working in department 30</div>
+                <p class="question-text">Use WHERE clause with AND for date and department filtering.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, HIREDATE, DEPTNO FROM EMP 
+WHERE YEAR(HIREDATE) < 1982 AND DEPTNO = 30;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>01-MAY-81</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Display employees working in departments 10, 20, or 30</div>
+                <p class="question-text">Use WHERE clause with IN operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO FROM EMP WHERE DEPTNO IN (10, 20, 30);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>10</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Display employees whose job is NOT MANAGER or CLERK</div>
+                <p class="question-text">Use WHERE clause with NOT IN operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP WHERE JOB NOT IN ('MANAGER', 'CLERK');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                        </tr>
+                        <tr>
+                            <td>7844</td>
+                            <td>TURNER</td>
+                            <td>SALESMAN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-title">Question 13: Display employees whose department is NOT 10</div>
+                <p class="question-text">Use WHERE clause with NOT operator for numeric value.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO FROM EMP WHERE DEPTNO <> 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-title">Question 14: Display employees whose salary is BETWEEN 1000 and 3000</div>
+                <p class="question-text">Use WHERE clause with BETWEEN operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP WHERE SAL BETWEEN 1000 AND 3000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>1250</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>2850</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>2450</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-title">Question 15: Display employees hired BETWEEN 01-JAN-81 and 31-DEC-81</div>
+                <p class="question-text">Use WHERE clause with BETWEEN for date range.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, HIREDATE FROM EMP 
+WHERE HIREDATE BETWEEN '01-JAN-81' AND '31-DEC-81';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>28-SEP-81</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>01-MAY-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question">
+                <div class="question-title">Question 16: Display all employees ordered by salary in ASCENDING order</div>
+                <p class="question-text">Use ORDER BY clause with ASC keyword.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP ORDER BY SAL ASC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>7900</td>
+                            <td>JAMES</td>
+                            <td>950</td>
+                        </tr>
+                        <tr>
+                            <td>7934</td>
+                            <td>MILLER</td>
+                            <td>1300</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Display all employees ordered by salary in DESCENDING order</div>
+                <p class="question-text">Use ORDER BY clause with DESC keyword.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP ORDER BY SAL DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>5000</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>2975</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>2850</td>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Display employees ordered by HIREDATE</div>
+                <p class="question-text">Use ORDER BY clause with date column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, HIREDATE FROM EMP ORDER BY HIREDATE;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>01-MAY-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Display employees ordered by DEPTNO and SAL</div>
+                <p class="question-text">Use ORDER BY clause with multiple columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO, SAL FROM EMP ORDER BY DEPTNO, SAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>DEPTNO</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7934</td>
+                            <td>MILLER</td>
+                            <td>10</td>
+                            <td>1300</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>10</td>
+                            <td>2450</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>10</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Display employees ordered by JOB (ASC) and SAL (DESC)</div>
+                <p class="question-text">Use ORDER BY with mixed ASC and DESC directions.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, SAL FROM EMP ORDER BY JOB ASC, SAL DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7500</td>
+                            <td>FORD</td>
+                            <td>ANALYST</td>
+                            <td>3000</td>
+                        </tr>
+                        <tr>
+                            <td>7934</td>
+                            <td>MILLER</td>
+                            <td>CLERK</td>
+                            <td>1300</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question">
+                <div class="question-title">Question 21: Display employee names ordered ALPHABETICALLY</div>
+                <p class="question-text">Use ORDER BY on string column (default is ASC).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME FROM EMP ORDER BY ENAME;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>7876</td>
+                            <td>ADAMS</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Display employees of department 30 ordered by SAL</div>
+                <p class="question-text">Combine WHERE and ORDER BY clauses.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP 
+WHERE DEPTNO = 30 ORDER BY SAL DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>2850</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>1250</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Display employees ordered by ANNUAL SALARY (SAL * 12)</div>
+                <p class="question-text">Use ORDER BY with calculated column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL, SAL * 12 AS ANNUAL_SAL FROM EMP 
+ORDER BY SAL * 12 DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>ANNUAL_SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>5000</td>
+                            <td>60000</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>2975</td>
+                            <td>35700</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Display employees ordered by COMM</div>
+                <p class="question-text">Use ORDER BY on nullable column (NULL values appear first/last).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM FROM EMP ORDER BY COMM DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>7844</td>
+                            <td>TURNER</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Display employees ordered by JOB and ENAME</div>
+                <p class="question-text">Use ORDER BY with two string columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB FROM EMP ORDER BY JOB, ENAME;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                        </tr>
+                        <tr>
+                            <td>7500</td>
+                            <td>FORD</td>
+                            <td>ANALYST</td>
+                        </tr>
+                        <tr>
+                            <td>7876</td>
+                            <td>ADAMS</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>7900</td>
+                            <td>JAMES</td>
+                            <td>CLERK</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Display ENAME as Employee_Name</div>
+                <p class="question-text">Use column alias with AS keyword.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME AS Employee_Name FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>Employee_Name</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Display SAL as Monthly_Salary</div>
+                <p class="question-text">Use column alias for numeric column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL AS Monthly_Salary FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>Monthly_Salary</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>2975</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 28 -->
+            <div class="question">
+                <div class="question-title">Question 28: Display ENAME and JOB with aliases</div>
+                <p class="question-text">Use multiple aliases in single SELECT.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Name, JOB AS Designation FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Designation</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>MANAGER</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 29 -->
+            <div class="question">
+                <div class="question-title">Question 29: Display DEPTNO as Dept_No</div>
+                <p class="question-text">Use alias for department number column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO AS Dept_No FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>Dept_No</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 30 -->
+            <div class="question">
+                <div class="question-title">Question 30: Display ENAME and SAL with meaningful aliases</div>
+                <p class="question-text">Use descriptive aliases for better readability.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Employee_Name, SAL AS Salary FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Employee_Name</th>
+                            <th>Salary</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 31 -->
+            <div class="question">
+                <div class="question-title">Question 31: Display COMM as Incentive</div>
+                <p class="question-text">Use alias for commission column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, COMM AS Incentive FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>Incentive</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 32 -->
+            <div class="question">
+                <div class="question-title">Question 32: Display ENAME, JOB, SAL with aliases, ordered by JOB</div>
+                <p class="question-text">Combine aliases with ORDER BY clause.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Employee, JOB AS Designation, SAL AS Salary 
+FROM EMP ORDER BY JOB;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Employee</th>
+                            <th>Designation</th>
+                            <th>Salary</th>
+                        </tr>
+                        <tr>
+                            <td>FORD</td>
+                            <td>ANALYST</td>
+                            <td>3000</td>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>PRESIDENT</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 33 -->
+            <div class="question">
+                <div class="question-title">Question 33: Display employees of dept 30 with salary > 1500, ordered by SAL</div>
+                <p class="question-text">Combine WHERE with multiple conditions and ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, DEPTNO, SAL FROM EMP 
+WHERE DEPTNO = 30 AND SAL > 1500 ORDER BY SAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>DEPTNO</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>30</td>
+                            <td>2850</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 34 -->
+            <div class="question">
+                <div class="question-title">Question 34: Display employees whose COMM IS NOT NULL, ordered by COMM</div>
+                <p class="question-text">Use IS NOT NULL condition with ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM FROM EMP 
+WHERE COMM IS NOT NULL ORDER BY COMM DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>1400</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 35 -->
+            <div class="question">
+                <div class="question-title">Question 35: Display employees with salary BETWEEN 1500 and 3000, ordered by SAL</div>
+                <p class="question-text">Use BETWEEN with ORDER BY clause.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP 
+WHERE SAL BETWEEN 1500 AND 3000 ORDER BY SAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>1250</td>
+                        </tr>
+                        <tr>
+                            <td>7698</td>
+                            <td>BLAKE</td>
+                            <td>2850</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 36 -->
+            <div class="question">
+                <div class="question-title">Question 36: Display employee name and department, ordered by DEPTNO and ENAME</div>
+                <p class="question-text">Use multiple columns in ORDER BY with aliases.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Name, DEPTNO AS Dept FROM EMP 
+ORDER BY DEPTNO, ENAME;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Dept</th>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 37 -->
+            <div class="question">
+                <div class="question-title">Question 37: Display employees whose name starts with 'S', ordered by SAL</div>
+                <p class="question-text">Use LIKE operator with WHERE and ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP 
+WHERE ENAME LIKE 'S%' ORDER BY SAL DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 38 -->
+            <div class="question">
+                <div class="question-title">Question 38: Display employees hired before 1982 with aliases, ordered by HIREDATE</div>
+                <p class="question-text">Combine WHERE date condition, aliases, and ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO AS Emp_ID, ENAME AS Employee, HIREDATE AS Joining_Date 
+FROM EMP WHERE YEAR(HIREDATE) < 1982 ORDER BY HIREDATE;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Emp_ID</th>
+                            <th>Employee</th>
+                            <th>Joining_Date</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 39 -->
+            <div class="question">
+                <div class="question-title">Question 39: Display ENAME as Name and SAL as Pay for department 10</div>
+                <p class="question-text">Use WHERE with multiple aliases.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Name, SAL AS Pay FROM EMP WHERE DEPTNO = 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Pay</th>
+                        </tr>
+                        <tr>
+                            <td>CLARK</td>
+                            <td>2450</td>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>5000</td>
+                        </tr>
+                        <tr>
+                            <td>MILLER</td>
+                            <td>1300</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 40 -->
+            <div class="question">
+                <div class="question-title">Question 40: Display employees whose COMM IS NULL, ordered by SAL DESC</div>
+                <p class="question-text">Use IS NULL condition with ORDER BY DESC.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM FROM EMP 
+WHERE COMM IS NULL ORDER BY SAL DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 41 -->
+            <div class="question">
+                <div class="question-title">Question 41: Display employee name and ANNUAL salary (SAL * 12), ordered by annual salary</div>
+                <p class="question-text">Use calculated column with alias and ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Employee, SAL * 12 AS Annual_Salary FROM EMP 
+ORDER BY SAL * 12 DESC;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Employee</th>
+                            <th>Annual_Salary</th>
+                        </tr>
+                        <tr>
+                            <td>KING</td>
+                            <td>60000</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>35700</td>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>9600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 42 -->
+            <div class="question">
+                <div class="question-title">Question 42: Display employees whose COMM IS NULL but JOB is SALESMAN</div>
+                <p class="question-text">Use combination of IS NULL and string comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, JOB, COMM FROM EMP 
+WHERE COMM IS NULL AND JOB = 'SALESMAN';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>No matching records</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 43 -->
+            <div class="question">
+                <div class="question-title">Question 43: Display employees whose MGR IS NULL and SAL > 4000</div>
+                <p class="question-text">Use IS NULL with numeric comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, MGR, SAL FROM EMP 
+WHERE MGR IS NULL AND SAL > 4000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>MGR</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>NULL</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 44 -->
+            <div class="question">
+                <div class="question-title">Question 44: Display employees who do NOT earn commission and work in department 20</div>
+                <p class="question-text">Use IS NULL with department condition.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM, DEPTNO FROM EMP 
+WHERE COMM IS NULL AND DEPTNO = 20;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>NULL</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>NULL</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 45 -->
+            <div class="question">
+                <div class="question-title">Question 45: Display employees whose COMM IS NOT NULL and DEPTNO = 30</div>
+                <p class="question-text">Use IS NOT NULL with department filtering.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM, DEPTNO FROM EMP 
+WHERE COMM IS NOT NULL AND DEPTNO = 30;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>1400</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 46 -->
+            <div class="question">
+                <div class="question-title">Question 46: Display employees whose COMM IS NULL OR SAL > 3000</div>
+                <p class="question-text">Use IS NULL with OR operator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM, SAL FROM EMP 
+WHERE COMM IS NULL OR SAL > 3000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>NULL</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>NULL</td>
+                            <td>2975</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>NULL</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 47 -->
+            <div class="question">
+                <div class="question-title">Question 47: Display employees whose COMM IS NULL and SAL > 2000</div>
+                <p class="question-text">Use IS NULL with AND operator for numeric comparison.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM, SAL FROM EMP 
+WHERE COMM IS NULL AND SAL > 2000;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>NULL</td>
+                            <td>2975</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>NULL</td>
+                            <td>2450</td>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>NULL</td>
+                            <td>5000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 48 -->
+            <div class="question">
+                <div class="question-title">Question 48: Display employees whose MGR IS NOT NULL</div>
+                <p class="question-text">Find employees who have a manager assigned.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, MGR FROM EMP WHERE MGR IS NOT NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>MGR</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>7902</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>7698</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>7839</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 49 -->
+            <div class="question">
+                <div class="question-title">Question 49: Display employees who do NOT have a manager</div>
+                <p class="question-text">Find top-level employees (MGR IS NULL).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, MGR FROM EMP WHERE MGR IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>MGR</th>
+                        </tr>
+                        <tr>
+                            <td>7839</td>
+                            <td>KING</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 50 -->
+            <div class="question">
+                <div class="question-title">Question 50: Display employees who ARE GETTING commission</div>
+                <p class="question-text">Find employees with commission (COMM IS NOT NULL and COMM > 0).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM FROM EMP WHERE COMM > 0;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <td>7654</td>
+                            <td>MARTIN</td>
+                            <td>1400</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 51 -->
+            <div class="question">
+                <div class="question-title">Question 51: Display employees whose COMM IS NULL</div>
+                <p class="question-text">Find employees without commission.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, COMM FROM EMP WHERE COMM IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>7782</td>
+                            <td>CLARK</td>
+                            <td>NULL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 52 -->
+            <div class="question">
+                <div class="question-title">Question 52: Display JOB and SAL using aliases</div>
+                <p class="question-text">Use aliases without WHERE or ORDER BY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB AS Job_Title, SAL AS Salary FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Job_Title</th>
+                            <th>Salary</th>
+                        </tr>
+                        <tr>
+                            <td>CLERK</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>SALESMAN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>MANAGER</td>
+                            <td>2975</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 53 -->
+            <div class="question">
+                <div class="question-title">Question 53: Display employee name and department number with aliases</div>
+                <p class="question-text">Use aliases for both columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME AS Employee, DEPTNO AS Department_No FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>Employee</th>
+                            <th>Department_No</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                            <td>20</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 54 -->
+            <div class="question">
+                <div class="question-title">Question 54: Display HIREDATE as Joining_Date</div>
+                <p class="question-text">Use alias for date column.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, HIREDATE AS Joining_Date FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>Joining_Date</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                        </tr>
+                        <tr>
+                            <td>7566</td>
+                            <td>JONES</td>
+                            <td>03-DEC-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

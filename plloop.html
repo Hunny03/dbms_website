@@ -1,0 +1,1152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL Loops - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        <header>
+            <h1>PL/SQL Loops</h1>
+        </header>
+
+
+        <div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Write a PL/SQL block to print numbers from 1 to 5 using SIMPLE LOOP.</div>
+                <p class="question-subtitle">(SIMPLE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+BEGIN
+  <<print_loop>>
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num);
+    v_num := v_num + 1;
+    EXIT WHEN v_num > 5;
+  END LOOP print_loop;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+2
+3
+4
+5
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Write a PL/SQL block to display numbers from 10 to 1 in reverse order.</div>
+                <p class="question-subtitle">(SIMPLE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 10;
+BEGIN
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num);
+    v_num := v_num - 1;
+    EXIT WHEN v_num < 1;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Write a PL/SQL block to calculate the sum of numbers from 1 to 10.</div>
+                <p class="question-subtitle">(SIMPLE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+  v_sum NUMBER := 0;
+BEGIN
+  LOOP
+    v_sum := v_sum + v_num;
+    v_num := v_num + 1;
+    EXIT WHEN v_num > 10;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Sum of 1 to 10 is: ' || v_sum);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Sum of 1 to 10 is: 55
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Write a PL/SQL block to print multiplication table of a number using SIMPLE LOOP.</div>
+                <p class="question-subtitle">(SIMPLE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 7;
+  v_i NUMBER := 1;
+BEGIN
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num || ' x ' || v_i || ' = ' || (v_num * v_i));
+    v_i := v_i + 1;
+    EXIT WHEN v_i > 10;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">7 x 1 = 7
+7 x 2 = 14
+7 x 3 = 21
+7 x 4 = 28
+7 x 5 = 35
+7 x 6 = 42
+7 x 7 = 49
+7 x 8 = 56
+7 x 9 = 63
+7 x 10 = 70
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Write a PL/SQL block to print even numbers between 1 and 20.</div>
+                <p class="question-subtitle">(SIMPLE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+BEGIN
+  LOOP
+    IF MOD(v_num, 2) = 0 THEN
+      DBMS_OUTPUT.PUT_LINE(v_num);
+    END IF;
+    v_num := v_num + 1;
+    EXIT WHEN v_num > 20;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Write a PL/SQL block that exits the loop when a number becomes greater than 50.</div>
+                <p class="question-subtitle">(SIMPLE LOOP + EXIT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 45;
+BEGIN
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num);
+    v_num := v_num + 3;
+    EXIT WHEN v_num > 50;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">45
+48
+51
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Write a PL/SQL block to print numbers from 1 to 10 using WHILE LOOP.</div>
+                <p class="question-subtitle">(WHILE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+BEGIN
+  WHILE v_num <= 10 LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num);
+    v_num := v_num + 1;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Write a PL/SQL block to calculate factorial of a number using WHILE LOOP.</div>
+                <p class="question-subtitle">(WHILE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 5;
+  v_factorial NUMBER := 1;
+BEGIN
+  WHILE v_num > 0 LOOP
+    v_factorial := v_factorial * v_num;
+    v_num := v_num - 1;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Factorial is: ' || v_factorial);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Factorial is: 120
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Write a PL/SQL block to display sum of digits of a number using WHILE LOOP.</div>
+                <p class="question-subtitle">(WHILE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_number NUMBER := 1234;
+  v_sum NUMBER := 0;
+BEGIN
+  WHILE v_number > 0 LOOP
+    v_sum := v_sum + MOD(v_number, 10);
+    v_number := TRUNC(v_number / 10);
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Sum of digits is: ' || v_sum);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Sum of digits is: 10
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Write a PL/SQL block to reverse a number using WHILE LOOP.</div>
+                <p class="question-subtitle">(WHILE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_number NUMBER := 12345;
+  v_reverse NUMBER := 0;
+BEGIN
+  WHILE v_number > 0 LOOP
+    v_reverse := v_reverse * 10 + MOD(v_number, 10);
+    v_number := TRUNC(v_number / 10);
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Reversed number is: ' || v_reverse);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Reversed number is: 54321
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Write a PL/SQL block to check whether a number is palindrome using WHILE LOOP.</div>
+                <p class="question-subtitle">(WHILE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_number NUMBER := 1221;
+  v_copy NUMBER := v_number;
+  v_reverse NUMBER := 0;
+BEGIN
+  WHILE v_copy > 0 LOOP
+    v_reverse := v_reverse * 10 + MOD(v_copy, 10);
+    v_copy := TRUNC(v_copy / 10);
+  END LOOP;
+  IF v_number = v_reverse THEN
+    DBMS_OUTPUT.PUT_LINE('Number ' || v_number || ' is a palindrome');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('Number ' || v_number || ' is not a palindrome');
+  END IF;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Number 1221 is a palindrome
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Write a PL/SQL block to print Fibonacci series up to N terms using WHILE LOOP.</div>
+                <p class="question-subtitle">(WHILE LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_n NUMBER := 7;
+  v_first NUMBER := 0;
+  v_second NUMBER := 1;
+  v_count NUMBER := 1;
+  v_next NUMBER;
+BEGIN
+  WHILE v_count <= v_n LOOP
+    DBMS_OUTPUT.PUT_LINE(v_first);
+    v_next := v_first + v_second;
+    v_first := v_second;
+    v_second := v_next;
+    v_count := v_count + 1;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">0
+1
+1
+2
+3
+5
+8
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Write a PL/SQL block to print numbers from 1 to 10 using FOR LOOP.</div>
+                <p class="question-subtitle">(FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_num IN 1..10 LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Write a PL/SQL block to print numbers in reverse order using FOR LOOP.</div>
+                <p class="question-subtitle">(FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_num IN REVERSE 10..1 LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Write a PL/SQL block to calculate sum of first 10 natural numbers using FOR LOOP.</div>
+                <p class="question-subtitle">(FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_sum NUMBER := 0;
+BEGIN
+  FOR v_num IN 1..10 LOOP
+    v_sum := v_sum + v_num;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Sum of first 10 natural numbers is: ' || v_sum);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Sum of first 10 natural numbers is: 55
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Write a PL/SQL block to display multiplication table of 5 using FOR LOOP.</div>
+                <p class="question-subtitle">(FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_i IN 1..10 LOOP
+    DBMS_OUTPUT.PUT_LINE('5 x ' || v_i || ' = ' || (5 * v_i));
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+5 x 8 = 40
+5 x 9 = 45
+5 x 10 = 50
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Write a PL/SQL block to print squares of numbers from 1 to 10.</div>
+                <p class="question-subtitle">(FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_num IN 1..10 LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num || '^2 = ' || (v_num * v_num));
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1^2 = 1
+2^2 = 4
+3^2 = 9
+4^2 = 16
+5^2 = 25
+6^2 = 36
+7^2 = 49
+8^2 = 64
+9^2 = 81
+10^2 = 100
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 18: Write a PL/SQL block to display all odd numbers between 1 and 50.</div>
+                <p class="question-subtitle">(FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_num IN 1..50 LOOP
+    IF MOD(v_num, 2) = 1 THEN
+      DBMS_OUTPUT.PUT_LINE(v_num);
+    END IF;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+25
+27
+29
+31
+33
+35
+37
+39
+41
+43
+45
+47
+49
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 19: Write a PL/SQL block to print a pattern using nested loops:
+*
+**
+***
+****</div>
+                <p class="question-subtitle">(Nested LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_row IN 1..4 LOOP
+    DECLARE
+      v_line VARCHAR2(10) := '';
+    BEGIN
+      FOR v_col IN 1..v_row LOOP
+        v_line := v_line || '*';
+      END LOOP;
+      DBMS_OUTPUT.PUT_LINE(v_line);
+    END;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">*
+**
+***
+****
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 20: Write a PL/SQL block to print multiplication tables from 1 to 5.</div>
+                <p class="question-subtitle">(Nested LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_base IN 1..5 LOOP
+    DBMS_OUTPUT.PUT_LINE('Table of ' || v_base);
+    FOR v_i IN 1..5 LOOP
+      DBMS_OUTPUT.PUT_LINE(v_base || ' x ' || v_i || ' = ' || (v_base * v_i));
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('---');
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Table of 1
+1 x 1 = 1
+1 x 2 = 2
+1 x 3 = 3
+1 x 4 = 4
+1 x 5 = 5
+---
+Table of 2
+2 x 1 = 2
+2 x 2 = 4
+2 x 3 = 6
+2 x 4 = 8
+2 x 5 = 10
+---
+Table of 3
+3 x 1 = 3
+3 x 2 = 6
+3 x 3 = 9
+3 x 4 = 12
+3 x 5 = 15
+---
+Table of 4
+4 x 1 = 4
+4 x 2 = 8
+4 x 3 = 12
+4 x 4 = 16
+4 x 5 = 20
+---
+Table of 5
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+---
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 21: Write a PL/SQL block to display a number pattern:
+1
+12
+123
+1234</div>
+                <p class="question-subtitle">(Nested LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR v_row IN 1..4 LOOP
+    DECLARE
+      v_line VARCHAR2(10) := '';
+    BEGIN
+      FOR v_col IN 1..v_row LOOP
+        v_line := v_line || v_col;
+      END LOOP;
+      DBMS_OUTPUT.PUT_LINE(v_line);
+    END;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+12
+123
+1234
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 22: Write a PL/SQL block to print numbers from 1 to 20 but skip multiples of 4.</div>
+                <p class="question-subtitle">(LOOP + CONTINUE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+BEGIN
+  LOOP
+    IF MOD(v_num, 4) = 0 THEN
+      v_num := v_num + 1;
+      CONTINUE;
+    END IF;
+    DBMS_OUTPUT.PUT_LINE(v_num);
+    v_num := v_num + 1;
+    EXIT WHEN v_num > 20;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+2
+3
+5
+6
+7
+9
+10
+11
+13
+14
+15
+17
+18
+19
+20
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 23: Write a PL/SQL block to stop printing numbers once the sum exceeds 100.</div>
+                <p class="question-subtitle">(LOOP + EXIT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+  v_sum NUMBER := 0;
+BEGIN
+  LOOP
+    v_sum := v_sum + v_num;
+    DBMS_OUTPUT.PUT_LINE('Number: ' || v_num || ' Sum: ' || v_sum);
+    EXIT WHEN v_sum > 100;
+    v_num := v_num + 1;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Number: 1 Sum: 1
+Number: 2 Sum: 3
+Number: 3 Sum: 6
+Number: 4 Sum: 10
+Number: 5 Sum: 15
+Number: 6 Sum: 21
+Number: 7 Sum: 28
+Number: 8 Sum: 36
+Number: 9 Sum: 45
+Number: 10 Sum: 55
+Number: 11 Sum: 66
+Number: 12 Sum: 78
+Number: 13 Sum: 91
+Number: 14 Sum: 105
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 24: Write a PL/SQL block to print numbers and exit when number divisible by 7 is found.</div>
+                <p class="question-subtitle">(LOOP + EXIT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+BEGIN
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(v_num);
+    EXIT WHEN MOD(v_num, 7) = 0;
+    v_num := v_num + 1;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">1
+2
+3
+4
+5
+6
+7
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 25: Write a PL/SQL block to loop through employee IDs from EMP table and display them.</div>
+                <p class="question-subtitle">(FOR LOOP + Table Data)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cursor IS SELECT EMPNO FROM EMP ORDER BY EMPNO;
+  v_emp_rec emp_cursor%ROWTYPE;
+BEGIN
+  OPEN emp_cursor;
+  LOOP
+    FETCH emp_cursor INTO v_emp_rec;
+    EXIT WHEN emp_cursor%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('Employee ID: ' || v_emp_rec.EMPNO);
+  END LOOP;
+  CLOSE emp_cursor;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee ID: 7369
+Employee ID: 7499
+Employee ID: 7521
+Employee ID: 7566
+Employee ID: 7654
+Employee ID: 7698
+Employee ID: 7782
+Employee ID: 7788
+Employee ID: 7839
+Employee ID: 7844
+Employee ID: 7900
+Employee ID: 7902
+Employee ID: 7934
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 26: Write a PL/SQL block to increase salary of employees by 10% using loop.</div>
+                <p class="question-subtitle">(LOOP + UPDATE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR emp_rec IN (SELECT EMPNO, SAL FROM EMP) LOOP
+    UPDATE EMP SET SAL = SAL * 1.10 WHERE EMPNO = emp_rec.EMPNO;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Salary update completed.');
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary update completed.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 27: Write a PL/SQL block to display employees whose salary is greater than 3000 using loop.</div>
+                <p class="question-subtitle">(LOOP + CONDITION)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR emp_rec IN (SELECT ENAME, SAL FROM EMP) LOOP
+    IF emp_rec.SAL > 3000 THEN
+      DBMS_OUTPUT.PUT_LINE(emp_rec.ENAME || ' - Rs.' || emp_rec.SAL);
+    END IF;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">KING - Rs.5500
+FORD - Rs.3300
+--- Example output after original data and salary update ---
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 28: Write a PL/SQL block to count total number of employees using loop.</div>
+                <p class="question-subtitle">(LOOP + COUNT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_count NUMBER := 0;
+BEGIN
+  FOR emp_rec IN (SELECT EMPNO FROM EMP) LOOP
+    v_count := v_count + 1;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Total employees: ' || v_count);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Total employees: 14
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 29: Write a PL/SQL block using all three loops (SIMPLE, WHILE, FOR) in one program.</div>
+                <p class="question-subtitle">(Combined Loops)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+  v_sum NUMBER := 0;
+  v_limit NUMBER := 5;
+BEGIN
+  -- SIMPLE LOOP
+  LOOP
+    DBMS_OUTPUT.PUT_LINE('Simple Loop Value: ' || v_num);
+    v_num := v_num + 1;
+    EXIT WHEN v_num > v_limit;
+  END LOOP;
+
+  -- WHILE LOOP
+  v_num := 1;
+  WHILE v_num <= v_limit LOOP
+    v_sum := v_sum + v_num;
+    v_num := v_num + 1;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Sum by While Loop: ' || v_sum);
+
+  -- FOR LOOP
+  FOR v_i IN 1..v_limit LOOP
+    DBMS_OUTPUT.PUT_LINE('For Loop Value: ' || v_i);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Simple Loop Value: 1
+Simple Loop Value: 2
+Simple Loop Value: 3
+Simple Loop Value: 4
+Simple Loop Value: 5
+Sum by While Loop: 15
+For Loop Value: 1
+For Loop Value: 2
+For Loop Value: 3
+For Loop Value: 4
+For Loop Value: 5
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 30: Write a PL/SQL block to generate prime numbers between 1 and 50.</div>
+                <p class="question-subtitle">(LOOP + LOGIC)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 2;
+  v_is_prime BOOLEAN;
+BEGIN
+  LOOP
+    EXIT WHEN v_num > 50;
+    v_is_prime := TRUE;
+    FOR v_div IN 2..TRUNC(SQRT(v_num)) LOOP
+      IF MOD(v_num, v_div) = 0 THEN
+        v_is_prime := FALSE;
+        EXIT;
+      END IF;
+    END LOOP;
+    IF v_is_prime THEN
+      DBMS_OUTPUT.PUT_LINE(v_num || ' is prime');
+    END IF;
+    v_num := v_num + 1;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">2 is prime
+3 is prime
+5 is prime
+7 is prime
+11 is prime
+13 is prime
+17 is prime
+19 is prime
+23 is prime
+29 is prime
+31 is prime
+37 is prime
+41 is prime
+43 is prime
+47 is prime
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 31: Write a PL/SQL block to simulate ATM withdrawal attempts (3 attempts using loop).</div>
+                <p class="question-subtitle">(LOOP + Practical)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_attempts NUMBER := 0;
+  v_max_attempts NUMBER := 3;
+  v_correct_pin NUMBER := 1234;
+  v_input_pin NUMBER := 1111;
+BEGIN
+  LOOP
+    v_attempts := v_attempts + 1;
+    IF v_input_pin = v_correct_pin THEN
+      DBMS_OUTPUT.PUT_LINE('Withdrawal successful');
+      EXIT;
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Attempt ' || v_attempts || ': Invalid PIN');
+    END IF;
+    EXIT WHEN v_attempts >= v_max_attempts;
+  END LOOP;
+  IF v_attempts = v_max_attempts THEN
+    DBMS_OUTPUT.PUT_LINE('Card blocked after 3 invalid attempts');
+  END IF;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Attempt 1: Invalid PIN
+Attempt 2: Invalid PIN
+Attempt 3: Invalid PIN
+Card blocked after 3 invalid attempts
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 32: Write a PL/SQL block to calculate sum of even and odd numbers separately using loop.</div>
+                <p class="question-subtitle">(LOOP + CONDITION)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_num NUMBER := 1;
+  v_even_sum NUMBER := 0;
+  v_odd_sum NUMBER := 0;
+BEGIN
+  LOOP
+    IF MOD(v_num, 2) = 0 THEN
+      v_even_sum := v_even_sum + v_num;
+    ELSE
+      v_odd_sum := v_odd_sum + v_num;
+    END IF;
+    v_num := v_num + 1;
+    EXIT WHEN v_num > 20;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Sum of even numbers: ' || v_even_sum);
+  DBMS_OUTPUT.PUT_LINE('Sum of odd numbers: ' || v_odd_sum);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Sum of even numbers: 110
+Sum of odd numbers: 100
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+
+</body>
+</html>

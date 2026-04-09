@@ -1,0 +1,206 @@
+body {
+    background: radial-gradient(circle at top, #111, #000);
+    color: #eee;
+    font-family: "Poppins", sans-serif;
+    line-height: 1.7;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px 50px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    color: gold;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    color: #aaa;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.categories {
+    max-width: 1100px;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.category-card {
+    background: linear-gradient(145deg, #111, #1a1a1a);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 25px;
+    border-radius: 16px;
+    width: 220px;
+    text-align: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.category-card h3 {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.category-card p {
+    font-size: 13px;
+    color: #aaa;
+}
+
+.category-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    border: 1px solid gold;
+    box-shadow: 0 0 20px rgba(255,215,0,0.2);
+}
+
+.category-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    padding: 20px;
+    color: #666;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+h1 {
+    color: gold;
+    margin-bottom: 15px;
+}
+
+h2 {
+    color: gold;
+    margin-top: 25px;
+}
+
+p {
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+.container > * {
+    margin-bottom: 10px;
+}
+
+button {
+    background: linear-gradient(145deg, #d4af37, #ffd700);
+    color: black;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    box-shadow: 0 0 8px gold;
+}
+
+pre {
+    background: #050505;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #222;
+    margin-top: 5px;
+}
+
+strong {
+    color: gold;
+}
+
+a {
+    color: gold;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.question {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,215,0,0.15);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.question:hover {
+    border: 1px solid gold;
+    transform: translateY(-3px);
+}
+
+.dropdown-btn {
+    width: 100%;
+    text-align: left;
+    background: #111;
+    color: gold;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.dropdown-btn:hover {
+    background: #1a1a1a;
+}
+
+.dropdown-content {
+    display: none;
+    margin-top: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-5px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.questions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.question-text {
+    font-size: 13px;
+    color: #aaa;
+    overflow: hidden;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+.total-questions-block { 
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #1a1a1a; 
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: #ffcc00; 
+    font-weight: bold;
+    font-size: 1.2rem;
+}

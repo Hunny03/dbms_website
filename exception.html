@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL Exception Handling - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+
+        <header>
+            <h1>PL/SQL Exception Handling</h1>
+        </header>
+
+
+        <div class="questions-list">
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Exception Basics - NO_DATA_FOUND</div>
+                <p class="question-text">Write a PL/SQL block to handle NO_DATA_FOUND exception while fetching employee details.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename, sal INTO v_ename, v_sal<br>&nbsp;&nbsp;&nbsp;&nbsp;FROM emp WHERE empno = 9999;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee: ' || v_ename || ', Salary: ' || v_sal);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Employee not found in database');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Employee not found in database</div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-title">Question 2: Exception Basics - TOO_MANY_ROWS</div>
+                <p class="question-text">Write a PL/SQL block to handle TOO_MANY_ROWS exception.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename, sal INTO v_ename, v_sal<br>&nbsp;&nbsp;&nbsp;&nbsp;FROM emp WHERE deptno = 20;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee: ' || v_ename);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN TOO_MANY_ROWS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Query returned more than one row');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Use cursor or WHERE clause to narrow results');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Query returned more than one row<br>Use cursor or WHERE clause to narrow results</div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-title">Question 3: Exception Basics - ZERO_DIVIDE</div>
+                <p class="question-text">Write a PL/SQL block to handle ZERO_DIVIDE exception.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_numerator NUMBER := 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_denominator NUMBER := 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result := v_numerator / v_denominator;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Result: ' || v_result);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN ZERO_DIVIDE THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Division by zero is not allowed');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Please provide a non-zero denominator');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Division by zero is not allowed<br>Please provide a non-zero denominator</div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-title">Question 4: Exception Basics - VALUE_ERROR</div>
+                <p class="question-text">Write a PL/SQL block to handle VALUE_ERROR exception.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_number NUMBER(3,0);<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_number := 9999;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Number assigned: ' || v_number);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN VALUE_ERROR THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Value too large for specified datatype');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Number should fit in NUMBER(3,0) format');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Value too large for specified datatype<br>Number should fit in NUMBER(3,0) format</div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-title">Question 5: Exception Basics - WHEN OTHERS</div>
+                <p class="question-text">Write a PL/SQL block with a generic WHEN OTHERS exception handler.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_name VARCHAR2(5);<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_name := 'Alexander';<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('An unexpected error occurred');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error type: ' || SQLCODE);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">An unexpected error occurred<br>Error type: -6502</div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Exception Variables - SQLCODE and SQLERRM</div>
+                <p class="question-text">Write a PL/SQL block to display error code and message using SQLCODE and SQLERRM.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result := 50 / 0;<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error Code: ' || SQLCODE);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error Message: ' || SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error Code: -1476<br>Error Message: ORA-01476: divisor is equal to zero</div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-title">Question 7: SQLCODE and SQLERRM - Division Error</div>
+                <p class="question-text">Write a PL/SQL block to capture and display error details when division by zero occurs.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_salary NUMBER := 50000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_days NUMBER := 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_daily_rate NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_error_code NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_error_msg VARCHAR2(200);<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_daily_rate := v_salary / v_days;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Daily Rate: ' || v_daily_rate);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN ZERO_DIVIDE THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_error_code := SQLCODE;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_error_msg := SQLERRM;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== Error Details =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Code: ' || v_error_code);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Message: ' || v_error_msg);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Severity: Critical');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">===== Error Details =====<br>Code: -1476<br>Message: ORA-01476: divisor is equal to zero<br>Severity: Critical</div>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-title">Question 8: Exception Variables - Logging Messages</div>
+                <p class="question-text">Write a PL/SQL block to log exception message into a variable and display it.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_error_log VARCHAR2(500);<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename INTO v_ename FROM emp WHERE empno = 99999;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee: ' || v_ename);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_error_log := 'Error Type: NO_DATA_FOUND | Message: ' || SQLERRM || ' | Time: ' || TO_CHAR(SYSDATE, 'DD-MON-YYYY HH:MI:SS');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(v_error_log);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error Type: NO_DATA_FOUND | Message: ORA-01403: no data found | Time: 08-APR-2026 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-title">Question 9: RAISE_APPLICATION_ERROR - Salary Validation</div>
+                <p class="question-text">Write a PL/SQL block to raise an error if salary is less than 2000 using RAISE_APPLICATION_ERROR.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_salary NUMBER := 1500;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_salary &lt; 2000 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20001, 'Salary must be at least 2000');<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: ORA-20001: Salary must be at least 2000</div>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-title">Question 10: RAISE_APPLICATION_ERROR - Age Validation</div>
+                <p class="question-text">Write a PL/SQL block to validate employee age and raise custom error if age &lt; 18.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_empno NUMBER := 7001;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_age NUMBER := 16;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20) := 'JOHN';<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_age &lt; 18 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20002, 'Employee ' || v_ename || ' is under 18 years old. Cannot hire.');<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee eligible for hire');<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">ORA-20002: Employee JOHN is under 18 years old. Cannot hire.</div>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Business Rule Validation - Update Restriction</div>
+                <p class="question-text">Write a PL/SQL block to restrict update operation using RAISE_APPLICATION_ERROR.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_old_salary NUMBER := 5000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_new_salary NUMBER := 3000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_decrease_pct NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_decrease_pct := ((v_old_salary - v_new_salary) / v_old_salary) * 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_decrease_pct &gt; 10 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20003, 'Cannot decrease salary more than 10%. Decrease requested: ' || ROUND(v_decrease_pct, 2) || '%');<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary update approved');<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">ORA-20003: Cannot decrease salary more than 10%. Decrease requested: 40%</div>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Validation Logic - Department Check</div>
+                <p class="question-text">Write a PL/SQL block to raise an error when invalid department number is entered.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_deptno NUMBER := 99;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_dept_exists NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_dept_exists FROM dept WHERE deptno = v_deptno;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_dept_exists = 0 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20004, 'Invalid department number: ' || v_deptno || '. Valid departments: 10, 20, 30, 40');<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Department is valid');<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">ORA-20004: Invalid department number: 99. Valid departments: 10, 20, 30, 40</div>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-title">Question 13: User Defined Exception - Basic</div>
+                <p class="question-text">Write a PL/SQL block to declare and handle a user-defined exception.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_balance NUMBER := 500;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_withdrawal NUMBER := 1000;<br>&nbsp;&nbsp;&nbsp;&nbsp;insufficient_funds EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_withdrawal &gt; v_balance THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE insufficient_funds;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_balance := v_balance - v_withdrawal;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Withdrawal successful. Balance: ' || v_balance);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN insufficient_funds THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Insufficient funds');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Available balance: ' || v_balance);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Withdrawal requested: ' || v_withdrawal);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Insufficient funds<br>Available balance: 500<br>Withdrawal requested: 1000</div>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-title">Question 14: User Defined Exception - Salary Limit</div>
+                <p class="question-text">Write a PL/SQL block to raise a custom exception when salary exceeds limit.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_salary NUMBER := 100000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_max_salary NUMBER := 50000;<br>&nbsp;&nbsp;&nbsp;&nbsp;salary_too_high EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_salary &gt; v_max_salary THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE salary_too_high;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary approved: ' || v_salary);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN salary_too_high THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Salary exceeds maximum limit');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Maximum allowed: ' || v_max_salary);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary requested: ' || v_salary);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Excess amount: ' || (v_salary - v_max_salary));<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Salary exceeds maximum limit<br>Maximum allowed: 50000<br>Salary requested: 100000<br>Excess amount: 50000</div>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-title">Question 15: Custom Validation - Multiple Conditions</div>
+                <p class="question-text">Write a PL/SQL block to validate input and raise user-defined exception for invalid data.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_empid NUMBER := 1001;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20) := '';<br>&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER := -500;<br>&nbsp;&nbsp;&nbsp;&nbsp;invalid_input EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_empid &lt;= 0 OR LENGTH(TRIM(v_ename)) = 0 OR v_sal &lt; 0 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE invalid_input;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee record created successfully');<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN invalid_input THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Invalid input data');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee ID must be positive: ' || v_empid);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee name cannot be empty: [' || v_ename || ']');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary cannot be negative: ' || v_sal);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Invalid input data<br>Employee ID must be positive: 1001<br>Employee name cannot be empty: []<br>Salary cannot be negative: -500</div>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question">
+                <div class="question-title">Question 16: Multiple User Defined Exceptions</div>
+                <p class="question-text">Write a PL/SQL block to handle multiple user-defined exceptions.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_age NUMBER := 25;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_experience NUMBER := 3;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_qualification VARCHAR2(20) := 'INTERMEDIATE';<br>&nbsp;&nbsp;&nbsp;&nbsp;underage EXCEPTION;<br>&nbsp;&nbsp;&nbsp;&nbsp;insufficient_exp EXCEPTION;<br>&nbsp;&nbsp;&nbsp;&nbsp;poor_qualification EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_age &lt; 21 THEN RAISE underage; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_experience &lt; 2 THEN RAISE insufficient_exp; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_qualification NOT IN ('GRADUATE', 'ENGINEER') THEN RAISE poor_qualification; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Candidate is eligible for the position');<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN underage THEN DBMS_OUTPUT.PUT_LINE('Error: Candidate age must be at least 21');<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN insufficient_exp THEN DBMS_OUTPUT.PUT_LINE('Error: Candidate needs at least 2 years experience');<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN poor_qualification THEN DBMS_OUTPUT.PUT_LINE('Error: Candidate must be GRADUATE or ENGINEER');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error: Candidate must be GRADUATE or ENGINEER</div>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Re-raise Exception</div>
+                <p class="question-text">Write a PL/SQL block to catch an exception and re-raise it using RAISE.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_result := 100 / 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN ZERO_DIVIDE THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Inner block caught ZERO_DIVIDE exception');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE;<br>&nbsp;&nbsp;&nbsp;&nbsp;END;<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN ZERO_DIVIDE THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Outer block caught re-raised ZERO_DIVIDE exception');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Inner block caught ZERO_DIVIDE exception<br>Outer block caught re-raised ZERO_DIVIDE exception<br>Error: ORA-01476: divisor is equal to zero</div>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Nested Blocks + Re-raise</div>
+                <p class="question-text">Write a PL/SQL block where exception is handled in inner block and re-raised to outer block.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Outer block: Starting transaction');<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Inner block: Fetching employee');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename INTO v_ename FROM emp WHERE empno = 9999;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Inner block: Employee not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE;<br>&nbsp;&nbsp;&nbsp;&nbsp;END;<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Outer block: Caught re-raised exception');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Transaction rolled back');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Outer block: Starting transaction<br>Inner block: Fetching employee<br>Inner block: Employee not found<br>Outer block: Caught re-raised exception<br>Transaction rolled back</div>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Logging + Re-raise</div>
+                <p class="question-text">Write a PL/SQL block to log error and then re-raise it.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_account_no NUMBER := 1001;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_amount NUMBER := 5000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_balance NUMBER := 1000;<br>&nbsp;&nbsp;&nbsp;&nbsp;insufficient_balance EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_amount &gt; v_balance THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE insufficient_balance;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN insufficient_balance THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('=== ERROR LOG ===');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Account: ' || v_account_no);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Available: ' || v_balance);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Requested: ' || v_amount);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Time: ' || TO_CHAR(SYSDATE, 'DD-MON-YYYY HH:MI:SS'));<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE;<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">=== ERROR LOG ===<br>Account: 1001<br>Available: 1000<br>Requested: 5000<br>Time: 08-APR-2026 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Combined Exception Handling</div>
+                <p class="question-text">Write a PL/SQL block to fetch employee details and handle all possible exceptions.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_empno NUMBER := 7788;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_job VARCHAR2(20);<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename, sal, job INTO v_ename, v_sal, v_job<br>&nbsp;&nbsp;&nbsp;&nbsp;FROM emp WHERE empno = v_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee Details:');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Name: ' || v_ename);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Job: ' || v_job);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary: $' || v_sal);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Employee ' || v_empno || ' not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN TOO_MANY_ROWS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Query returned multiple rows');<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN VALUE_ERROR THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Invalid data type in query');<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Unexpected error: ' || SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Employee Details:<br>Name: SCOTT<br>Job: ANALYST<br>Salary: $3000</div>
+                </div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question">
+                <div class="question-title">Question 21: User-defined Exception + RAISE_APPLICATION_ERROR</div>
+                <p class="question-text">Write a PL/SQL block using user-defined exception and RAISE_APPLICATION_ERROR together.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_bonus_rate NUMBER := 50;<br>&nbsp;&nbsp;&nbsp;&nbsp;bonus_rate_high EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_bonus_rate &gt; 30 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE bonus_rate_high;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Bonus approved at ' || v_bonus_rate || '%');<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN bonus_rate_high THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20010, 'Bonus rate ' || v_bonus_rate || '% exceeds limit of 30%');<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">ORA-20010: Bonus rate 50% exceeds limit of 30%</div>
+                </div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Validation + Exception</div>
+                <p class="question-text">Write a PL/SQL block to validate salary and raise appropriate exception.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_salary NUMBER := 2500;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_min_sal NUMBER := 1000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_max_sal NUMBER := 50000;<br>&nbsp;&nbsp;&nbsp;&nbsp;salary_too_low EXCEPTION;<br>&nbsp;&nbsp;&nbsp;&nbsp;salary_too_high EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_salary &lt; v_min_sal THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE salary_too_low;<br>&nbsp;&nbsp;&nbsp;&nbsp;ELSIF v_salary &gt; v_max_sal THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE salary_too_high;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary validated: $' || v_salary);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN salary_too_low THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Salary $' || v_salary || ' is below minimum $' || v_min_sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN salary_too_high THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Salary $' || v_salary || ' exceeds maximum $' || v_max_sal);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Salary validated: $2500</div>
+                </div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Division + SQLCODE & SQLERRM</div>
+                <p class="question-text">Write a PL/SQL block to perform division and handle exception using SQLCODE & SQLERRM.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_numerator NUMBER := 1000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_denominator NUMBER := 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result := v_numerator / v_denominator;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Result: ' || v_result);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('=========== ERROR DETAILS ===========');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error Code: ' || SQLCODE);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error Message: ' || SQLERRM);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Numerator: ' || v_numerator);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Denominator: ' || v_denominator);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('======================================');<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">=========== ERROR DETAILS ===========<br>Error Code: -1476<br>Error Message: ORA-01476: divisor is equal to zero<br>Numerator: 1000<br>Denominator: 0<br>======================================</div>
+                </div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Banking Operations with Exception Handling</div>
+                <p class="question-text">Write a PL/SQL block to simulate bank withdrawal with exception handling.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_account_id NUMBER := 5001;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_balance NUMBER := 10000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_withdrawal NUMBER := 3000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_new_balance NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;invalid_amount EXCEPTION;<br>&nbsp;&nbsp;&nbsp;&nbsp;insufficient_balance EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_withdrawal &lt;= 0 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE invalid_amount;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_withdrawal &gt; v_balance THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE insufficient_balance;<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_new_balance := v_balance - v_withdrawal;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Withdrawal Successful');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Account: ' || v_account_id);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Amount withdrawn: $' || v_withdrawal);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Previous balance: $' || v_balance);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('New balance: $' || v_new_balance);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN invalid_amount THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Withdrawal amount must be positive');<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN insufficient_balance THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: Insufficient balance');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Available: $' || v_balance || ' | Requested: $' || v_withdrawal);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Withdrawal Successful<br>Account: 5001<br>Amount withdrawn: $3000<br>Previous balance: $10000<br>New balance: $7000</div>
+                </div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Multiple Exception Handling - Employee Validation</div>
+                <p class="question-text">Write a PL/SQL block to validate employee data and raise different exceptions for different errors.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_empno NUMBER := 7001;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20) := 'ALEX';<br>&nbsp;&nbsp;&nbsp;&nbsp;v_age NUMBER := 25;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_salary NUMBER := 3500;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_deptno NUMBER := 20;<br>&nbsp;&nbsp;&nbsp;&nbsp;invalid_age EXCEPTION;<br>&nbsp;&nbsp;&nbsp;&nbsp;invalid_salary EXCEPTION;<br>&nbsp;&nbsp;&nbsp;&nbsp;invalid_deptno EXCEPTION;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_age &lt; 18 OR v_age &gt; 65 THEN RAISE invalid_age; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_salary &lt; 1000 OR v_salary &gt; 100000 THEN RAISE invalid_salary; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_deptno NOT IN (10, 20, 30, 40) THEN RAISE invalid_deptno; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee validated successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('EmpNo: ' || v_empno || ', Name: ' || v_ename || ', Age: ' || v_age || ', Salary: ' || v_salary);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN invalid_age THEN DBMS_OUTPUT.PUT_LINE('Error: Age must be between 18 and 65. Provided: ' || v_age);<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN invalid_salary THEN DBMS_OUTPUT.PUT_LINE('Error: Salary must be between 1000 and 100000. Provided: ' || v_salary);<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN invalid_deptno THEN DBMS_OUTPUT.PUT_LINE('Error: Invalid department. Valid: 10, 20, 30, 40. Provided: ' || v_deptno);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Employee validated successfully<br>EmpNo: 7001, Name: ALEX, Age: 25, Salary: 3500</div>
+                </div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Logging Errors into a Table</div>
+                <p class="question-text">Write a PL/SQL block to log errors into a table using exception handling.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Error Log Table:</div>
+                    <div class="command">CREATE TABLE error_log (<br>&nbsp;&nbsp;&nbsp;&nbsp;log_id NUMBER PRIMARY KEY,<br>&nbsp;&nbsp;&nbsp;&nbsp;error_code NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;error_message VARCHAR2(500),<br>&nbsp;&nbsp;&nbsp;&nbsp;log_date DATE<br>);</div>
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_empno NUMBER := 9999;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_log_id NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename INTO v_ename FROM emp WHERE empno = v_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee found: ' || v_ename);<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT NVL(MAX(log_id), 0) + 1 INTO v_log_id FROM error_log;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO error_log VALUES (v_log_id, SQLCODE, SQLERRM, SYSDATE);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error logged successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Log ID: ' || v_log_id);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Error logged successfully<br>Log ID: 1<br>Error: ORA-01403: no data found</div>
+                </div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Advanced Exception Handling - Nested Blocks with Re-raise</div>
+                <p class="question-text">Write a PL/SQL block to implement nested exception blocks with re-raise mechanism.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Code:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER := 5000;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_bonus_rate NUMBER := 50;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_bonus NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== SALARY PROCESSING =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Level 1: Validating salary...');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Level 2: Calculating bonus...');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v_bonus_rate &gt; 30 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20100, 'Bonus rate exceeds limit');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_bonus := (v_sal * v_bonus_rate) / 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Level 2: Bonus calculated = ' || v_bonus);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Level 2: Error - ' || SQLERRM);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Level 1: Error caught - ' || SQLERRM);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE;<br>&nbsp;&nbsp;&nbsp;&nbsp;END;<br>EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Level 0 (Main): Final error - ' || SQLERRM);<br>END;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">===== SALARY PROCESSING =====<br>Level 1: Validating salary...<br>Level 2: Calculating bonus...<br>Level 2: Error - ORA-20100: Bonus rate exceeds limit<br>Level 1: Error caught - ORA-20100: Bonus rate exceeds limit<br>Level 0 (Main): Final error - ORA-20100: Bonus rate exceeds limit</div>
+                </div>
+            </div>
+        </div>
+
+         <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

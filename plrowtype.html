@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL SELECT INTO, %TYPE, %ROWTYPE - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        <header>
+            <h1>PL/SQL SELECT INTO, %TYPE, %ROWTYPE</h1>
+        </header>
+
+
+        <div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Write a PL/SQL block to fetch employee name from EMP table for empno = 7369 and display it.</div>
+                <p class="question-subtitle">(SELECT INTO Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_name VARCHAR2(20);
+BEGIN
+  SELECT ENAME INTO v_name FROM EMP WHERE EMPNO = 7369;
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_name);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Name: SMITH
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Write a PL/SQL block to retrieve salary of an employee and print it.</div>
+                <p class="question-subtitle">(SELECT INTO Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_salary NUMBER;
+BEGIN
+  SELECT SAL INTO v_salary FROM EMP WHERE EMPNO = 7839;
+  DBMS_OUTPUT.PUT_LINE('Salary of Employee 7839: Rs.' || v_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary of Employee 7839: Rs.5000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Write a PL/SQL block to fetch employee name and job using a single SELECT statement.</div>
+                <p class="question-subtitle">(SELECT INTO Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_name VARCHAR2(20);
+  v_job VARCHAR2(15);
+BEGIN
+  SELECT ENAME, JOB INTO v_name, v_job FROM EMP WHERE EMPNO = 7566;
+  DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);
+  DBMS_OUTPUT.PUT_LINE('Job: ' || v_job);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Name: JONES
+Job: MANAGER
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Write a PL/SQL block to display department number of an employee using SELECT INTO.</div>
+                <p class="question-subtitle">(SELECT INTO Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_deptno NUMBER;
+BEGIN
+  SELECT DEPTNO INTO v_deptno FROM EMP WHERE EMPNO = 7902;
+  DBMS_OUTPUT.PUT_LINE('Department Number for Employee 7902: ' || v_deptno);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Department Number for Employee 7902: 20
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Write a PL/SQL block to fetch hiredate of an employee and display it.</div>
+                <p class="question-subtitle">(SELECT INTO Statement)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_hiredate DATE;
+BEGIN
+  SELECT HIREDATE INTO v_hiredate FROM EMP WHERE EMPNO = 7839;
+  DBMS_OUTPUT.PUT_LINE('Hire Date: ' || TO_CHAR(v_hiredate, 'DD-MON-YYYY'));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Hire Date: 17-NOV-1981
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Write a PL/SQL block to count total number of employees using SELECT INTO.</div>
+                <p class="question-subtitle">(Aggregate Function + SELECT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_count FROM EMP;
+  DBMS_OUTPUT.PUT_LINE('Total Employees: ' || v_count);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Total Employees: 14
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Write a PL/SQL block to declare a variable using %TYPE based on EMP.SAL and display salary.</div>
+                <p class="question-subtitle">(%TYPE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_salary EMP.SAL%TYPE;
+BEGIN
+  SELECT SAL INTO v_salary FROM EMP WHERE EMPNO = 7788;
+  DBMS_OUTPUT.PUT_LINE('Salary using %TYPE: Rs.' || v_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary using %TYPE: Rs.3000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Write a PL/SQL block to declare variables for employee name and job using %TYPE.</div>
+                <p class="question-subtitle">(%TYPE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_name EMP.ENAME%TYPE;
+  v_job EMP.JOB%TYPE;
+BEGIN
+  SELECT ENAME, JOB INTO v_name, v_job FROM EMP WHERE EMPNO = 7698;
+  DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);
+  DBMS_OUTPUT.PUT_LINE('Job: ' || v_job);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Name: BLAKE
+Job: MANAGER
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Write a PL/SQL block to fetch salary using %TYPE variable and display it.</div>
+                <p class="question-subtitle">(%TYPE + SELECT INTO)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_empno EMP.EMPNO%TYPE := 7521;
+  v_salary EMP.SAL%TYPE;
+BEGIN
+  SELECT SAL INTO v_salary FROM EMP WHERE EMPNO = v_empno;
+  DBMS_OUTPUT.PUT_LINE('Salary of Employee ' || v_empno || ': Rs.' || v_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary of Employee 7521: Rs.1250
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Write a PL/SQL block to calculate annual salary using %TYPE variable.</div>
+                <p class="question-subtitle">(%TYPE + Calculation)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_salary EMP.SAL%TYPE;
+  v_annual_salary EMP.SAL%TYPE;
+BEGIN
+  SELECT SAL INTO v_salary FROM EMP WHERE EMPNO = 7654;
+  v_annual_salary := v_salary * 12;
+  DBMS_OUTPUT.PUT_LINE('Monthly Salary: Rs.' || v_salary);
+  DBMS_OUTPUT.PUT_LINE('Annual Salary: Rs.' || v_annual_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Monthly Salary: Rs.1250
+Annual Salary: Rs.15000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Write a PL/SQL block to update salary using %TYPE variable.</div>
+                <p class="question-subtitle">(%TYPE + UPDATE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_empno EMP.EMPNO%TYPE := 7934;
+  v_new_salary EMP.SAL%TYPE := 1500;
+BEGIN
+  UPDATE EMP SET SAL = v_new_salary WHERE EMPNO = v_empno;
+  DBMS_OUTPUT.PUT_LINE('Salary updated for Employee ID: ' || v_empno);
+  DBMS_OUTPUT.PUT_LINE('New Salary: Rs.' || v_new_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary updated for Employee ID: 7934
+New Salary: Rs.1500
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Write a PL/SQL block to declare a variable using %TYPE from DEPT table.</div>
+                <p class="question-subtitle">(%TYPE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_deptname DEPT.DNAME%TYPE;
+  v_location DEPT.LOC%TYPE;
+BEGIN
+  SELECT DNAME, LOC INTO v_deptname, v_location FROM DEPT WHERE DEPTNO = 10;
+  DBMS_OUTPUT.PUT_LINE('Department: ' || v_deptname);
+  DBMS_OUTPUT.PUT_LINE('Location: ' || v_location);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Department: ACCOUNTING
+Location: NEW YORK
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Write a PL/SQL block to declare a record using %ROWTYPE for EMP table.</div>
+                <p class="question-subtitle">(%ROWTYPE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp EMP%ROWTYPE;
+BEGIN
+  SELECT * INTO v_emp FROM EMP WHERE EMPNO = 7876;
+  DBMS_OUTPUT.PUT_LINE('Employee Record Retrieved');
+  DBMS_OUTPUT.PUT_LINE('EMPNO: ' || v_emp.EMPNO);
+  DBMS_OUTPUT.PUT_LINE('ENAME: ' || v_emp.ENAME);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Record Retrieved
+EMPNO: 7876
+ENAME: ADAMS
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Write a PL/SQL block to fetch complete employee record using %ROWTYPE and display fields.</div>
+                <p class="question-subtitle">(%ROWTYPE + SELECT INTO)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp EMP%ROWTYPE;
+BEGIN
+  SELECT * INTO v_emp FROM EMP WHERE EMPNO = 7902;
+  DBMS_OUTPUT.PUT_LINE('--- Employee Details ---');
+  DBMS_OUTPUT.PUT_LINE('EMPNO: ' || v_emp.EMPNO);
+  DBMS_OUTPUT.PUT_LINE('ENAME: ' || v_emp.ENAME);
+  DBMS_OUTPUT.PUT_LINE('JOB: ' || v_emp.JOB);
+  DBMS_OUTPUT.PUT_LINE('SAL: Rs.' || v_emp.SAL);
+  DBMS_OUTPUT.PUT_LINE('DEPTNO: ' || v_emp.DEPTNO);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">--- Employee Details ---
+EMPNO: 7902
+ENAME: FORD
+JOB: ANALYST
+SAL: Rs.3000
+DEPTNO: 20
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Write a PL/SQL block to display employee name, salary, and job using %ROWTYPE.</div>
+                <p class="question-subtitle">(%ROWTYPE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp EMP%ROWTYPE;
+BEGIN
+  SELECT * INTO v_emp FROM EMP WHERE EMPNO = 7839;
+  DBMS_OUTPUT.PUT_LINE('Employee Information');
+  DBMS_OUTPUT.PUT_LINE('Name: ' || v_emp.ENAME);
+  DBMS_OUTPUT.PUT_LINE('Salary: Rs.' || v_emp.SAL);
+  DBMS_OUTPUT.PUT_LINE('Job: ' || v_emp.JOB);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Information
+Name: KING
+Salary: Rs.5000
+Job: PRESIDENT
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Write a PL/SQL block to update salary using %ROWTYPE variable.</div>
+                <p class="question-subtitle">(%ROWTYPE + UPDATE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp EMP%ROWTYPE;
+BEGIN
+  SELECT * INTO v_emp FROM EMP WHERE EMPNO = 7788;
+  DBMS_OUTPUT.PUT_LINE('Employee: ' || v_emp.ENAME);
+  DBMS_OUTPUT.PUT_LINE('Old Salary: Rs.' || v_emp.SAL);
+  
+  v_emp.SAL := v_emp.SAL + 500;
+  UPDATE EMP SET SAL = v_emp.SAL WHERE EMPNO = v_emp.EMPNO;
+  
+  DBMS_OUTPUT.PUT_LINE('New Salary: Rs.' || v_emp.SAL);
+  DBMS_OUTPUT.PUT_LINE('Salary Updated Successfully');
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee: SCOTT
+Old Salary: Rs.3000
+New Salary: Rs.3500
+Salary Updated Successfully
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Write a PL/SQL block to insert a record using %ROWTYPE.</div>
+                <p class="question-subtitle">(%ROWTYPE + INSERT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_emp EMP%ROWTYPE;
+BEGIN
+  v_emp.EMPNO := 9999;
+  v_emp.ENAME := 'NEWHIRE';
+  v_emp.JOB := 'ENGINEER';
+  v_emp.SAL := 4500;
+  v_emp.DEPTNO := 30;
+  
+  INSERT INTO EMP (EMPNO, ENAME, JOB, SAL, DEPTNO) 
+  VALUES (v_emp.EMPNO, v_emp.ENAME, v_emp.JOB, v_emp.SAL, v_emp.DEPTNO);
+  
+  DBMS_OUTPUT.PUT_LINE('New Employee Inserted:');
+  DBMS_OUTPUT.PUT_LINE('EMPNO: ' || v_emp.EMPNO);
+  DBMS_OUTPUT.PUT_LINE('ENAME: ' || v_emp.ENAME);
+  DBMS_OUTPUT.PUT_LINE('Salary: Rs.' || v_emp.SAL);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">New Employee Inserted:
+EMPNO: 9999
+ENAME: NEWHIRE
+Salary: Rs.4500
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+    
+</body>
+</html>

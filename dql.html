@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DQL Commands - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        
+        <header>
+            <h1>DQL Commands</h1>
+        </header>
+
+<div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Display all columns of the EMP table</div>
+                <p class="question-text">Show complete details of all employees from the EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT * FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>JOB</th>
+                            <th>MGR</th>
+                            <th>HIREDATE</th>
+                            <th>SAL</th>
+                            <th>COMM</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                            <td>7902</td>
+                            <td>17-DEC-80</td>
+                            <td>800</td>
+                            <td>NULL</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                            <td>7698</td>
+                            <td>20-FEB-81</td>
+                            <td>1600</td>
+                            <td>300</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                    <img src="photos/1.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Display EMPNO, ENAME, and SAL</div>
+                <p class="question-text">Show employee numbers, names, and salaries of all employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT EMPNO, ENAME, SAL FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>EMPNO</th>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>7369</td>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>7499</td>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>7521</td>
+                            <td>WARD</td>
+                            <td>1250</td>
+                        </tr>
+                    </table>
+                    <img src="photos/2.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Display unique job titles</div>
+                <p class="question-text">Show all different job titles from the EMP table without repetition.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DISTINCT JOB FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>JOB</th>
+                        </tr>
+                        <tr>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>SALESMAN</td>
+                        </tr>
+                        <tr>
+                            <td>MANAGER</td>
+                        </tr>
+                        <tr>
+                            <td>ANALYST</td>
+                        </tr>
+                    </table>
+                    <img src="photos/3.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Display employee names and department numbers</div>
+                <p class="question-text">Show the names and departments of all employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, DEPTNO FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                    <img src="photos/4.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Display all department details</div>
+                <p class="question-text">Show complete information from the DEPT table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT * FROM DEPT;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DEPTNO</th>
+                            <th>DNAME</th>
+                            <th>LOC</th>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>ACCOUNTING</td>
+                            <td>NEW YORK</td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>RESEARCH</td>
+                            <td>DALLAS</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>SALES</td>
+                            <td>CHICAGO</td>
+                        </tr>
+                    </table>
+                    <img src="photos/5.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Display distinct department numbers</div>
+                <p class="question-text">Show all different department numbers where employees work.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT DISTINCT DEPTNO FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DEPTNO</th>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                        </tr>
+                    </table>
+                    <img src="photos/6.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Display employee name and annual salary</div>
+                <p class="question-text">Calculate and show the annual salary (SAL × 12) for each employee.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL*12 AS ANNUAL_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>ANNUAL_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>9600</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>19200</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>15000</td>
+                        </tr>
+                    </table>
+                    <img src="photos/7.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Display salary and commission</div>
+                <p class="question-text">Show employee names with their salary and commission details.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, COMM FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>COMM</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>300</td>
+                        </tr>
+                    </table>
+                    <img src="photos/8.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Display job and salary</div>
+                <p class="question-text">Show the job title and salary of each employee.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT JOB, SAL FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>JOB</th>
+                            <th>SAL</th>
+                        </tr>
+                        <tr>
+                            <td>CLERK</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>SALESMAN</td>
+                            <td>1600</td>
+                        </tr>
+                        <tr>
+                            <td>MANAGER</td>
+                            <td>2975</td>
+                        </tr>
+                    </table>
+                    <img src="photos/9.png">
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Display employee and manager numbers</div>
+                <p class="question-text">Show each employee with their manager's employee number.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                   Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, MGR FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>MGR</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>7902</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>7698</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>7698</td>
+                        </tr>
+                    </table>
+                    <img src="photos/10.png">
+                </div>
+            </div>
+        </div>
+         <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL Cursors - DBMS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        <header>
+            <h1>PL/SQL Cursors</h1>
+        </header>
+
+
+        <div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Declare a cursor to fetch all employees from EMP table and display their names.</div>
+                <p class="question-subtitle">(Explicit Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT ename FROM emp;
+  v_name emp.ename%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_name;
+    EXIT WHEN emp_cur%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('Employee: ' || v_name);
+  END LOOP;
+  CLOSE emp_cur;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Employee: SMITH
+Employee: ALLEN
+Employee: WARD
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Fetch employee name and salary using cursor and display them.</div>
+                <p class="question-subtitle">(Explicit Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT ename, sal FROM emp;
+  v_name emp.ename%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_name, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE(v_name || ' - ' || v_sal);
+  END LOOP;
+  CLOSE emp_cur;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">SMITH - 800
+ALLEN - 1600
+WARD - 1250
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Display employees whose salary is greater than 3000 using cursor.</div>
+                <p class="question-subtitle">(Explicit Cursor + Condition)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT ename, sal FROM emp WHERE sal > 3000;
+  v_name emp.ename%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_name, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE(v_name || ' - ' || v_sal);
+  END LOOP;
+  CLOSE emp_cur;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">FORD - 3000
+MILLER - 1300
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Count number of employees using cursor.</div>
+                <p class="question-subtitle">(Explicit Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno FROM emp;
+  v_count NUMBER := 0;
+  v_empno emp.empno%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_empno;
+    EXIT WHEN emp_cur%NOTFOUND;
+    v_count := v_count + 1;
+  END LOOP;
+  CLOSE emp_cur;
+  DBMS_OUTPUT.PUT_LINE('Number of employees: ' || v_count);
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Number of employees: 14
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Calculate total salary of all employees using cursor.</div>
+                <p class="question-subtitle">(Explicit Cursor + Aggregate)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT sal FROM emp;
+  v_sal emp.sal%TYPE;
+  v_total NUMBER := 0;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    v_total := v_total + v_sal;
+  END LOOP;
+  CLOSE emp_cur;
+  DBMS_OUTPUT.PUT_LINE('Total salary: ' || v_total);
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Total salary: 39250
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Fetch records one by one using OPEN, FETCH, and CLOSE.</div>
+                <p class="question-subtitle">(Cursor Lifecycle)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, ename, sal FROM emp;
+  v_empno emp.empno%TYPE;
+  v_name emp.ename%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  FETCH emp_cur INTO v_empno, v_name, v_sal;
+  WHILE emp_cur%FOUND LOOP
+    DBMS_OUTPUT.PUT_LINE(v_empno || ' ' || v_name || ' ' || v_sal);
+    FETCH emp_cur INTO v_empno, v_name, v_sal;
+  END LOOP;
+  CLOSE emp_cur;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">7369 SMITH 800
+7499 ALLEN 1600
+7521 WARD 1250
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Display all employee records using cursor FOR LOOP.</div>
+                <p class="question-subtitle">(Cursor FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR rec IN (SELECT empno, ename, job, sal FROM emp) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.empno || ' ' || rec.ename || ' ' || rec.job || ' ' || rec.sal);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">7369 SMITH CLERK 800
+7499 ALLEN SALESMAN 1600
+7521 WARD SALESMAN 1250
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Display employee names and jobs using cursor FOR LOOP.</div>
+                <p class="question-subtitle">(Cursor FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR rec IN (SELECT ename, job FROM emp) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - ' || rec.job);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">SMITH - CLERK
+ALLEN - SALESMAN
+WARD - SALESMAN
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Display employees from department 10 using cursor FOR LOOP.</div>
+                <p class="question-subtitle">(Cursor FOR LOOP + Condition)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR rec IN (SELECT ename, sal FROM emp WHERE deptno = 10) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - ' || rec.sal);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">CLARK - 2450
+KING - 5000
+MILLER - 1300
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Calculate total salary using cursor FOR LOOP.</div>
+                <p class="question-subtitle">(Cursor FOR LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  v_total NUMBER := 0;
+BEGIN
+  FOR rec IN (SELECT sal FROM emp) LOOP
+    v_total := v_total + rec.sal;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Total salary: ' || v_total);
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Total salary: 39250
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Display employees with salary greater than average using cursor FOR LOOP.</div>
+                <p class="question-subtitle">(Cursor FOR LOOP + Subquery)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR rec IN (
+    SELECT ename, sal FROM emp
+    WHERE sal > (SELECT AVG(sal) FROM emp)
+  ) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - ' || rec.sal);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">KING - 5000
+FORD - 3000
+SCOTT - 3000
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Declare a parameterized cursor that takes department number and displays employees of that department.</div>
+                <p class="question-subtitle">(Parameterized Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR dept_emp_cur(p_deptno NUMBER) IS
+    SELECT ename, job FROM emp WHERE deptno = p_deptno;
+BEGIN
+  FOR rec IN dept_emp_cur(20) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - ' || rec.job);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">JONES - MANAGER
+BLAKE - MANAGER
+CLARK - MANAGER
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Fetch employees whose salary is greater than a given value using parameterized cursor.</div>
+                <p class="question-subtitle">(Parameterized Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR sal_cur(p_min_sal NUMBER) IS
+    SELECT ename, sal FROM emp WHERE sal > p_min_sal;
+BEGIN
+  FOR rec IN sal_cur(2500) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - ' || rec.sal);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">KING - 5000
+FORD - 3000
+SCOTT - 3000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Display employees based on job role using parameterized cursor.</div>
+                <p class="question-subtitle">(Parameterized Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR job_cur(p_job VARCHAR2) IS
+    SELECT ename, deptno FROM emp WHERE job = p_job;
+BEGIN
+  FOR rec IN job_cur('SALESMAN') LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - Dept ' || rec.deptno);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">ALLEN - Dept 30
+WARD - Dept 30
+MARTIN - Dept 30
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Calculate total salary of a given department using parameterized cursor.</div>
+                <p class="question-subtitle">(Parameterized Cursor + Aggregate)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR dept_sal_cur(p_deptno NUMBER) IS
+    SELECT sal FROM emp WHERE deptno = p_deptno;
+  v_total NUMBER := 0;
+BEGIN
+  FOR rec IN dept_sal_cur(10) LOOP
+    v_total := v_total + rec.sal;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE('Dept 10 total salary: ' || v_total);
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Dept 10 total salary: 8750
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Pass multiple parameters (deptno, job) to cursor and display matching records.</div>
+                <p class="question-subtitle">(Parameterized Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR dept_job_cur(p_deptno NUMBER, p_job VARCHAR2) IS
+    SELECT ename, sal FROM emp WHERE deptno = p_deptno AND job = p_job;
+BEGIN
+  FOR rec IN dept_job_cur(30, 'SALESMAN') LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - ' || rec.sal);
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">ALLEN - 1600
+WARD - 1250
+MARTIN - 1250
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Update salary of employees using cursor with FOR UPDATE.</div>
+                <p class="question-subtitle">(Updatable Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, sal FROM emp FOR UPDATE;
+  v_empno emp.empno%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_empno, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    UPDATE emp SET sal = v_sal + 500 WHERE CURRENT OF emp_cur;
+  END LOOP;
+  CLOSE emp_cur;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('Salaries updated by 500 for all rows.');
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Salaries updated by 500 for all rows.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 18: Increase salary by 10% for employees using WHERE CURRENT OF.</div>
+                <p class="question-subtitle">(Updatable Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, sal FROM emp FOR UPDATE;
+  v_empno emp.empno%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_empno, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    UPDATE emp SET sal = ROUND(v_sal * 1.10, 2) WHERE CURRENT OF emp_cur;
+  END LOOP;
+  CLOSE emp_cur;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('All salaries increased by 10%.');
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">All salaries increased by 10%.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 19: Delete employees with salary less than 2000 using cursor.</div>
+                <p class="question-subtitle">(Updatable Cursor + DELETE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, sal FROM emp WHERE sal < 2000 FOR UPDATE;
+  v_empno emp.empno%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_empno, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    DELETE FROM emp WHERE CURRENT OF emp_cur;
+  END LOOP;
+  CLOSE emp_cur;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('Employees with salary < 2000 deleted.');
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Employees with salary < 2000 deleted.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 20: Update job of employees using updatable cursor.</div>
+                <p class="question-subtitle">(Updatable Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, job FROM emp WHERE job = 'CLERK' FOR UPDATE;
+  v_empno emp.empno%TYPE;
+  v_job emp.job%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_empno, v_job;
+    EXIT WHEN emp_cur%NOTFOUND;
+    UPDATE emp SET job = 'SENIOR CLERK' WHERE CURRENT OF emp_cur;
+  END LOOP;
+  CLOSE emp_cur;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('CLERK jobs updated to SENIOR CLERK.');
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">CLERK jobs updated to SENIOR CLERK.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 21: Fetch records using cursor and modify values row-by-row.</div>
+                <p class="question-subtitle">(Updatable Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, sal FROM emp FOR UPDATE;
+  v_empno emp.empno%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_empno, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    IF v_sal < 2500 THEN
+      UPDATE emp SET sal = v_sal + 250 WHERE CURRENT OF emp_cur;
+    END IF;
+  END LOOP;
+  CLOSE emp_cur;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('Low salaries increased by 250.');
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Low salaries increased by 250.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 22: Use explicit cursor and IF condition to display high salary employees.</div>
+                <p class="question-subtitle">(Cursor + IF)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT ename, sal FROM emp;
+  v_name emp.ename%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_name, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    IF v_sal > 3000 THEN
+      DBMS_OUTPUT.PUT_LINE(v_name || ' earns ' || v_sal);
+    END IF;
+  END LOOP;
+  CLOSE emp_cur;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">KING earns 5000
+FORD earns 3000
+SCOTT earns 3000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 23: Use cursor FOR LOOP and calculate bonus (10% of salary).</div>
+                <p class="question-subtitle">(Cursor FOR LOOP + Calculation)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">BEGIN
+  FOR rec IN (SELECT ename, sal FROM emp) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' bonus: ' || ROUND(rec.sal * 0.10, 2));
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">SMITH bonus: 80
+ALLEN bonus: 160
+WARD bonus: 125
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 24: Use parameterized cursor and loop through multiple departments.</div>
+                <p class="question-subtitle">(Parameterized Cursor + LOOP)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR dept_cur(p_deptno NUMBER) IS
+    SELECT ename, sal FROM emp WHERE deptno = p_deptno;
+BEGIN
+  FOR i IN 10..20 STEP 10 LOOP
+    DBMS_OUTPUT.PUT_LINE('Department ' || i || ':');
+    FOR rec IN dept_cur(i) LOOP
+      DBMS_OUTPUT.PUT_LINE('  ' || rec.ename || ' - ' || rec.sal);
+    END LOOP;
+  END LOOP;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Department 10:
+  CLARK - 2450
+  KING - 5000
+  MILLER - 1300
+Department 20:
+  JONES - 2975
+  BLAKE - 2850
+  SCOTT - 3000
+Department 30:
+  ALLEN - 1600
+  WARD - 1250
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 25: Update and display employee data using updatable cursor.</div>
+                <p class="question-subtitle">(Updatable Cursor + Output)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, sal FROM emp FOR UPDATE;
+  v_empno emp.empno%TYPE;
+  v_sal emp.sal%TYPE;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_empno, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND;
+    UPDATE emp SET sal = v_sal + 100 WHERE CURRENT OF emp_cur;
+    DBMS_OUTPUT.PUT_LINE('Updated empno ' || v_empno || ' to ' || (v_sal + 100));
+  END LOOP;
+  CLOSE emp_cur;
+  COMMIT;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Updated empno 7369 to 900
+Updated empno 7499 to 1700
+Updated empno 7521 to 1350
+... 
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 26: Display top 3 highest paid employees using cursor.</div>
+                <p class="question-subtitle">(Cursor + Logic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT ename, sal FROM emp ORDER BY sal DESC;
+  v_rank NUMBER := 0;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_name, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND OR v_rank = 3;
+    v_rank := v_rank + 1;
+    DBMS_OUTPUT.PUT_LINE('Rank ' || v_rank || ': ' || v_name || ' - ' || v_sal);
+  END LOOP;
+  CLOSE emp_cur;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Rank 1: KING - 5000
+Rank 2: FORD - 3000
+Rank 3: SCOTT - 3000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 27: Simulate pagination (fetch limited rows using cursor).</div>
+                <p class="question-subtitle">(Cursor Advanced)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT ename, sal FROM emp ORDER BY empno;
+  v_name emp.ename%TYPE;
+  v_sal emp.sal%TYPE;
+  v_page_start NUMBER := 1;
+  v_page_size  NUMBER := 5;
+  v_counter NUMBER := 0;
+BEGIN
+  OPEN emp_cur;
+  LOOP
+    FETCH emp_cur INTO v_name, v_sal;
+    EXIT WHEN emp_cur%NOTFOUND OR v_counter = v_page_size;
+    v_counter := v_counter + 1;
+    DBMS_OUTPUT.PUT_LINE(v_counter || '. ' || v_name || ' - ' || v_sal);
+  END LOOP;
+  CLOSE emp_cur;
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">1. SMITH - 800
+2. ALLEN - 1600
+3. WARD - 1250
+4. JONES - 2975
+5. BLAKE - 2850
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 28: Copy employee data into another table using cursor.</div>
+                <p class="question-subtitle">(Cursor + INSERT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">DECLARE
+  CURSOR emp_cur IS
+    SELECT empno, ename, job, sal, deptno FROM emp;
+BEGIN
+  FOR rec IN emp_cur LOOP
+    INSERT INTO emp_copy(empno, ename, job, sal, deptno)
+    VALUES(rec.empno, rec.ename, rec.job, rec.sal, rec.deptno);
+  END LOOP;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('Employee data copied to emp_copy.');
+END;
+/</div>
+                    <div class="section-label" style="margin-top:15px;">Output:</div>
+                    <div class="output">Employee data copied to emp_copy.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

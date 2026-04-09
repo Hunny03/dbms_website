@@ -1,0 +1,1028 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL Procedures and Functions - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        <header>
+            <h1>PL/SQL Procedures and Functions</h1>
+        </header>
+
+
+        <div class="questions-list">
+            <div class="question">
+                <div class="question-title">Question 1: Write a stored procedure to display "Hello Oracle" using DBMS_OUTPUT.</div>
+                <p class="question-subtitle">(Stored Procedure – Basic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE hello_oracle IS
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Hello Oracle');
+END;
+/
+
+BEGIN
+  hello_oracle;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Hello Oracle
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 2: Write a stored procedure to display employee name for a given empno.</div>
+                <p class="question-subtitle">(Procedure + SELECT INTO)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE show_emp_name(p_empno NUMBER) IS
+  v_name emp.ename%TYPE;
+BEGIN
+  SELECT ename INTO v_name FROM emp WHERE empno = p_empno;
+  DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_name);
+END;
+/
+
+BEGIN
+  show_emp_name(7369);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Employee Name: SMITH
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 3: Write a stored procedure to print salary of an employee.</div>
+                <p class="question-subtitle">(Procedure + SELECT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE show_emp_salary(p_empno NUMBER) IS
+  v_salary emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_salary FROM emp WHERE empno = p_empno;
+  DBMS_OUTPUT.PUT_LINE('Salary: ' || v_salary);
+END;
+/
+
+BEGIN
+  show_emp_salary(7499);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary: 1600
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 4: Write a stored procedure to display all employees using cursor.</div>
+                <p class="question-subtitle">(Procedure + Cursor)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE list_all_emps IS
+  CURSOR emp_cur IS
+    SELECT empno, ename, job, sal FROM emp;
+BEGIN
+  FOR rec IN emp_cur LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.empno || ' ' || rec.ename || ' ' || rec.job || ' ' || rec.sal);
+  END LOOP;
+END;
+/
+
+BEGIN
+  list_all_emps;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">7369 SMITH CLERK 800
+7499 ALLEN SALESMAN 1600
+7521 WARD SALESMAN 1250
+... 
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 5: Write a stored procedure to display department details.</div>
+                <p class="question-subtitle">(Procedure – Basic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE list_departments IS
+BEGIN
+  FOR dept_rec IN (SELECT deptno, dname, loc FROM dept) LOOP
+    DBMS_OUTPUT.PUT_LINE(dept_rec.deptno || ' ' || dept_rec.dname || ' ' || dept_rec.loc);
+  END LOOP;
+END;
+/
+
+BEGIN
+  list_departments;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">10 ACCOUNTING NEW YORK
+20 RESEARCH DALLAS
+30 SALES CHICAGO
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 6: Write a stored procedure that takes empno as input and displays employee details.</div>
+                <p class="question-subtitle">(IN Parameter)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE emp_details(p_empno NUMBER) IS
+  v_name emp.ename%TYPE;
+  v_job emp.job%TYPE;
+  v_sal emp.sal%TYPE;
+  v_dept emp.deptno%TYPE;
+BEGIN
+  SELECT ename, job, sal, deptno
+    INTO v_name, v_job, v_sal, v_dept
+    FROM emp WHERE empno = p_empno;
+  DBMS_OUTPUT.PUT_LINE(v_name || ' - ' || v_job || ' - ' || v_sal || ' - Dept ' || v_dept);
+END;
+/
+
+BEGIN
+  emp_details(7839);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">KING - PRESIDENT - 5000 - Dept 10
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 7: Write a stored procedure that takes department number and displays employees of that department.</div>
+                <p class="question-subtitle">(IN Parameter)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE emps_by_dept(p_deptno NUMBER) IS
+BEGIN
+  FOR rec IN (SELECT empno, ename, job FROM emp WHERE deptno = p_deptno) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.empno || ' ' || rec.ename || ' ' || rec.job);
+  END LOOP;
+END;
+/
+
+BEGIN
+  emps_by_dept(30);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">7499 ALLEN SALESMAN
+7521 WARD SALESMAN
+7566 JONES MANAGER
+... 
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 8: Write a stored procedure that takes salary as input and displays employees earning more than that.</div>
+                <p class="question-subtitle">(IN Parameter)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE emps_with_min_salary(p_min_sal NUMBER) IS
+BEGIN
+  FOR rec IN (SELECT empno, ename, sal FROM emp WHERE sal > p_min_sal) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.empno || ' ' || rec.ename || ' ' || rec.sal);
+  END LOOP;
+END;
+/
+
+BEGIN
+  emps_with_min_salary(2500);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">7839 KING 5000
+7566 JONES 2975
+7902 FORD 3000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 9: Write a stored procedure with OUT parameter to return employee salary.</div>
+                <p class="question-subtitle">(OUT Parameter)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE get_emp_salary(p_empno NUMBER, p_salary OUT NUMBER) IS
+BEGIN
+  SELECT sal INTO p_salary FROM emp WHERE empno = p_empno;
+END;
+/
+
+DECLARE
+  v_sal NUMBER;
+BEGIN
+  get_emp_salary(7654, v_sal);
+  DBMS_OUTPUT.PUT_LINE('Salary: ' || v_sal);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary: 1250
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 10: Write a stored procedure with IN OUT parameter to update salary and return new salary.</div>
+                <p class="question-subtitle">(IN OUT Parameter)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE raise_salary(p_empno IN NUMBER, p_increment IN OUT NUMBER) IS
+  v_sal emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_sal FROM emp WHERE empno = p_empno;
+  v_sal := v_sal + p_increment;
+  UPDATE emp SET sal = v_sal WHERE empno = p_empno;
+  p_increment := v_sal;
+  COMMIT;
+END;
+/
+
+DECLARE
+  v_new_sal NUMBER := 500;
+BEGIN
+  raise_salary(7521, v_new_sal);
+  DBMS_OUTPUT.PUT_LINE('New Salary: ' || v_new_sal);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">New Salary: 1750
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 11: Write a stored procedure to insert a new employee record.</div>
+                <p class="question-subtitle">(Procedure + INSERT)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE add_employee(
+  p_empno NUMBER,
+  p_ename VARCHAR2,
+  p_job VARCHAR2,
+  p_mgr NUMBER,
+  p_sal NUMBER,
+  p_comm NUMBER,
+  p_deptno NUMBER
+) IS
+BEGIN
+  INSERT INTO emp(empno, ename, job, mgr, sal, comm, deptno)
+  VALUES(p_empno, p_ename, p_job, p_mgr, p_sal, p_comm, p_deptno);
+  COMMIT;
+END;
+/
+
+BEGIN
+  add_employee(9999, 'DEEPA', 'ANALYST', 7566, 2800, NULL, 20);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">PL/SQL procedure successfully completed.
+
+-- New employee inserted.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 12: Write a stored procedure to update employee salary based on empno.</div>
+                <p class="question-subtitle">(Procedure + UPDATE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE update_salary(p_empno NUMBER, p_new_sal NUMBER) IS
+BEGIN
+  UPDATE emp SET sal = p_new_sal WHERE empno = p_empno;
+  COMMIT;
+END;
+/
+
+BEGIN
+  update_salary(7902, 3200);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">PL/SQL procedure successfully completed.
+
+-- Salary updated.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 13: Write a stored procedure to delete an employee record.</div>
+                <p class="question-subtitle">(Procedure + DELETE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE delete_employee(p_empno NUMBER) IS
+BEGIN
+  DELETE FROM emp WHERE empno = p_empno;
+  COMMIT;
+END;
+/
+
+BEGIN
+  delete_employee(9999);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">PL/SQL procedure successfully completed.
+
+-- Employee deleted.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 14: Write a stored procedure to increase salary of all employees by 10%.</div>
+                <p class="question-subtitle">(Procedure + UPDATE)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE increase_all_salaries IS
+BEGIN
+  UPDATE emp SET sal = ROUND(sal * 1.10, 2);
+  COMMIT;
+END;
+/
+
+BEGIN
+  increase_all_salaries;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">PL/SQL procedure successfully completed.
+
+-- All salaries increased by 10%.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 15: Write a stored procedure to transfer employees from one department to another.</div>
+                <p class="question-subtitle">(Procedure + Business Logic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE transfer_dept(
+  p_from_dept NUMBER,
+  p_to_dept NUMBER
+) IS
+BEGIN
+  UPDATE emp SET deptno = p_to_dept WHERE deptno = p_from_dept;
+  COMMIT;
+  DBMS_OUTPUT.PUT_LINE('Transferred employees from dept ' || p_from_dept || ' to ' || p_to_dept);
+END;
+/
+
+BEGIN
+  transfer_dept(20, 30);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Transferred employees from dept 20 to 30
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 16: Write a function to return square of a number.</div>
+                <p class="question-subtitle">(Function – Basic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION square_num(p_num NUMBER) RETURN NUMBER IS
+BEGIN
+  RETURN p_num * p_num;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Square: ' || square_num(8));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Square: 64
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 17: Write a function to return employee salary based on empno.</div>
+                <p class="question-subtitle">(Function + SELECT INTO)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION get_salary(p_empno NUMBER) RETURN NUMBER IS
+  v_sal emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_sal FROM emp WHERE empno = p_empno;
+  RETURN v_sal;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Salary: ' || get_salary(7839));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Salary: 5000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 18: Write a function to return total number of employees.</div>
+                <p class="question-subtitle">(Function + Aggregate)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION total_employees RETURN NUMBER IS
+  v_count NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO v_count FROM emp;
+  RETURN v_count;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Total employees: ' || total_employees);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Total employees: 14
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 19: Write a function to return maximum salary from EMP table.</div>
+                <p class="question-subtitle">(Function + Aggregate)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION max_salary RETURN NUMBER IS
+  v_max_sal emp.sal%TYPE;
+BEGIN
+  SELECT MAX(sal) INTO v_max_sal FROM emp;
+  RETURN v_max_sal;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Maximum salary: ' || max_salary);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Maximum salary: 5000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 20: Write a function to return department name based on deptno.</div>
+                <p class="question-subtitle">(Function)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION dept_name(p_deptno NUMBER) RETURN VARCHAR2 IS
+  v_name dept.dname%TYPE;
+BEGIN
+  SELECT dname INTO v_name FROM dept WHERE deptno = p_deptno;
+  RETURN v_name;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Department: ' || dept_name(20));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Department: RESEARCH
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 21: Write a function to calculate bonus (10% of salary) and return it.</div>
+                <p class="question-subtitle">(Function + Calculation)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION calc_bonus(p_sal NUMBER) RETURN NUMBER IS
+BEGIN
+  RETURN ROUND(p_sal * 0.10, 2);
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Bonus: ' || calc_bonus(3200));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Bonus: 320
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 22: Write a function to return grade based on salary.</div>
+                <p class="question-subtitle">(Function + IF-ELSIF)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION salary_grade(p_sal NUMBER) RETURN VARCHAR2 IS
+BEGIN
+  IF p_sal >= 4000 THEN
+    RETURN 'A';
+  ELSIF p_sal >= 2500 THEN
+    RETURN 'B';
+  ELSE
+    RETURN 'C';
+  END IF;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Grade: ' || salary_grade(2750));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Grade: B
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 23: Write a function to check whether a number is even or odd.</div>
+                <p class="question-subtitle">(Function + Logic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION even_or_odd(p_num NUMBER) RETURN VARCHAR2 IS
+BEGIN
+  IF MOD(p_num, 2) = 0 THEN
+    RETURN 'Even';
+  ELSE
+    RETURN 'Odd';
+  END IF;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Result: ' || even_or_odd(15));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Result: Odd
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 24: Write a function to return annual salary of an employee.</div>
+                <p class="question-subtitle">(Function + Calculation)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION annual_salary(p_empno NUMBER) RETURN NUMBER IS
+  v_sal emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_sal FROM emp WHERE empno = p_empno;
+  RETURN v_sal * 12;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Annual Salary: ' || annual_salary(7369));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Annual Salary: 9600
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 25: Write a function to return employee experience (based on hiredate).</div>
+                <p class="question-subtitle">(Function + Date Logic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION emp_experience(p_empno NUMBER) RETURN NUMBER IS
+  v_hiredate emp.hiredate%TYPE;
+BEGIN
+  SELECT hiredate INTO v_hiredate FROM emp WHERE empno = p_empno;
+  RETURN TRUNC(MONTHS_BETWEEN(SYSDATE, v_hiredate) / 12);
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Experience: ' || emp_experience(7788) || ' years');
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Experience: 17 years
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 26: Write a procedure that calls a function to calculate bonus and display result.</div>
+                <p class="question-subtitle">(Procedure calling Function)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION calculate_bonus(p_sal NUMBER) RETURN NUMBER IS
+BEGIN
+  RETURN ROUND(p_sal * 0.10, 2);
+END;
+/
+CREATE OR REPLACE PROCEDURE show_bonus(p_empno NUMBER) IS
+  v_sal emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_sal FROM emp WHERE empno = p_empno;
+  DBMS_OUTPUT.PUT_LINE('Bonus: ' || calculate_bonus(v_sal));
+END;
+/
+
+BEGIN
+  show_bonus(7654);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Bonus: 125
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 27: Write a function and use it inside SQL query.</div>
+                <p class="question-subtitle">(Function in SQL)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION salary_bonus(p_sal NUMBER) RETURN NUMBER IS
+BEGIN
+  RETURN ROUND(p_sal * 0.10, 2);
+END;
+/
+
+SELECT ename, salary_bonus(sal) AS bonus
+FROM emp;
+</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">ENAME  BONUS
+KING   500
+FORD   300
+SCOTT  300
+... 
+
+Query executed successfully.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 28: Write a procedure that uses function to update salary.</div>
+                <p class="question-subtitle">(Procedure + Function)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION add_increment(p_sal NUMBER) RETURN NUMBER IS
+BEGIN
+  RETURN p_sal + 250;
+END;
+/
+CREATE OR REPLACE PROCEDURE update_salary_using_function IS
+BEGIN
+  FOR rec IN (SELECT empno, sal FROM emp) LOOP
+    UPDATE emp SET sal = add_increment(rec.sal) WHERE empno = rec.empno;
+  END LOOP;
+  COMMIT;
+END;
+/
+
+BEGIN
+  update_salary_using_function;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">PL/SQL procedure successfully completed.
+
+-- Each salary updated using the function.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 29: Write a function that returns highest salary and use it in procedure.</div>
+                <p class="question-subtitle">(Integration)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION highest_salary RETURN NUMBER IS
+  v_max emp.sal%TYPE;
+BEGIN
+  SELECT MAX(sal) INTO v_max FROM emp;
+  RETURN v_max;
+END;
+/
+CREATE OR REPLACE PROCEDURE show_highest_salary IS
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Highest salary: ' || highest_salary);
+END;
+/
+
+BEGIN
+  show_highest_salary;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Highest salary: 5000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 30: Write a stored procedure to display top 5 highest paid employees.</div>
+                <p class="question-subtitle">(Procedure + Advanced Query)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE top_five_paid IS
+BEGIN
+  FOR rec IN (
+    SELECT ename, sal FROM (
+      SELECT ename, sal FROM emp ORDER BY sal DESC
+    ) WHERE ROWNUM <= 5
+  ) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.ename || ' - ' || rec.sal);
+  END LOOP;
+END;
+/
+
+BEGIN
+  top_five_paid;
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">KING - 5000
+FORD - 3000
+SCOTT - 3000
+JONES - 2975
+MILLER - 1300
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 31: Write a function to return nth highest salary.</div>
+                <p class="question-subtitle">(Function + Logic)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION nth_highest_salary(p_rank NUMBER) RETURN NUMBER IS
+  v_salary emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_salary
+  FROM (
+    SELECT sal, DENSE_RANK() OVER (ORDER BY sal DESC) rnk FROM emp
+  )
+  WHERE rnk = p_rank AND ROWNUM = 1;
+  RETURN v_salary;
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('3rd highest salary: ' || nth_highest_salary(3));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">3rd highest salary: 3000
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 32: Write a procedure to implement transaction (COMMIT / ROLLBACK).</div>
+                <p class="question-subtitle">(Procedure + Transaction Control)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE PROCEDURE transfer_salary(p_from_emp NUMBER, p_to_emp NUMBER, p_amount NUMBER) IS
+  v_from_sal emp.sal%TYPE;
+  v_to_sal emp.sal%TYPE;
+BEGIN
+  SELECT sal INTO v_from_sal FROM emp WHERE empno = p_from_emp FOR UPDATE;
+  SELECT sal INTO v_to_sal FROM emp WHERE empno = p_to_emp FOR UPDATE;
+
+  IF v_from_sal >= p_amount THEN
+    UPDATE emp SET sal = v_from_sal - p_amount WHERE empno = p_from_emp;
+    UPDATE emp SET sal = v_to_sal + p_amount WHERE empno = p_to_emp;
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Transfer completed.');
+  ELSE
+    ROLLBACK;
+    DBMS_OUTPUT.PUT_LINE('Transfer failed: insufficient funds.');
+  END IF;
+END;
+/
+
+BEGIN
+  transfer_salary(7839, 7566, 500);
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Transfer completed.
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-title">Question 33: Write a function that returns department-wise total salary.</div>
+                <p class="question-subtitle">(Function + GROUP BY)</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">PL/SQL Block:</div>
+                    <div class="command">CREATE OR REPLACE FUNCTION dept_total_salary(p_deptno NUMBER) RETURN NUMBER IS
+  v_total NUMBER;
+BEGIN
+  SELECT SUM(sal) INTO v_total FROM emp WHERE deptno = p_deptno GROUP BY deptno;
+  RETURN NVL(v_total, 0);
+END;
+/
+
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('Dept 10 total salary: ' || dept_total_salary(10));
+END;
+/</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="output">Dept 10 total salary: 8750
+
+PL/SQL procedure successfully completed.</div>
+                </div>
+            </div>
+
+        </div>
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

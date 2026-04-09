@@ -1,0 +1,677 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL Packages - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+
+        <header>
+            <h1>PL/SQL Packages</h1>
+        </header>
+
+
+        <div class="questions-list">
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Package Basic Structure</div>
+                <p class="question-text">Write a package specification and body to display "Hello Oracle".</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE hello_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_message;<br>END hello_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY hello_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_message IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Hello Oracle');<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_message;<br>END hello_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;hello_pkg.display_message;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Hello Oracle</div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-title">Question 2: Package + Procedure</div>
+                <p class="question-text">Create a package with one procedure to display employee details.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_employee(p_empno IN NUMBER);<br>END emp_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_employee(p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename, sal INTO v_ename, v_sal<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee: ' || v_ename || ', Salary: ' || v_sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_employee;<br>END emp_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_pkg.display_employee(7369);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Employee: SMITH, Salary: 800</div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-title">Question 3: Package + Function</div>
+                <p class="question-text">Create a package containing a function to return square of a number.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE math_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION square(p_num IN NUMBER) RETURN NUMBER;<br>END math_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY math_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION square(p_num IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN p_num * p_num;<br>&nbsp;&nbsp;&nbsp;&nbsp;END square;<br>END math_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result := math_pkg.square(5);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Square of 5: ' || v_result);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Square of 5: 25</div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-title">Question 4: Package Structure</div>
+                <p class="question-text">Write a package with both procedure and function.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE calc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE add_numbers(p_a IN NUMBER, p_b IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION multiply(p_a IN NUMBER, p_b IN NUMBER) RETURN NUMBER;<br>END calc_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY calc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE add_numbers(p_a IN NUMBER, p_b IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Sum: ' || (p_a + p_b));<br>&nbsp;&nbsp;&nbsp;&nbsp;END add_numbers;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION multiply(p_a IN NUMBER, p_b IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN p_a * p_b;<br>&nbsp;&nbsp;&nbsp;&nbsp;END multiply;<br>END calc_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;calc_pkg.add_numbers(10, 20);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_result := calc_pkg.multiply(10, 20);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Product: ' || v_result);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Sum: 30<br>Product: 200</div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-title">Question 5: Package Design</div>
+                <p class="question-text">Create a package to group employee-related operations.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE employee_ops AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE hire_employee(p_empno IN NUMBER, p_ename IN VARCHAR2, p_sal IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE fire_employee(p_empno IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_employee_count RETURN NUMBER;<br>END employee_ops;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY employee_ops AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE hire_employee(p_empno IN NUMBER, p_ename IN VARCHAR2, p_sal IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp (empno, ename, sal) VALUES (p_empno, p_ename, p_sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee hired successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;END hire_employee;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE fire_employee(p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DELETE FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee fired successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;END fire_employee;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_employee_count RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_count NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_count FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_count;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_employee_count;<br>END employee_ops;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;employee_ops.hire_employee(9999, 'JOHN', 3000);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Total employees: ' || employee_ops.get_employee_count());<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Employee hired successfully<br>Total employees: 15</div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Package Variable</div>
+                <p class="question-text">Create a package with a global variable and display its value.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE global_var_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;g_counter NUMBER := 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE increment_counter;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_counter;<br>END global_var_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY global_var_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE increment_counter IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g_counter := g_counter + 1;<br>&nbsp;&nbsp;&nbsp;&nbsp;END increment_counter;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_counter IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Counter value: ' || g_counter);<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_counter;<br>END global_var_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;global_var_pkg.increment_counter;<br>&nbsp;&nbsp;&nbsp;&nbsp;global_var_pkg.increment_counter;<br>&nbsp;&nbsp;&nbsp;&nbsp;global_var_pkg.display_counter;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Counter value: 2</div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-title">Question 7: Package Constant</div>
+                <p class="question-text">Write a package to store company name as constant and display it.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE company_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;c_company_name CONSTANT VARCHAR2(50) := 'Oracle Corporation';<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_company;<br>END company_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY company_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_company IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Company: ' || c_company_name);<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_company;<br>END company_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;company_pkg.display_company;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Company: Oracle Corporation</div>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-title">Question 8: Package State Management</div>
+                <p class="question-text">Create a package that uses a variable to count number of procedure calls.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE call_counter_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE some_procedure;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_call_count;<br>END call_counter_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY call_counter_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;v_call_count NUMBER := 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE some_procedure IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_call_count := v_call_count + 1;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Procedure called');<br>&nbsp;&nbsp;&nbsp;&nbsp;END some_procedure;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_call_count IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Total calls: ' || v_call_count);<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_call_count;<br>END call_counter_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;call_counter_pkg.some_procedure;<br>&nbsp;&nbsp;&nbsp;&nbsp;call_counter_pkg.some_procedure;<br>&nbsp;&nbsp;&nbsp;&nbsp;call_counter_pkg.some_procedure;<br>&nbsp;&nbsp;&nbsp;&nbsp;call_counter_pkg.display_call_count;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Procedure called<br>Procedure called<br>Procedure called<br>Total calls: 3</div>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-title">Question 9: Shared Variable in Package</div>
+                <p class="question-text">Write a package with a global variable used in multiple procedures.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE shared_var_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE set_value(p_val IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE increment_value;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_value;<br>END shared_var_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY shared_var_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;v_shared_value NUMBER := 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE set_value(p_val IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_shared_value := p_val;<br>&nbsp;&nbsp;&nbsp;&nbsp;END set_value;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE increment_value IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_shared_value := v_shared_value + 1;<br>&nbsp;&nbsp;&nbsp;&nbsp;END increment_value;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_value IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Shared value: ' || v_shared_value);<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_value;<br>END shared_var_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;shared_var_pkg.set_value(10);<br>&nbsp;&nbsp;&nbsp;&nbsp;shared_var_pkg.increment_value;<br>&nbsp;&nbsp;&nbsp;&nbsp;shared_var_pkg.display_value;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Shared value: 11</div>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-title">Question 10: Package Procedure</div>
+                <p class="question-text">Create a package procedure to fetch employee details using empno.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_fetch_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_employee_details(p_empno IN NUMBER);<br>END emp_fetch_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_fetch_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_employee_details(p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_job VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename, job, sal INTO v_ename, v_job, v_sal<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Name: ' || v_ename);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Job: ' || v_job);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary: ' || v_sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_employee_details;<br>END emp_fetch_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_fetch_pkg.get_employee_details(7788);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Name: SCOTT<br>Job: ANALYST<br>Salary: 3000</div>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Package + INSERT</div>
+                <p class="question-text">Create a package procedure to insert employee record.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_insert_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE insert_employee(p_empno IN NUMBER, p_ename IN VARCHAR2, p_job IN VARCHAR2, p_sal IN NUMBER, p_deptno IN NUMBER);<br>END emp_insert_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_insert_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE insert_employee(p_empno IN NUMBER, p_ename IN VARCHAR2, p_job IN VARCHAR2, p_sal IN NUMBER, p_deptno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp (empno, ename, job, sal, deptno) VALUES (p_empno, p_ename, p_job, p_sal, p_deptno);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee record inserted successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN DUP_VAL_ON_INDEX THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee ID already exists');<br>&nbsp;&nbsp;&nbsp;&nbsp;END insert_employee;<br>END emp_insert_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_insert_pkg.insert_employee(9001, 'ALEX', 'MANAGER', 5000, 10);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Employee record inserted successfully</div>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Package + UPDATE</div>
+                <p class="question-text">Create a package procedure to update employee salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_update_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE update_salary(p_empno IN NUMBER, p_new_sal IN NUMBER);<br>END emp_update_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_update_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE update_salary(p_empno IN NUMBER, p_new_sal IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_count NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_count FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v_count &gt; 0 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPDATE emp SET sal = p_new_sal WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary updated successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;END update_salary;<br>END emp_update_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_update_pkg.update_salary(7369, 900);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Salary updated successfully</div>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-title">Question 13: Package + DELETE</div>
+                <p class="question-text">Create a package procedure to delete employee record.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_delete_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE delete_employee(p_empno IN NUMBER);<br>END emp_delete_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_delete_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE delete_employee(p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_rows_deleted NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DELETE FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_rows_deleted := SQL%ROWCOUNT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v_rows_deleted &gt; 0 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee record deleted successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;END delete_employee;<br>END emp_delete_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_delete_pkg.delete_employee(9001);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Employee record deleted successfully</div>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-title">Question 14: Package + Business Logic</div>
+                <p class="question-text">Create a package procedure to increase salary of all employees by 10%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE salary_mgmt_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE increase_all_salaries(p_percentage IN NUMBER);<br>END salary_mgmt_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY salary_mgmt_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE increase_all_salaries(p_percentage IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_count NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPDATE emp SET sal = sal + (sal * p_percentage / 100);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_count := SQL%ROWCOUNT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary increased for ' || v_count || ' employees');<br>&nbsp;&nbsp;&nbsp;&nbsp;END increase_all_salaries;<br>END salary_mgmt_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;salary_mgmt_pkg.increase_all_salaries(10);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Salary increased for 14 employees</div>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-title">Question 15: Package Function</div>
+                <p class="question-text">Create a package function to return employee salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_salary_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_salary(p_empno IN NUMBER) RETURN NUMBER;<br>END emp_salary_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_salary_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_salary(p_empno IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT sal INTO v_sal FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_sal;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_salary;<br>END emp_salary_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_salary NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_salary := emp_salary_pkg.get_salary(7369);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary of SMITH: ' || v_salary);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Salary of SMITH: 800</div>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question">
+                <div class="question-title">Question 16: Package + Aggregate Function</div>
+                <p class="question-text">Create a package function to return total employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_count_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_total_employees RETURN NUMBER;<br>END emp_count_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_count_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_total_employees RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_count NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_count FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_count;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_total_employees;<br>END emp_count_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_total NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_total := emp_count_pkg.get_total_employees;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Total employees: ' || v_total);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Total employees: 14</div>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Package + Aggregate Function (Max)</div>
+                <p class="question-text">Create a package function to return maximum salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE salary_stats_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_max_salary RETURN NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_min_salary RETURN NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_avg_salary RETURN NUMBER;<br>END salary_stats_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY salary_stats_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_max_salary RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_max NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT MAX(sal) INTO v_max FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_max;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_max_salary;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_min_salary RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_min NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT MIN(sal) INTO v_min FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_min;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_min_salary;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_avg_salary RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_avg NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT AVG(sal) INTO v_avg FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_avg;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_avg_salary;<br>END salary_stats_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Max Salary: ' || salary_stats_pkg.get_max_salary);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Min Salary: ' || salary_stats_pkg.get_min_salary);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Avg Salary: ' || ROUND(salary_stats_pkg.get_avg_salary, 2));<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Max Salary: 5000<br>Min Salary: 800<br>Avg Salary: 2073.21</div>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Package Function + Logic</div>
+                <p class="question-text">Create a package function to calculate bonus (10% of salary).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE bonus_calc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_bonus(p_empno IN NUMBER, p_bonus_pct IN NUMBER) RETURN NUMBER;<br>END bonus_calc_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY bonus_calc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_bonus(p_empno IN NUMBER, p_bonus_pct IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_sal NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_bonus NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT sal INTO v_sal FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_bonus := (v_sal * p_bonus_pct) / 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_bonus;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN NO_DATA_FOUND THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;END calculate_bonus;<br>END bonus_calc_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Bonus for SMITH: ' || bonus_calc_pkg.calculate_bonus(7369, 10));<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Bonus for SMITH: 80</div>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Package + Cursor</div>
+                <p class="question-text">Create a package that uses cursor to display all employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_cursor_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_all_employees;<br>END emp_cursor_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_cursor_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_all_employees IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CURSOR emp_cur IS SELECT empno, ename, job, sal FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_empno emp.empno%TYPE;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_ename emp.ename%TYPE;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_job emp.job%TYPE;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_sal emp.sal%TYPE;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OPEN emp_cur;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOOP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FETCH emp_cur INTO v_empno, v_ename, v_job, v_sal;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXIT WHEN emp_cur%NOTFOUND;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(v_empno || ' - ' || v_ename || ' - ' || v_job || ' - ' || v_sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END LOOP;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CLOSE emp_cur;<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_all_employees;<br>END emp_cursor_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_cursor_pkg.display_all_employees;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">7369 - SMITH - CLERK - 800<br>7499 - ALLEN - SALESMAN - 1600<br>7521 - WARD - SALESMAN - 1250<br>(... more records)</div>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Package + Parameterized Cursor</div>
+                <p class="question-text">Create a package with parameterized cursor to fetch employees by department.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE dept_emp_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_employees_by_dept(p_deptno IN NUMBER);<br>END dept_emp_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY dept_emp_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_employees_by_dept(p_deptno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CURSOR dept_cur(p_dept IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT empno, ename, sal FROM emp WHERE deptno = p_dept;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR emp_rec IN dept_cur(p_deptno) LOOP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(emp_rec.empno || ' - ' || emp_rec.ename || ' - ' || emp_rec.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END LOOP;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_employees_by_dept;<br>END dept_emp_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;dept_emp_pkg.get_employees_by_dept(20);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">7369 - SMITH - 800<br>7566 - JONES - 2975<br>7788 - SCOTT - 3000<br>7876 - ADAMS - 1100<br>7902 - FORD - 3000</div>
+                </div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question">
+                <div class="question-title">Question 21: Package + Cursor Loop</div>
+                <p class="question-text">Create a package procedure that loops through employees using cursor FOR LOOP.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_loop_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE cursor_for_loop_demo;<br>END emp_loop_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_loop_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE cursor_for_loop_demo IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CURSOR emp_sal_cur IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename, sal, job FROM emp WHERE sal &gt; 1000 ORDER BY sal DESC;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('=== High Earning Employees ===');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR emp_rec IN emp_sal_cur LOOP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(emp_rec.ename || ' (' || emp_rec.job || ') earns $' || emp_rec.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END LOOP;<br>&nbsp;&nbsp;&nbsp;&nbsp;END cursor_for_loop_demo;<br>END emp_loop_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_loop_pkg.cursor_for_loop_demo;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">=== High Earning Employees ===<br>KING (PRESIDENT) earns $5000<br>FORD (ANALYST) earns $3000<br>SCOTT (ANALYST) earns $3000<br>JONES (MANAGER) earns $2975</div>
+                </div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Private vs Public in Package</div>
+                <p class="question-text">Create a package with private procedure (only in body, not in specification).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification (Only public procedure declared):</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE private_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE public_proc;<br>END private_pkg;</div>
+                    <div class="section-label" >Package Body (Contains both public and private):</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY private_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE private_proc IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('This is a PRIVATE procedure');<br>&nbsp;&nbsp;&nbsp;&nbsp;END private_proc;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE public_proc IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('This is PUBLIC procedure');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private_proc;<br>&nbsp;&nbsp;&nbsp;&nbsp;END public_proc;<br>END private_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;private_pkg.public_proc;<br>&nbsp;&nbsp;&nbsp;&nbsp;-- private_pkg.private_proc; -- This will cause error<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">This is PUBLIC procedure<br>This is a PRIVATE procedure</div>
+                </div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Procedure Overloading</div>
+                <p class="question-text">Create a package with overloaded procedures (same name, different parameters).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE overload_proc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_info(p_val IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_info(p_val IN VARCHAR2);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_info(p_val IN DATE);<br>END overload_proc_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY overload_proc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_info(p_val IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Number: ' || p_val);<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_info;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_info(p_val IN VARCHAR2) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('String: ' || p_val);<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_info;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_info(p_val IN DATE) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Date: ' || TO_CHAR(p_val, 'DD-MON-YYYY'));<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_info;<br>END overload_proc_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;overload_proc_pkg.display_info(100);<br>&nbsp;&nbsp;&nbsp;&nbsp;overload_proc_pkg.display_info('Hello Oracle');<br>&nbsp;&nbsp;&nbsp;&nbsp;overload_proc_pkg.display_info(TRUNC(SYSDATE));<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Number: 100<br>String: Hello Oracle<br>Date: 08-APR-2026</div>
+                </div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Function Overloading</div>
+                <p class="question-text">Create a package with function overloading.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE overload_func_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate(p_a IN NUMBER, p_b IN NUMBER) RETURN NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate(p_a IN VARCHAR2) RETURN NUMBER;<br>END overload_func_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY overload_func_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate(p_a IN NUMBER, p_b IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN p_a + p_b;<br>&nbsp;&nbsp;&nbsp;&nbsp;END calculate;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate(p_a IN VARCHAR2) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN LENGTH(p_a);<br>&nbsp;&nbsp;&nbsp;&nbsp;END calculate;<br>END overload_func_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Sum: ' || overload_func_pkg.calculate(10, 20));<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('String length: ' || overload_func_pkg.calculate('Oracle'));<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Sum: 30<br>String length: 6</div>
+                </div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Package for Audit Logs</div>
+                <p class="question-text">Create a package to maintain employee audit logs.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Audit Table:</div>
+                    <div class="command">CREATE TABLE emp_audit (<br>&nbsp;&nbsp;&nbsp;&nbsp;audit_id NUMBER PRIMARY KEY,<br>&nbsp;&nbsp;&nbsp;&nbsp;empno NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;action VARCHAR2(20),<br>&nbsp;&nbsp;&nbsp;&nbsp;old_value VARCHAR2(100),<br>&nbsp;&nbsp;&nbsp;&nbsp;new_value VARCHAR2(100),<br>&nbsp;&nbsp;&nbsp;&nbsp;audit_date DATE<br>);</div>
+                    <div class="section-label" >Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE audit_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE log_action(p_empno IN NUMBER, p_action IN VARCHAR2, p_old_val IN VARCHAR2, p_new_val IN VARCHAR2);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_audit_logs;<br>END audit_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY audit_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE log_action(p_empno IN NUMBER, p_action IN VARCHAR2, p_old_val IN VARCHAR2, p_new_val IN VARCHAR2) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_id NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT NVL(MAX(audit_id), 0) + 1 INTO v_id FROM emp_audit;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp_audit VALUES (v_id, p_empno, p_action, p_old_val, p_new_val, SYSDATE);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;END log_action;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_audit_logs IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR rec IN (SELECT * FROM emp_audit ORDER BY audit_date DESC) LOOP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(rec.empno || ' - ' || rec.action || ' - ' || rec.new_value);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END LOOP;<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_audit_logs;<br>END audit_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;audit_pkg.log_action(7369, 'SALARY_UPDATE', '800', '900');<br>&nbsp;&nbsp;&nbsp;&nbsp;audit_pkg.display_audit_logs;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">7369 - SALARY_UPDATE - 900</div>
+                </div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Package Initialization</div>
+                <p class="question-text">Create a package with initialization block (executed once).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE init_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_message;<br>END init_pkg;</div>
+                    <div class="section-label" >Package Body (with initialization block):</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY init_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;v_initialized VARCHAR2(1);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE display_message IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Message from package');<br>&nbsp;&nbsp;&nbsp;&nbsp;END display_message;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;-- This block executes only once when package is loaded<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('=== Package Initialized ===');<br>&nbsp;&nbsp;&nbsp;&nbsp;v_initialized := 'Y';<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Initialization time: ' || TO_CHAR(SYSDATE, 'HH:MI:SS'));<br>END init_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;init_pkg.display_message;<br>&nbsp;&nbsp;&nbsp;&nbsp;init_pkg.display_message;<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">=== Package Initialized ===<br>Initialization time: 10:30:45<br>Message from package<br>Message from package</div>
+                </div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Full Package Design (CRUD)</div>
+                <p class="question-text">Create a package to perform all CRUD operations on EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_crud_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE create_emp(p_empno IN NUMBER, p_ename IN VARCHAR2, p_job IN VARCHAR2, p_sal IN NUMBER, p_deptno IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE read_emp(p_empno IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE update_emp(p_empno IN NUMBER, p_sal IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE delete_emp(p_empno IN NUMBER);<br>END emp_crud_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_crud_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE create_emp(p_empno IN NUMBER, p_ename IN VARCHAR2, p_job IN VARCHAR2, p_sal IN NUMBER, p_deptno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp (empno, ename, job, sal, deptno) VALUES (p_empno, p_ename, p_job, p_sal, p_deptno);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee created');<br>&nbsp;&nbsp;&nbsp;&nbsp;END create_emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE read_emp(p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_ename VARCHAR2(20); v_sal NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT ename, sal INTO v_ename, v_sal FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee: ' || v_ename || ', Salary: ' || v_sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('Not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;END read_emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE update_emp(p_empno IN NUMBER, p_sal IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPDATE emp SET sal = p_sal WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee updated');<br>&nbsp;&nbsp;&nbsp;&nbsp;END update_emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE delete_emp(p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DELETE FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee deleted');<br>&nbsp;&nbsp;&nbsp;&nbsp;END delete_emp;<br>END emp_crud_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_crud_pkg.create_emp(9999, 'DAVID', 'ENGINEER', 4000, 10);<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_crud_pkg.read_emp(9999);<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_crud_pkg.update_emp(9999, 4500);<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_crud_pkg.delete_emp(9999);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Employee created<br>Employee: DAVID, Salary: 4000<br>Employee updated<br>Employee deleted</div>
+                </div>
+            </div>
+
+            <!-- Question 28 -->
+            <div class="question">
+                <div class="question-title">Question 28: Business Logic Package</div>
+                <p class="question-text">Create a package that calculates salary, bonus, and tax using multiple functions.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE salary_calc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_gross_salary(p_basic IN NUMBER, p_da_pct IN NUMBER, p_hra_pct IN NUMBER) RETURN NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_bonus(p_salary IN NUMBER, p_bonus_pct IN NUMBER) RETURN NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_tax(p_salary IN NUMBER) RETURN NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_net_salary(p_basic IN NUMBER, p_da_pct IN NUMBER, p_hra_pct IN NUMBER, p_bonus_pct IN NUMBER) RETURN NUMBER;<br>END salary_calc_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY salary_calc_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_gross_salary(p_basic IN NUMBER, p_da_pct IN NUMBER, p_hra_pct IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN p_basic + (p_basic * p_da_pct / 100) + (p_basic * p_hra_pct / 100);<br>&nbsp;&nbsp;&nbsp;&nbsp;END calculate_gross_salary;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_bonus(p_salary IN NUMBER, p_bonus_pct IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN (p_salary * p_bonus_pct) / 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;END calculate_bonus;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_tax(p_salary IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF p_salary &gt; 5000 THEN RETURN (p_salary * 10) / 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSIF p_salary &gt; 3000 THEN RETURN (p_salary * 5) / 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE RETURN 0; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;END calculate_tax;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION calculate_net_salary(p_basic IN NUMBER, p_da_pct IN NUMBER, p_hra_pct IN NUMBER, p_bonus_pct IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_gross NUMBER; v_bonus NUMBER; v_tax NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_gross := calculate_gross_salary(p_basic, p_da_pct, p_hra_pct);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_bonus := calculate_bonus(v_gross, p_bonus_pct);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_tax := calculate_tax(v_gross + v_bonus);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_gross + v_bonus - v_tax;<br>&nbsp;&nbsp;&nbsp;&nbsp;END calculate_net_salary;<br>END salary_calc_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Gross Salary: ' || salary_calc_pkg.calculate_gross_salary(10000, 10, 15));<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Bonus: ' || salary_calc_pkg.calculate_bonus(11500, 10));<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Tax: ' || salary_calc_pkg.calculate_tax(12650));<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Net Salary: ' || salary_calc_pkg.calculate_net_salary(10000, 10, 15, 10));<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Gross Salary: 12500<br>Bonus: 1150<br>Tax: 1265<br>Net Salary: 12385</div>
+                </div>
+            </div>
+
+            <!-- Question 29 -->
+            <div class="question">
+                <div class="question-title">Question 29: Validation Logic</div>
+                <p class="question-text">Create a package to validate employee data before insert/update.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_validation_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION validate_empno(p_empno IN NUMBER) RETURN BOOLEAN;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION validate_salary(p_sal IN NUMBER) RETURN BOOLEAN;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION validate_ename(p_ename IN VARCHAR2) RETURN BOOLEAN;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE insert_with_validation(p_empno IN NUMBER, p_ename IN VARCHAR2, p_sal IN NUMBER, p_deptno IN NUMBER);<br>END emp_validation_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY emp_validation_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION validate_empno(p_empno IN NUMBER) RETURN BOOLEAN IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN p_empno &gt; 0 AND p_empno &lt; 10000;<br>&nbsp;&nbsp;&nbsp;&nbsp;END validate_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION validate_salary(p_sal IN NUMBER) RETURN BOOLEAN IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN p_sal &gt;= 500 AND p_sal &lt;= 100000;<br>&nbsp;&nbsp;&nbsp;&nbsp;END validate_salary;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION validate_ename(p_ename IN VARCHAR2) RETURN BOOLEAN IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN LENGTH(p_ename) &gt; 0 AND LENGTH(p_ename) &lt;= 20;<br>&nbsp;&nbsp;&nbsp;&nbsp;END validate_ename;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE insert_with_validation(p_empno IN NUMBER, p_ename IN VARCHAR2, p_sal IN NUMBER, p_deptno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF NOT validate_empno(p_empno) THEN RAISE_APPLICATION_ERROR(-20001, 'Invalid Employee Number'); END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF NOT validate_ename(p_ename) THEN RAISE_APPLICATION_ERROR(-20002, 'Invalid Employee Name'); END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF NOT validate_salary(p_sal) THEN RAISE_APPLICATION_ERROR(-20003, 'Invalid Salary'); END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp (empno, ename, sal, deptno) VALUES (p_empno, p_ename, p_sal, p_deptno);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee inserted successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>&nbsp;&nbsp;&nbsp;&nbsp;END insert_with_validation;<br>END emp_validation_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_validation_pkg.insert_with_validation(9050, 'MICHAEL', 3500, 20);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Employee inserted successfully</div>
+                </div>
+            </div>
+
+            <!-- Question 30 -->
+            <div class="question">
+                <div class="question-title">Question 30: Multi-table Package</div>
+                <p class="question-text">Create a package that interacts with multiple tables (EMP, DEPT).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE multi_table_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_dept_employees(p_deptno IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_dept_salary_info(p_deptno IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_dept_name(p_deptno IN NUMBER) RETURN VARCHAR2;<br>END multi_table_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY multi_table_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_dept_employees(p_deptno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR rec IN (SELECT e.empno, e.ename, d.dname FROM emp e, dept d WHERE e.deptno = d.deptno AND e.deptno = p_deptno) LOOP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE(rec.empno || ' - ' || rec.ename || ' (' || rec.dname || ')');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END LOOP;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_dept_employees;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE get_dept_salary_info(p_deptno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FOR rec IN (SELECT d.dname, COUNT(e.empno) emp_count, SUM(e.sal) total_sal, AVG(e.sal) avg_sal FROM emp e, dept d WHERE e.deptno(+) = d.deptno AND d.deptno = p_deptno GROUP BY d.dname) LOOP<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Dept: ' || rec.dname || ' | Count: ' || rec.emp_count || ' | Total: ' || rec.total_sal || ' | Avg: ' || ROUND(rec.avg_sal, 2));<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END LOOP;<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_dept_salary_info;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION get_dept_name(p_deptno IN NUMBER) RETURN VARCHAR2 IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_dname VARCHAR2(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT dname INTO v_dname FROM dept WHERE deptno = p_deptno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_dname;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION WHEN NO_DATA_FOUND THEN RETURN 'Not Found';<br>&nbsp;&nbsp;&nbsp;&nbsp;END get_dept_name;<br>END multi_table_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Department: ' || multi_table_pkg.get_dept_name(20));<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('=== Employees ===');<br>&nbsp;&nbsp;&nbsp;&nbsp;multi_table_pkg.get_dept_employees(20);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('=== Salary Info ===');<br>&nbsp;&nbsp;&nbsp;&nbsp;multi_table_pkg.get_dept_salary_info(20);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Department: RESEARCH<br>=== Employees ===<br>7369 - SMITH (RESEARCH)<br>7566 - JONES (RESEARCH)<br>7788 - SCOTT (RESEARCH)<br>7876 - ADAMS (RESEARCH)<br>7902 - FORD (RESEARCH)<br>=== Salary Info ===<br>Dept: RESEARCH | Count: 5 | Total: 10875 | Avg: 2175</div>
+                </div>
+            </div>
+
+            <!-- Question 31 -->
+            <div class="question">
+                <div class="question-title">Question 31: Banking Operations Package</div>
+                <p class="question-text">Create a package to simulate banking operations (deposit, withdraw, balance check).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Account Table:</div>
+                    <div class="command">CREATE TABLE bank_account (<br>&nbsp;&nbsp;&nbsp;&nbsp;account_id NUMBER PRIMARY KEY,<br>&nbsp;&nbsp;&nbsp;&nbsp;account_holder VARCHAR2(50),<br>&nbsp;&nbsp;&nbsp;&nbsp;balance NUMBER(10,2)<br>);</div>
+                    <div class="section-label" >Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE banking_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE deposit(p_account_id IN NUMBER, p_amount IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE withdraw(p_account_id IN NUMBER, p_amount IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION check_balance(p_account_id IN NUMBER) RETURN NUMBER;<br>END banking_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY banking_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE deposit(p_account_id IN NUMBER, p_amount IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF p_amount &lt;= 0 THEN RAISE_APPLICATION_ERROR(-20001, 'Invalid amount'); END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPDATE bank_account SET balance = balance + p_amount WHERE account_id = p_account_id;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Deposit of ' || p_amount || ' successful');<br>&nbsp;&nbsp;&nbsp;&nbsp;END deposit;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE withdraw(p_account_id IN NUMBER, p_amount IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_balance NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF p_amount &lt;= 0 THEN RAISE_APPLICATION_ERROR(-20001, 'Invalid amount'); END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT balance INTO v_balance FROM bank_account WHERE account_id = p_account_id;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF v_balance &lt; p_amount THEN RAISE_APPLICATION_ERROR(-20002, 'Insufficient balance'); END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPDATE bank_account SET balance = balance - p_amount WHERE account_id = p_account_id;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Withdrawal of ' || p_amount || ' successful');<br>&nbsp;&nbsp;&nbsp;&nbsp;END withdraw;<br>&nbsp;&nbsp;&nbsp;&nbsp;FUNCTION check_balance(p_account_id IN NUMBER) RETURN NUMBER IS<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_balance NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT balance INTO v_balance FROM bank_account WHERE account_id = p_account_id;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RETURN v_balance;<br>&nbsp;&nbsp;&nbsp;&nbsp;END check_balance;<br>END banking_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO bank_account VALUES (1001, 'John', 5000);<br>&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;banking_pkg.deposit(1001, 1000);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Current balance: ' || banking_pkg.check_balance(1001));<br>&nbsp;&nbsp;&nbsp;&nbsp;banking_pkg.withdraw(1001, 2000);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Final balance: ' || banking_pkg.check_balance(1001));<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Deposit of 1000 successful<br>Current balance: 6000<br>Withdrawal of 2000 successful<br>Final balance: 4000</div>
+                </div>
+            </div>
+
+            <!-- Question 32 -->
+            <div class="question">
+                <div class="question-title">Question 32: Exception Handling in Package</div>
+                <p class="question-text">Create a package that uses exception handling for all operations.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package Specification:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE robust_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE insert_with_error_handling(p_empno IN NUMBER, p_ename IN VARCHAR2, p_sal IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE update_with_error_handling(p_empno IN NUMBER, p_sal IN NUMBER);<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE delete_with_error_handling(p_empno IN NUMBER);<br>END robust_pkg;</div>
+                    <div class="section-label" >Package Body:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE BODY robust_pkg AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE insert_with_error_handling(p_empno IN NUMBER, p_ename IN VARCHAR2, p_sal IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp (empno, ename, sal) VALUES (p_empno, p_ename, p_sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Insert successful');<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN DUP_VAL_ON_INDEX THEN DBMS_OUTPUT.PUT_LINE('Error: Employee ID already exists');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN VALUE_ERROR THEN DBMS_OUTPUT.PUT_LINE('Error: Invalid data type');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>&nbsp;&nbsp;&nbsp;&nbsp;END insert_with_error_handling;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE update_with_error_handling(p_empno IN NUMBER, p_sal IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPDATE emp SET sal = p_sal WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF SQL%ROWCOUNT = 0 THEN DBMS_OUTPUT.PUT_LINE('Error: Employee not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE COMMIT; DBMS_OUTPUT.PUT_LINE('Update successful');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>&nbsp;&nbsp;&nbsp;&nbsp;END update_with_error_handling;<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE delete_with_error_handling(p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DELETE FROM emp WHERE empno = p_empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF SQL%ROWCOUNT = 0 THEN DBMS_OUTPUT.PUT_LINE('Error: Employee not found');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ELSE COMMIT; DBMS_OUTPUT.PUT_LINE('Delete successful');<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;EXCEPTION WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);<br>&nbsp;&nbsp;&nbsp;&nbsp;END delete_with_error_handling;<br>END robust_pkg;</div>
+                    <div class="section-label" >Execution:</div>
+                    <div class="command">BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;robust_pkg.insert_with_error_handling(8888, 'EMMA', 2500);<br>&nbsp;&nbsp;&nbsp;&nbsp;robust_pkg.update_with_error_handling(8888, 2800);<br>&nbsp;&nbsp;&nbsp;&nbsp;robust_pkg.delete_with_error_handling(8888);<br>&nbsp;&nbsp;&nbsp;&nbsp;robust_pkg.delete_with_error_handling(9999);<br>END;</div>
+                    <div class="section-label" >Output:</div>
+                    <div class="command">Insert successful<br>Update successful<br>Delete successful<br>Error: Employee not found</div>
+                </div>
+            </div>
+        </div>
+
+  <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

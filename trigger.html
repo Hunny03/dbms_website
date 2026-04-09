@@ -1,0 +1,587 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PL/SQL Triggers - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+
+        <header>
+            <h1>PL/SQL Triggers</h1>
+        </header>
+
+
+        <div class="questions-list">
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Trigger Basics - Simple INSERT</div>
+                <p class="question-text">Write a trigger to display a message whenever a record is inserted into EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_insert_msg<br>AFTER INSERT ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('New employee record inserted successfully');<br>END emp_insert_msg;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9001, 'ALEX', 3000, 10);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">New employee record inserted successfully</div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-title">Question 2: BEFORE INSERT Trigger</div>
+                <p class="question-text">Write a trigger that fires before inserting data into EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_before_insert<br>BEFORE INSERT ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== INSERT TRIGGER FIRED =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Validating employee data...');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Time: ' || TO_CHAR(SYSDATE, 'HH:MI:SS'));<br>END emp_before_insert;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9002, 'JOHN', 3500, 20);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">===== INSERT TRIGGER FIRED =====<br>Validating employee data...<br>Time: 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-title">Question 3: AFTER DELETE Trigger</div>
+                <p class="question-text">Write a trigger that fires after deleting a record from EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_after_delete<br>AFTER DELETE ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee record has been deleted');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Deletion timestamp: ' || TO_CHAR(SYSDATE, 'DD-MON-YYYY HH:MI:SS'));<br>END emp_after_delete;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">DELETE FROM emp WHERE empno = 9001;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Employee record has been deleted<br>Deletion timestamp: 08-APR-2026 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-title">Question 4: BEFORE DELETE Trigger - Prevention</div>
+                <p class="question-text">Write a trigger to prevent deletion from EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_prevent_delete<br>BEFORE DELETE ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20001, 'Deletion of employee records is not allowed');<br>END emp_prevent_delete;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">DELETE FROM emp WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">ORA-20001: Deletion of employee records is not allowed</div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-title">Question 5: AFTER UPDATE Trigger</div>
+                <p class="question-text">Write a trigger to display a message when employee salary is updated.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_after_update<br>AFTER UPDATE ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee record has been updated');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Update completed at: ' || TO_CHAR(SYSDATE, 'HH:MI:SS'));<br>END emp_after_update;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 3200 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Employee record has been updated<br>Update completed at: 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Row-Level Trigger - :OLD and :NEW</div>
+                <p class="question-text">Write a row-level trigger to display old and new salary when salary is updated.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_sal_update<br>AFTER UPDATE OF sal ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary Update Details:');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee ID: ' || :NEW.empno);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Old Salary: $' || :OLD.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('New Salary: $' || :NEW.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Increase: $' || (:NEW.sal - :OLD.sal));<br>END emp_sal_update;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 3500 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Salary Update Details:<br>Employee ID: 7369<br>Old Salary: $800<br>New Salary: $3500<br>Increase: $2700</div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-title">Question 7: Row-Level Trigger - Salary Validation</div>
+                <p class="question-text">Write a trigger to restrict salary update if new salary is less than old salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_sal_validation<br>BEFORE UPDATE OF sal ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF :NEW.sal &lt; :OLD.sal THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20002, 'Salary cannot be decreased. Old: $' || :OLD.sal || ', New: $' || :NEW.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary validation passed');<br>END emp_sal_validation;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 700 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">ORA-20002: Salary cannot be decreased. Old: $800, New: $700</div>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-title">Question 8: BEFORE INSERT - Auto Set Hiredate</div>
+                <p class="question-text">Write a trigger to automatically set hiredate while inserting employee record.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_auto_hiredate<br>BEFORE INSERT ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF :NEW.hiredate IS NULL THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:NEW.hiredate := SYSDATE;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Hiredate auto-set to: ' || TO_CHAR(:NEW.hiredate, 'DD-MON-YYYY'));<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>END emp_auto_hiredate;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9003, 'EMMA', 4000, 10);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Hiredate auto-set to: 08-APR-2026</div>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-title">Question 9: BEFORE UPDATE - Auto Increase Salary</div>
+                <p class="question-text">Write a trigger to increase salary by 5% before updating.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_sal_increase<br>BEFORE UPDATE OF sal ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;:NEW.sal := :NEW.sal * 1.05;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary increased by 5%');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Updated Salary: $' || :NEW.sal);<br>END emp_sal_increase;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 4000 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Salary increased by 5%<br>Updated Salary: $4200</div>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-title">Question 10: AFTER DELETE - Copy to Audit Table</div>
+                <p class="question-text">Write a trigger to copy deleted records into another table (audit table).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Audit Table:</div>
+                    <div class="command">CREATE TABLE emp_audit (<br>&nbsp;&nbsp;&nbsp;&nbsp;audit_id NUMBER PRIMARY KEY,<br>&nbsp;&nbsp;&nbsp;&nbsp;empno NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;ename VARCHAR2(20),<br>&nbsp;&nbsp;&nbsp;&nbsp;sal NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;action VARCHAR2(10),<br>&nbsp;&nbsp;&nbsp;&nbsp;audit_date DATE<br>);</div>
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_delete_audit<br>AFTER DELETE ON emp<br>FOR EACH ROW<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_id NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT NVL(MAX(audit_id), 0) + 1 INTO v_id FROM emp_audit;<br>&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp_audit VALUES (v_id, :OLD.empno, :OLD.ename, :OLD.sal, 'DELETE', SYSDATE);<br>&nbsp;&nbsp;&nbsp;&nbsp;COMMIT;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Deleted record archived: ' || :OLD.ename);<br>END emp_delete_audit;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">DELETE FROM emp WHERE empno = 9001;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Deleted record archived: ALEX</div>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Statement-Level Trigger - INSERT</div>
+                <p class="question-text">Write a statement-level trigger to display message when any insert occurs on EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code (Statement-Level - No FOR EACH ROW):</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_insert_stmt<br>AFTER INSERT ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== INSERT STATEMENT COMPLETED =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Fires once per INSERT statement');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Not once per row');<br>END emp_insert_stmt;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9004, 'MIKE', 3800, 30);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">===== INSERT STATEMENT COMPLETED =====<br>Fires once per INSERT statement<br>Not once per row</div>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Statement-Level Trigger - UPDATE Logging</div>
+                <p class="question-text">Write a statement-level trigger to log update operations on EMP table.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_upd_log<br>AFTER UPDATE ON emp<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_count NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_count FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== UPDATE LOG =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Total employees in system: ' || v_count);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Updated at: ' || TO_CHAR(SYSDATE, 'DD-MON-YYYY HH:MI:SS'));<br>END emp_upd_log;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = sal + 500 WHERE deptno = 10;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">===== UPDATE LOG =====<br>Total employees in system: 14<br>Updated at: 08-APR-2026 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-title">Question 13: Statement-Level DELETE Trigger</div>
+                <p class="question-text">Write a trigger that fires once for DELETE statement regardless of number of rows.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_delete_stmt<br>AFTER DELETE ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('DELETE STATEMENT EXECUTED');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('This trigger fires ONCE regardless of rows deleted');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Time: ' || TO_CHAR(SYSDATE, 'HH:MI:SS'));<br>END emp_delete_stmt;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">DELETE FROM emp WHERE sal &lt; 1000;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">DELETE STATEMENT EXECUTED<br>This trigger fires ONCE regardless of rows deleted<br>Time: 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-title">Question 14: BEFORE INSERT - Salary Validation</div>
+                <p class="question-text">Write a BEFORE trigger to validate salary before inserting.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_insert_sal_val<br>BEFORE INSERT ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF :NEW.sal &lt; 1000 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20003, 'Minimum salary is 1000. Provided: ' || :NEW.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF :NEW.sal &gt; 100000 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20004, 'Maximum salary is 100000. Provided: ' || :NEW.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary validation passed');<br>END emp_insert_sal_val;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9005, 'JOHN', 5000, 20);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Salary validation passed</div>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-title">Question 15: AFTER INSERT - Logging Records</div>
+                <p class="question-text">Write an AFTER trigger to log inserted employee records.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_insert_log<br>AFTER INSERT ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== NEW EMPLOYEE ADDED =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('ID: ' || :NEW.empno);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Name: ' || :NEW.ename);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary: $' || :NEW.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Department: ' || :NEW.deptno);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Joined: ' || TO_CHAR(:NEW.hiredate, 'DD-MON-YYYY'));<br>END emp_insert_log;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno, hiredate) VALUES (9006, 'SARAH', 4500, 10, SYSDATE);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">===== NEW EMPLOYEE ADDED =====<br>ID: 9006<br>Name: SARAH<br>Salary: $4500<br>Department: 10<br>Joined: 08-APR-2026</div>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question">
+                <div class="question-title">Question 16: BEFORE vs AFTER UPDATE Triggers</div>
+                <p class="question-text">Write both BEFORE and AFTER triggers for UPDATE operation.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">BEFORE Trigger:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_upd_before<br>BEFORE UPDATE ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('BEFORE UPDATE: Validating changes...');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Old Salary: ' || :OLD.sal || ' → New Salary: ' || :NEW.sal);<br>END emp_upd_before;</div>
+                    <div class="section-label">AFTER Trigger:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_upd_after<br>AFTER UPDATE ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('AFTER UPDATE: Changes applied successfully');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Updated at: ' || TO_CHAR(SYSDATE, 'HH:MI:SS'));<br>END emp_upd_after;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 5000 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">BEFORE UPDATE: Validating changes...<br>Old Salary: 3500 → New Salary: 5000<br>AFTER UPDATE: Changes applied successfully<br>Updated at: 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Conditional Trigger - Salary &gt; 5000</div>
+                <p class="question-text">Write a trigger that fires only when salary > 5000.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_high_sal<br>AFTER INSERT ON emp<br>FOR EACH ROW<br>WHEN (:NEW.sal &gt; 5000)<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('HIGH SALARY ALERT');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Employee: ' || :NEW.ename);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary: $' || :NEW.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Requires Executive Approval');<br>END emp_high_sal;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9007, 'DIRECTOR', 8000, 10);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">HIGH SALARY ALERT<br>Employee: DIRECTOR<br>Salary: $8000<br>Requires Executive Approval</div>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Conditional Trigger - Working Hours</div>
+                <p class="question-text">Write a trigger to allow insert only during working hours.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_working_hours<br>BEFORE INSERT ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF TO_NUMBER(TO_CHAR(SYSDATE, 'HH24')) &lt; 9 OR TO_NUMBER(TO_CHAR(SYSDATE, 'HH24')) &gt;= 18 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20005, 'Employee records can only be added during working hours (9 AM - 6 PM)');<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Working hours verified. Proceeding with insert.');<br>END emp_working_hours;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9008, 'VISITOR', 2000, 10);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Working hours verified. Proceeding with insert.</div>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Prevent Weekend Updates</div>
+                <p class="question-text">Write a trigger to prevent update on weekends.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_no_weekend_update<br>BEFORE UPDATE ON emp<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF TO_CHAR(SYSDATE, 'DY') IN ('SAT', 'SUN') THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20006, 'Cannot update employee records on weekends');<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Weekday verified. Update allowed.');<br>END emp_no_weekend_update;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 4000 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Weekday verified. Update allowed.</div>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Audit Trigger - Multi-Operation</div>
+                <p class="question-text">Write a trigger to maintain audit table for INSERT, UPDATE, DELETE.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code (Handles All DML):</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_full_audit<br>AFTER INSERT OR UPDATE OR DELETE ON emp<br>FOR EACH ROW<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_action VARCHAR2(10);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_id NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT NVL(MAX(audit_id), 0) + 1 INTO v_id FROM emp_audit;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF INSERTING THEN v_action := 'INSERT'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF UPDATING THEN v_action := 'UPDATE'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF DELETING THEN v_action := 'DELETE'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp_audit (audit_id, empno, action, audit_date, user_name)<br>&nbsp;&nbsp;&nbsp;&nbsp;VALUES (v_id, :NEW.empno, v_action, SYSDATE, USER);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Audit logged: ' || v_action);<br>END emp_full_audit;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9009, 'AUDIT_TEST', 3000, 10);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Audit logged: INSERT</div>
+                </div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question">
+                <div class="question-title">Question 21: Auto-Increment Employee ID</div>
+                <p class="question-text">Write a trigger to generate automatic employee ID.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Sequence:</div>
+                    <div class="command">CREATE SEQUENCE emp_seq START WITH 10000 INCREMENT BY 1;</div>
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_auto_id<br>BEFORE INSERT ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;IF :NEW.empno IS NULL THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:NEW.empno := emp_seq.NEXTVAL;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Auto-generated Employee ID: ' || :NEW.empno);<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>END emp_auto_id;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (ename, sal, deptno) VALUES ('AUTO_EMP', 3500, 30);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Auto-generated Employee ID: 10000</div>
+                </div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Referential Integrity Check</div>
+                <p class="question-text">Write a trigger to enforce referential integrity manually.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_ref_integrity<br>BEFORE INSERT OR UPDATE ON emp<br>FOR EACH ROW<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_count NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_count FROM dept WHERE deptno = :NEW.deptno;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_count = 0 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20007, 'Invalid department number: ' || :NEW.deptno);<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Department integrity verified');<br>END emp_ref_integrity;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9010, 'REF_TEST', 3000, 20);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Department integrity verified</div>
+                </div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Calculate Bonus After Salary Update</div>
+                <p class="question-text">Write a trigger to calculate bonus after salary update.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Bonus Table:</div>
+                    <div class="command">CREATE TABLE emp_bonus (<br>&nbsp;&nbsp;&nbsp;&nbsp;bonus_id NUMBER PRIMARY KEY,<br>&nbsp;&nbsp;&nbsp;&nbsp;empno NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;salary NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;bonus_amount NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;calculated_date DATE<br>);</div>
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_calc_bonus<br>AFTER UPDATE OF sal ON emp<br>FOR EACH ROW<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_bonus NUMBER;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_id NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_bonus := :NEW.sal * 0.10;<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT NVL(MAX(bonus_id), 0) + 1 INTO v_id FROM emp_bonus;<br>&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO emp_bonus VALUES (v_id, :NEW.empno, :NEW.sal, v_bonus, SYSDATE);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Bonus calculated: $' || v_bonus);<br>END emp_calc_bonus;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 5000 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Bonus calculated: $500</div>
+                </div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Track Number of Rows Affected</div>
+                <p class="question-text">Write a trigger to track number of rows affected.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_track_rows<br>AFTER UPDATE ON emp<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_row_count NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Operation Statistics:');<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_row_count FROM emp;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Total rows in EMP table: ' || v_row_count);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Update completed successfully');<br>END emp_track_rows;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = sal + 100 WHERE deptno = 20;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Operation Statistics:<br>Total rows in EMP table: 14<br>Update completed successfully</div>
+                </div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Prevent Duplicate Employee Names</div>
+                <p class="question-text">Write a trigger to prevent duplicate employee names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_unique_name<br>BEFORE INSERT OR UPDATE ON emp<br>FOR EACH ROW<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_count NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT COUNT(*) INTO v_count FROM emp WHERE UPPER(ename) = UPPER(:NEW.ename) AND empno &lt;&gt; :NEW.empno;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_count &gt; 0 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20008, 'Employee name already exists: ' || :NEW.ename);<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Name uniqueness verified');<br>END emp_unique_name;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9011, 'UNIQUE_NAME', 3500, 10);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Name uniqueness verified</div>
+                </div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Log User Activity - Audit with User Info</div>
+                <p class="question-text">Write a trigger to log user activity (who updated, when updated).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Activity Log Table:</div>
+                    <div class="command">CREATE TABLE user_activity (<br>&nbsp;&nbsp;&nbsp;&nbsp;activity_id NUMBER PRIMARY KEY,<br>&nbsp;&nbsp;&nbsp;&nbsp;table_name VARCHAR2(20),<br>&nbsp;&nbsp;&nbsp;&nbsp;action VARCHAR2(10),<br>&nbsp;&nbsp;&nbsp;&nbsp;user_name VARCHAR2(30),<br>&nbsp;&nbsp;&nbsp;&nbsp;action_date DATE<br>);</div>
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_user_activity<br>AFTER INSERT OR UPDATE OR DELETE ON emp<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_action VARCHAR2(10);<br>&nbsp;&nbsp;&nbsp;&nbsp;v_id NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT NVL(MAX(activity_id), 0) + 1 INTO v_id FROM user_activity;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF INSERTING THEN v_action := 'INSERT'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF UPDATING THEN v_action := 'UPDATE'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF DELETING THEN v_action := 'DELETE'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO user_activity VALUES (v_id, 'EMP', v_action, USER, SYSDATE);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Activity logged by user: ' || USER);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Action: ' || v_action || ' | Time: ' || TO_CHAR(SYSDATE, 'DD-MON-YYYY HH:MI:SS'));<br>END emp_user_activity;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9012, 'LOGGED_EMP', 4000, 30);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Activity logged by user: SCOTT<br>Action: INSERT | Time: 08-APR-2026 10:30:45</div>
+                </div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Restrict Salary Update Beyond 20%</div>
+                <p class="question-text">Write a trigger to restrict salary update beyond 20%.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_sal_limit<br>BEFORE UPDATE OF sal ON emp<br>FOR EACH ROW<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_increase_pct NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;v_increase_pct := ((:NEW.sal - :OLD.sal) / :OLD.sal) * 100;<br>&nbsp;&nbsp;&nbsp;&nbsp;IF v_increase_pct &gt; 20 THEN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RAISE_APPLICATION_ERROR(-20009, 'Salary increase limited to 20%. Requested: ' || ROUND(v_increase_pct, 2) || '%');<br>&nbsp;&nbsp;&nbsp;&nbsp;END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary increase approved: ' || ROUND(v_increase_pct, 2) || '%');<br>END emp_sal_limit;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 6000 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">ORA-20009: Salary increase limited to 20%. Requested: 200%</div>
+                </div>
+            </div>
+
+            <!-- Question 28 -->
+            <div class="question">
+                <div class="question-title">Question 28: Trigger Calling Package Procedure</div>
+                <p class="question-text">Write a trigger that calls a procedure from a package.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Package with Procedure:</div>
+                    <div class="command">CREATE OR REPLACE PACKAGE emp_operations AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE log_emp_action(p_action IN VARCHAR2, p_empno IN NUMBER);<br>END emp_operations;<br><br>CREATE OR REPLACE PACKAGE BODY emp_operations AS<br>&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE log_emp_action(p_action IN VARCHAR2, p_empno IN NUMBER) IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Package Log: ' || p_action || ' - Employee: ' || p_empno);<br>&nbsp;&nbsp;&nbsp;&nbsp;END log_emp_action;<br>END emp_operations;</div>
+                    <div class="section-label">Trigger Calling Package:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_pkg_call<br>AFTER INSERT ON emp<br>FOR EACH ROW<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;emp_operations.log_emp_action('INSERT', :NEW.empno);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Trigger called package successfully');<br>END emp_pkg_call;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">INSERT INTO emp (empno, ename, sal, deptno) VALUES (9013, 'PKG_TEST', 3500, 10);</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Package Log: INSERT - Employee: 9013<br>Trigger called package successfully</div>
+                </div>
+            </div>
+
+            <!-- Question 29 -->
+            <div class="question">
+                <div class="question-title">Question 29: Maintain Salary History Table</div>
+                <p class="question-text">Write a trigger to maintain history table for salary changes.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Create Salary History Table:</div>
+                    <div class="command">CREATE TABLE sal_history (<br>&nbsp;&nbsp;&nbsp;&nbsp;history_id NUMBER PRIMARY KEY,<br>&nbsp;&nbsp;&nbsp;&nbsp;empno NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;old_salary NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;new_salary NUMBER,<br>&nbsp;&nbsp;&nbsp;&nbsp;change_date DATE,<br>&nbsp;&nbsp;&nbsp;&nbsp;sal_increase NUMBER<br>);</div>
+                    <div class="section-label">Trigger Code:</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_sal_history<br>AFTER UPDATE OF sal ON emp<br>FOR EACH ROW<br>DECLARE<br>&nbsp;&nbsp;&nbsp;&nbsp;v_id NUMBER;<br>BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;SELECT NVL(MAX(history_id), 0) + 1 INTO v_id FROM sal_history;<br>&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO sal_history VALUES (v_id, :NEW.empno, :OLD.sal, :NEW.sal, SYSDATE, :NEW.sal - :OLD.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Salary history recorded');<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Old: $' || :OLD.sal || ' → New: $' || :NEW.sal);<br>&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Increase: $' || (:NEW.sal - :OLD.sal));<br>END emp_sal_history;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = 5500 WHERE empno = 7369;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">Salary history recorded<br>Old: $3500 → New: $5500<br>Increase: $2000</div>
+                </div>
+            </div>
+
+            <!-- Question 30 -->
+            <div class="question">
+                <div class="question-title">Question 30: Compound Trigger (Advanced)</div>
+                <p class="question-text">Write a compound trigger (advanced Oracle feature).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">Compound Trigger Code (Oracle 11g+):</div>
+                    <div class="command">CREATE OR REPLACE TRIGGER emp_compound<br>FOR INSERT OR UPDATE OR DELETE ON emp<br>COMPOUND TRIGGER<br>&nbsp;&nbsp;&nbsp;&nbsp;v_row_count NUMBER := 0;<br>&nbsp;&nbsp;&nbsp;&nbsp;v_action VARCHAR2(10);<br><br>&nbsp;&nbsp;&nbsp;&nbsp;BEFORE STATEMENT IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== COMPOUND TRIGGER START =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;END BEFORE STATEMENT;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;BEFORE EACH ROW IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v_row_count := v_row_count + 1;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF INSERTING THEN v_action := 'INSERT'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF UPDATING THEN v_action := 'UPDATE'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF DELETING THEN v_action := 'DELETE'; END IF;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Processing row: ' || v_row_count || ' (' || v_action || ')');<br>&nbsp;&nbsp;&nbsp;&nbsp;END BEFORE EACH ROW;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;AFTER STATEMENT IS<br>&nbsp;&nbsp;&nbsp;&nbsp;BEGIN<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('Total rows affected: ' || v_row_count);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DBMS_OUTPUT.PUT_LINE('===== COMPOUND TRIGGER END =====');<br>&nbsp;&nbsp;&nbsp;&nbsp;END AFTER STATEMENT;<br>END emp_compound;</div>
+                    <div class="section-label">Execution:</div>
+                    <div class="command">UPDATE emp SET sal = sal + 500 WHERE deptno = 10;</div>
+                    <div class="section-label">Output:</div>
+                    <div class="command">===== COMPOUND TRIGGER START =====<br>Processing row: 1 (UPDATE)<br>Processing row: 2 (UPDATE)<br>Processing row: 3 (UPDATE)<br>Total rows affected: 3<br>===== COMPOUND TRIGGER END =====</div>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+</body>
+</html>

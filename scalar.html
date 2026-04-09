@@ -1,0 +1,1784 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scalar Functions - DBMS</title>
+    
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <script src="script.js"></script>
+    <div class="container">
+        <a class='back-button' href='/'>← Back to Home</a>
+        
+        <header>
+            <h1>Scalar Functions</h1>
+        </header>
+
+        <div class="questions-list">
+            <!-- Question 1 -->
+            <div class="question">
+                <div class="question-title">Question 1: Display employee name, hire date, and current date. Also calculate the number of days the employee has worked.</div>
+                <p class="question-text">Show employee names, their hire dates, current system date, and calculate tenure in days.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE, SYSDATE, SYSDATE - HIREDATE AS DAYS_WORKED FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>SYSDATE</th>
+                            <th>DAYS_WORKED</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                            <td>05-APR-26</td>
+                            <td>16545</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>05-APR-26</td>
+                            <td>16328</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <div class="question-title">Question 2: Display employee name and hire date in the format: Monday, January 01, 2024.</div>
+                <p class="question-text">Format hire dates to show full day name, month name, day, and year.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, TO_CHAR(HIREDATE, 'Day, Month DD, YYYY') AS FORMATTED_DATE FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FORMATTED_DATE</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>Sunday, December 17, 1980</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>Wednesday, February 20, 1981</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <div class="question-title">Question 3: Find employees who joined in the same month as the current system date (ignore year).</div>
+                <p class="question-text">Display employees whose hire month matches the current month.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE FROM EMP WHERE EXTRACT(MONTH FROM HIREDATE) = EXTRACT(MONTH FROM SYSDATE);</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                        </tr>
+                        <tr>
+                            <td>No matching records</td>
+                            <td>(Current month is April)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <div class="question-title">Question 4: Display employee name and the next Monday after their hire date.</div>
+                <p class="question-text">Find the next Monday following each employee's hire date.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE, NEXT_DAY(HIREDATE, 'MONDAY') AS NEXT_MONDAY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>NEXT_MONDAY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                            <td>22-DEC-80</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>23-FEB-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <div class="question-title">Question 5: Display employee name and the last day of their joining month.</div>
+                <p class="question-text">Show the last day of the month when each employee joined.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE, LAST_DAY(HIREDATE) AS LAST_DAY_OF_MONTH FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>LAST_DAY_OF_MONTH</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                            <td>31-DEC-80</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>28-FEB-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <div class="question-title">Question 6: Find employees who have completed more than 10 years in the company.</div>
+                <p class="question-text">Display employees with more than 10 years of service.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE, FLOOR(MONTHS_BETWEEN(SYSDATE, HIREDATE)/12) AS YEARS_WORKED FROM EMP WHERE MONTHS_BETWEEN(SYSDATE, HIREDATE)/12 > 10;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>YEARS_WORKED</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                            <td>45</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>45</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <div class="question-title">Question 7: Display employee name and number of months worked in the company.</div>
+                <p class="question-text">Calculate total months of service for each employee.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE, FLOOR(MONTHS_BETWEEN(SYSDATE, HIREDATE)) AS MONTHS_WORKED FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>MONTHS_WORKED</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                            <td>541</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>537</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <div class="question-title">Question 8: Display employee name, hire date, and hire date after adding 3 years and 6 months.</div>
+                <p class="question-text">Show original hire date and date after adding 3 years and 6 months.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE, ADD_MONTHS(HIREDATE, 42) AS FUTURE_DATE FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>FUTURE_DATE</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                            <td>17-JUN-84</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>20-AUG-84</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <div class="question-title">Question 9: Find employees hired between two given dates (use TO_DATE).</div>
+                <p class="question-text">Display employees hired between January 1, 1981 and December 31, 1982.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE FROM EMP WHERE HIREDATE BETWEEN TO_DATE('01-JAN-1981', 'DD-MON-YYYY') AND TO_DATE('31-DEC-1982', 'DD-MON-YYYY');</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                        </tr>
+                        <tr>
+                            <td>WARD</td>
+                            <td>22-FEB-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <div class="question-title">Question 10: Display the difference in years between SYSDATE and hire date (rounded).</div>
+                <p class="question-text">Calculate years of service rounded to nearest whole number.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, HIREDATE, ROUND(MONTHS_BETWEEN(SYSDATE, HIREDATE)/12) AS YEARS_WORKED FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIREDATE</th>
+                            <th>YEARS_WORKED</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                            <td>45</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                            <td>45</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 11 -->
+            <div class="question">
+                <div class="question-title">Question 11: Display employee name and salary rounded to the nearest 1000.</div>
+                <p class="question-text">Round salaries to the nearest thousand.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, ROUND(SAL, -3) AS ROUNDED_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>ROUNDED_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>2000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 12 -->
+            <div class="question">
+                <div class="question-title">Question 12: Display salary truncated to 2 decimal places.</div>
+                <p class="question-text">Truncate salary values to 2 decimal places.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, TRUNC(SAL, 2) AS TRUNCATED_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>TRUNCATED_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 13 -->
+            <div class="question">
+                <div class="question-title">Question 13: Display employee name and square root of salary.</div>
+                <p class="question-text">Calculate square root of each employee's salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, SQRT(SAL) AS SQRT_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>SQRT_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>28.28</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>40.00</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 14 -->
+            <div class="question">
+                <div class="question-title">Question 14: Find the absolute difference between salary and 5000.</div>
+                <p class="question-text">Calculate absolute difference between each salary and 5000.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, ABS(SAL - 5000) AS ABS_DIFF FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>ABS_DIFF</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>4200</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>3400</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <div class="question-title">Question 15: Display salary rounded up to the nearest integer.</div>
+                <p class="question-text">Round salary values up to the next whole number.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, CEIL(SAL) AS CEIL_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>CEIL_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 16 -->
+            <div class="question">
+                <div class="question-title">Question 16: Display salary rounded down to the nearest integer.</div>
+                <p class="question-text">Round salary values down to the previous whole number.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, FLOOR(SAL) AS FLOOR_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>FLOOR_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 17 -->
+            <div class="question">
+                <div class="question-title">Question 17: Generate a random number between 1 and 500 for each employee.</div>
+                <p class="question-text">Display employee names with randomly generated numbers.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, ROUND(DBMS_RANDOM.VALUE(1, 500)) AS RANDOM_NUM FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>RANDOM_NUM</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>245</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>178</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 18 -->
+            <div class="question">
+                <div class="question-title">Question 18: Display remainder when salary is divided by 2000.</div>
+                <p class="question-text">Calculate MOD(salary, 2000) for each employee.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, MOD(SAL, 2000) AS REMAINDER FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>REMAINDER</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 19 -->
+            <div class="question">
+                <div class="question-title">Question 19: Display salary raised to the power of 3.</div>
+                <p class="question-text">Calculate salary³ for each employee.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, POWER(SAL, 3) AS SALARY_CUBED FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>SALARY_CUBED</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>512000000</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>4096000000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 20 -->
+            <div class="question">
+                <div class="question-title">Question 20: Round salary to nearest hundred and thousand (two columns).</div>
+                <p class="question-text">Display salary rounded to nearest 100 and nearest 1000.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, ROUND(SAL, -2) AS NEAREST_100, ROUND(SAL, -3) AS NEAREST_1000 FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>NEAREST_100</th>
+                            <th>NEAREST_1000</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>800</td>
+                            <td>1000</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>1600</td>
+                            <td>2000</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 21 -->
+            <div class="question">
+                <div class="question-title">Question 21: Display employee names in uppercase and lowercase in two columns.</div>
+                <p class="question-text">Show employee names in both upper and lower case formats.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT UPPER(ENAME) AS UPPER_NAME, LOWER(ENAME) AS LOWER_NAME FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>UPPER_NAME</th>
+                            <th>LOWER_NAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>smith</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>allen</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 22 -->
+            <div class="question">
+                <div class="question-title">Question 22: Display employee name and its length.</div>
+                <p class="question-text">Show the length of each employee name.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, LENGTH(ENAME) AS NAME_LENGTH FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>NAME_LENGTH</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>5</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 23 -->
+            <div class="question">
+                <div class="question-title">Question 23: Display first 4 characters of employee name.</div>
+                <p class="question-text">Extract the first 4 characters from each employee name.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SUBSTR(ENAME, 1, 4) AS FIRST_4_CHARS FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FIRST_4_CHARS</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>SMIT</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>ALLE</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 24 -->
+            <div class="question">
+                <div class="question-title">Question 24: Concatenate employee name and job using - symbol.</div>
+                <p class="question-text">Combine employee name and job title with a dash separator.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT CONCAT(CONCAT(ENAME, ' - '), JOB) AS NAME_JOB FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>NAME_JOB</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH - CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN - SALESMAN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 25 -->
+            <div class="question">
+                <div class="question-title">Question 25: Replace all occurrences of letter 'A' with '#' in employee names.</div>
+                <p class="question-text">Replace all 'A' characters with '#' in employee names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, REPLACE(ENAME, 'A', '#') AS MODIFIED_NAME FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>MODIFIED_NAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>#LLEN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 26 -->
+            <div class="question">
+                <div class="question-title">Question 26: Display position of first occurrence of 'E' in employee name.</div>
+                <p class="question-text">Find the position of the first 'E' in each employee name.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, INSTR(ENAME, 'E') AS POSITION_E FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>POSITION_E</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 27 -->
+            <div class="question">
+                <div class="question-title">Question 27: Remove leading and trailing spaces from employee name.</div>
+                <p class="question-text">Trim whitespace from both ends of employee names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, TRIM(ENAME) AS TRIMMED_NAME FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>TRIMMED_NAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>ALLEN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 28 -->
+            <div class="question">
+                <div class="question-title">Question 28: Display employee name with first letter capital and rest lowercase.</div>
+                <p class="question-text">Format employee names with proper capitalization.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, INITCAP(ENAME) AS FORMATTED_NAME FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FORMATTED_NAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>Smith</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>Allen</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 29 -->
+            <div class="question">
+                <div class="question-title">Question 29: Display last 3 characters of employee name.</div>
+                <p class="question-text">Extract the last 3 characters from each employee name.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SUBSTR(ENAME, -3) AS LAST_3_CHARS FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>LAST_3_CHARS</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>ITH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>LEN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 30 -->
+            <div class="question">
+                <div class="question-title">Question 30: Pad employee name with * on the left to make total length 10.</div>
+                <p class="question-text">Left-pad employee names with asterisks to reach 10 characters.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, LPAD(ENAME, 10, '*') AS PADDED_NAME FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>PADDED_NAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>*****SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>*****ALLEN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 31 -->
+            <div class="question">
+                <div class="question-title">Question 31: Display employee name with spaces removed.</div>
+                <p class="question-text">Remove all spaces from employee names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, REPLACE(ENAME, ' ', '') AS NO_SPACES_NAME FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>NO_SPACES_NAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>ALLEN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 32 -->
+            <div class="question">
+                <div class="question-title">Question 32: Display employee names starting with 'S'.</div>
+                <p class="question-text">Find all employee names that begin with the letter 'S'.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE SUBSTR(ENAME, 1, 1) = 'S';</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>SCOTT</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 33 -->
+            <div class="question">
+                <div class="question-title">Question 33: Count number of characters excluding spaces.</div>
+                <p class="question-text">Calculate length of employee names without counting spaces.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, LENGTH(REPLACE(ENAME, ' ', '')) AS CHAR_COUNT FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>CHAR_COUNT</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>5</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 34 -->
+            <div class="question">
+                <div class="question-title">Question 34: Display employee name reversed.</div>
+                <p class="question-text">Show employee names spelled backwards.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, REVERSE(ENAME) AS REVERSED_NAME FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>REVERSED_NAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>HTIMS</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>NELLA</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 35 -->
+            <div class="question">
+                <div class="question-title">Question 35: Extract domain name from email column.</div>
+                <p class="question-text">Extract domain part from email addresses (assuming email column exists).</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT SUBSTR(EMAIL, INSTR(EMAIL, '@') + 1) AS DOMAIN FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>DOMAIN</th>
+                        </tr>
+                        <tr>
+                            <td>company.com</td>
+                        </tr>
+                        <tr>
+                            <td>company.com</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 36 -->
+            <div class="question">
+                <div class="question-title">Question 36: Convert current date into format: DD/MM/YYYY.</div>
+                <p class="question-text">Format SYSDATE as DD/MM/YYYY.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT TO_CHAR(SYSDATE, 'DD/MM/YYYY') AS FORMATTED_DATE FROM DUAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>FORMATTED_DATE</th>
+                        </tr>
+                        <tr>
+                            <td>05/04/2026</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 37 -->
+            <div class="question">
+                <div class="question-title">Question 37: Convert string '15-AUG-2020' into DATE format.</div>
+                <p class="question-text">Convert a date string to DATE datatype.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT TO_DATE('15-AUG-2020', 'DD-MON-YYYY') AS CONVERTED_DATE FROM DUAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>CONVERTED_DATE</th>
+                        </tr>
+                        <tr>
+                            <td>15-AUG-20</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 38 -->
+            <div class="question">
+                <div class="question-title">Question 38: Convert salary into character with currency format (₹10,000).</div>
+                <p class="question-text">Format salary as currency with Indian rupee symbol and commas.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, '₹' || TO_CHAR(SAL, '99,999') AS FORMATTED_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FORMATTED_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>₹   800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>₹ 1,600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 39 -->
+            <div class="question">
+                <div class="question-title">Question 39: Convert number 12345 into string with commas.</div>
+                <p class="question-text">Format a number with comma separators.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT TO_CHAR(12345, '99,999') AS FORMATTED_NUMBER FROM DUAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>FORMATTED_NUMBER</th>
+                        </tr>
+                        <tr>
+                            <td> 12,345</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 40 -->
+            <div class="question">
+                <div class="question-title">Question 40: Convert hire date into format: Month DD, YYYY.</div>
+                <p class="question-text">Format hire dates as "Month DD, YYYY".</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, TO_CHAR(HIREDATE, 'Month DD, YYYY') AS FORMATTED_DATE FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FORMATTED_DATE</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>December 17, 1980</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>February 20, 1981</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 41 -->
+            <div class="question">
+                <div class="question-title">Question 41: Convert string column to number and perform arithmetic operation.</div>
+                <p class="question-text">Convert a string number to numeric and perform calculations.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT TO_NUMBER('1234') + SAL AS RESULT FROM EMP WHERE ROWNUM = 1;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>RESULT</th>
+                        </tr>
+                        <tr>
+                            <td>2034</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 42 -->
+            <div class="question">
+                <div class="question-title">Question 42: Handle invalid date format using TO_DATE safely.</div>
+                <p class="question-text">Safely convert date strings with error handling.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT TO_DATE('15-AUG-2020', 'DD-MON-YYYY') AS SAFE_DATE FROM DUAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>SAFE_DATE</th>
+                        </tr>
+                        <tr>
+                            <td>15-AUG-20</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 43 -->
+            <div class="question">
+                <div class="question-title">Question 43: Convert SYSDATE into year only.</div>
+                <p class="question-text">Extract only the year from current date.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT TO_CHAR(SYSDATE, 'YYYY') AS CURRENT_YEAR FROM DUAL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>CURRENT_YEAR</th>
+                        </tr>
+                        <tr>
+                            <td>2026</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 44 -->
+            <div class="question">
+                <div class="question-title">Question 44: Convert salary into string and concatenate with text.</div>
+                <p class="question-text">Convert numeric salary to string and combine with descriptive text.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, 'Salary: ' || TO_CHAR(SAL) AS SALARY_TEXT FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SALARY_TEXT</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>Salary: 800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>Salary: 1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 45 -->
+            <div class="question">
+                <div class="question-title">Question 45: Display hire date in multiple formats (3 columns).</div>
+                <p class="question-text">Show hire dates in three different formats side by side.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, TO_CHAR(HIREDATE, 'DD/MM/YYYY') AS FORMAT1, TO_CHAR(HIREDATE, 'MM-DD-YYYY') AS FORMAT2, TO_CHAR(HIREDATE, 'YYYY-MM-DD') AS FORMAT3 FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FORMAT1</th>
+                            <th>FORMAT2</th>
+                            <th>FORMAT3</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17/12/1980</td>
+                            <td>12-17-1980</td>
+                            <td>1980-12-17</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20/02/1981</td>
+                            <td>02-20-1981</td>
+                            <td>1981-02-20</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 46 -->
+            <div class="question">
+                <div class="question-title">Question 46: Display employee name and salary. If salary is NULL, display 0.</div>
+                <p class="question-text">Handle NULL salaries by replacing them with 0.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL(SAL, 0) AS SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 47 -->
+            <div class="question">
+                <div class="question-title">Question 47: Display employee name and commission. If NULL, display 'No Commission'.</div>
+                <p class="question-text">Replace NULL commission values with descriptive text.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL(TO_CHAR(COMM), 'No Commission') AS COMMISSION FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>COMMISSION</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>No Commission</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 48 -->
+            <div class="question">
+                <div class="question-title">Question 48: Use NVL2 to show commission status (Has/No Commission).</div>
+                <p class="question-text">Use NVL2 to display different values based on whether commission is NULL or not.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL2(COMM, 'Has Commission', 'No Commission') AS COMM_STATUS FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>COMM_STATUS</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>No Commission</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>Has Commission</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 49 -->
+            <div class="question">
+                <div class="question-title">Question 49: Use COALESCE to display first non-null value among salary, commission, bonus.</div>
+                <p class="question-text">Return the first non-NULL value from salary, commission, or bonus columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, COALESCE(SAL, COMM, 0) AS FIRST_NON_NULL FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FIRST_NON_NULL</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 50 -->
+            <div class="question">
+                <div class="question-title">Question 50: Display employee salary; if NULL replace with average salary.</div>
+                <p class="question-text">Replace NULL salaries with the average salary of all employees.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL(SAL, (SELECT AVG(SAL) FROM EMP)) AS SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 51 -->
+            <div class="question">
+                <div class="question-title">Question 51: Use NULLIF to compare salary and commission.</div>
+                <p class="question-text">Return NULL if salary equals commission, otherwise return salary.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NULLIF(SAL, COMM) AS RESULT FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>RESULT</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>NULL</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 52 -->
+            <div class="question">
+                <div class="question-title">Question 52: Replace NULL department name with 'No Department'.</div>
+                <p class="question-text">Handle NULL values in department names.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL(DNAME, 'No Department') AS DEPARTMENT FROM EMP E LEFT JOIN DEPT D ON E.DEPTNO = D.DEPTNO;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>DEPARTMENT</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>RESEARCH</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 53 -->
+            <div class="question">
+                <div class="question-title">Question 53: Display employees whose commission is NULL.</div>
+                <p class="question-text">Find all employees with NULL commission values.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME FROM EMP WHERE COMM IS NULL;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                        </tr>
+                        <tr>
+                            <td>JONES</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 54 -->
+            <div class="question">
+                <div class="question-title">Question 54: Use DECODE to categorize salary (Low/Medium/High).</div>
+                <p class="question-text">Categorize salaries using DECODE function.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, SAL, DECODE(SIGN(SAL - 1500), -1, 'Low', 0, 'Medium', 1, 'High') AS SALARY_CATEGORY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>SAL</th>
+                            <th>SALARY_CATEGORY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>800</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>1600</td>
+                            <td>High</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 55 -->
+            <div class="question">
+                <div class="question-title">Question 55: Use CASE to categorize employees based on experience.</div>
+                <p class="question-text">Categorize employees by years of experience using CASE statement.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, CASE WHEN MONTHS_BETWEEN(SYSDATE, HIREDATE)/12 < 10 THEN 'Junior' WHEN MONTHS_BETWEEN(SYSDATE, HIREDATE)/12 < 20 THEN 'Mid-level' ELSE 'Senior' END AS EXPERIENCE_LEVEL FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>EXPERIENCE_LEVEL</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>Senior</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>Senior</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 56 -->
+            <div class="question">
+                <div class="question-title">Question 56: Display job; if NULL show 'Unknown Job'.</div>
+                <p class="question-text">Handle NULL job values with default text.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL(JOB, 'Unknown Job') AS JOB_TITLE FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>JOB_TITLE</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>CLERK</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>SALESMAN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 57 -->
+            <div class="question">
+                <div class="question-title">Question 57: Use NVL with date columns.</div>
+                <p class="question-text">Handle NULL values in date columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL(HIREDATE, SYSDATE) AS HIRE_DATE FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>HIRE_DATE</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>17-DEC-80</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>20-FEB-81</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 58 -->
+            <div class="question">
+                <div class="question-title">Question 58: Display employee name and bonus; if NULL calculate 10% of salary.</div>
+                <p class="question-text">Calculate bonus as 10% of salary when bonus is NULL.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, NVL(COMM, SAL * 0.1) AS BONUS FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>BONUS</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 59 -->
+            <div class="question">
+                <div class="question-title">Question 59: Use COALESCE with multiple NULL columns.</div>
+                <p class="question-text">Return first non-NULL value from multiple columns.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, COALESCE(COMM, SAL * 0.05, 100) AS INCENTIVE FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>INCENTIVE</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>40</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>300</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Question 60 -->
+            <div class="question">
+                <div class="question-title">Question 60: Combine NVL and TO_CHAR for formatted output.</div>
+                <p class="question-text">Format NULL values and convert to character for display.</p>
+                <button class="dropdown-btn" onclick="toggleDropdown(this)">
+                    Output
+                    <span class="dropdown-arrow"></span>
+                </button>
+                <div class="dropdown-content">
+                    <div class="section-label">SQL Command:</div>
+                    <div class="command">SELECT ENAME, TO_CHAR(NVL(SAL, 0), '₹99,999') AS FORMATTED_SALARY FROM EMP;</div>
+                    <div class="section-label" >Output:</div>
+                    <table class="output-table">
+                        <tr>
+                            <th>ENAME</th>
+                            <th>FORMATTED_SALARY</th>
+                        </tr>
+                        <tr>
+                            <td>SMITH</td>
+                            <td>₹   800</td>
+                        </tr>
+                        <tr>
+                            <td>ALLEN</td>
+                            <td>₹ 1,600</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+ <footer>
+       <pre> <p>Submitted By : Hunny 
+                7081/24
+                                    BCA II (4th Semester)      
+                Submitted To: Dr. Chetan Gupta       
+        </p></pre>
+    </footer>
+    </div>
+
+
+</body>
+</html>
